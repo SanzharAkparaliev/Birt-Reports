@@ -1,22 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.24" id="1">
     <property name="createdBy">Eclipse BIRT Designer Version 4.9.0.v202203150031</property>
-    <list-property name="propertyBindings">
-        <structure>
-            <property name="name">queryText</property>
-            <property name="id">2845</property>
-        </structure>
-        <structure>
-            <property name="name">queryTimeOut</property>
-            <property name="id">2845</property>
-        </structure>
-        <structure>
-            <property name="name">rowFetchSize</property>
-            <property name="id">2845</property>
-        </structure>
-    </list-property>
     <property name="units">in</property>
     <property name="iconFile">/templates/blank_report.gif</property>
+    <property name="layoutPreference">fixed layout</property>
     <property name="bidiLayoutOrientation">ltr</property>
     <property name="imageDPI">96</property>
     <parameters>
@@ -63,7 +50,7 @@
         </oda-data-source>
     </data-sources>
     <data-sets>
-        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Transaction Declaration" id="2021">
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Product Transit Declaration" id="2021">
             <list-property name="columnHints">
                 <structure>
                     <property name="columnName">name</property>
@@ -804,14 +791,187 @@ where TransitDec.id = ?]]></xml-property>
   </design:ResultSets>
 </model:DesignValues>]]></xml-property>
         </oda-data-set>
-        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="ProductCount" id="2845">
-            <property name="nullsOrdering">nulls lowest</property>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Transit Declaration" id="3185">
             <list-property name="columnHints">
                 <structure>
-                    <property name="columnName">count</property>
+                    <property name="columnName">id</property>
                     <property name="analysis">measure</property>
-                    <text-property name="displayName">count</text-property>
-                    <text-property name="heading">count</text-property>
+                    <text-property name="displayName">id</text-property>
+                    <text-property name="heading">id</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">archived</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">archived</text-property>
+                    <text-property name="heading">archived</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">import_id</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">import_id</text-property>
+                    <text-property name="heading">import_id</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">import_origin</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">import_origin</text-property>
+                    <text-property name="heading">import_origin</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">process_instance_id</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">process_instance_id</text-property>
+                    <text-property name="heading">process_instance_id</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">version</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">version</text-property>
+                    <text-property name="heading">version</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">created_on</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">created_on</text-property>
+                    <text-property name="heading">created_on</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">updated_on</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">updated_on</text-property>
+                    <text-property name="heading">updated_on</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">attrs</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">attrs</text-property>
+                    <text-property name="heading">attrs</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">declaration_type</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">declaration_type</text-property>
+                    <text-property name="heading">declaration_type</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">one_time_assumption</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">one_time_assumption</text-property>
+                    <text-property name="heading">one_time_assumption</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">purpose_goods</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">purpose_goods</text-property>
+                    <text-property name="heading">purpose_goods</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">registration_number</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">registration_number</text-property>
+                    <text-property name="heading">registration_number</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">status</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">status</text-property>
+                    <text-property name="heading">status</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">transit_period</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">transit_period</text-property>
+                    <text-property name="heading">transit_period</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">type_movement_goods</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">type_movement_goods</text-property>
+                    <text-property name="heading">type_movement_goods</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">created_by</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">created_by</text-property>
+                    <text-property name="heading">created_by</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">updated_by</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">updated_by</text-property>
+                    <text-property name="heading">updated_by</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">carrier</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">carrier</text-property>
+                    <text-property name="heading">carrier</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">consignment</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">consignment</text-property>
+                    <text-property name="heading">consignment</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">customs_department</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">customs_department</text-property>
+                    <text-property name="heading">customs_department</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">customs_office_departure</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">customs_office_departure</text-property>
+                    <text-property name="heading">customs_office_departure</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">customs_office_destination</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">customs_office_destination</text-property>
+                    <text-property name="heading">customs_office_destination</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">decision_customs_authority</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">decision_customs_authority</text-property>
+                    <text-property name="heading">decision_customs_authority</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">declarant</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">declarant</text-property>
+                    <text-property name="heading">declarant</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">departure_country</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">departure_country</text-property>
+                    <text-property name="heading">departure_country</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">destination_country</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">destination_country</text-property>
+                    <text-property name="heading">destination_country</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">railway_station</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">railway_station</text-property>
+                    <text-property name="heading">railway_station</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">registration_number_tir_carnet</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">registration_number_tir_carnet</text-property>
+                    <text-property name="heading">registration_number_tir_carnet</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">transport_kind</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">transport_kind</text-property>
+                    <text-property name="heading">transport_kind</text-property>
                 </structure>
             </list-property>
             <list-property name="parameters">
@@ -830,7 +990,152 @@ where TransitDec.id = ?]]></xml-property>
                 <list-property name="resultSet">
                     <structure>
                         <property name="position">1</property>
-                        <property name="name">count</property>
+                        <property name="name">id</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">archived</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">import_id</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">import_origin</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">process_instance_id</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">version</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">created_on</property>
+                        <property name="dataType">date-time</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">updated_on</property>
+                        <property name="dataType">date-time</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">attrs</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">declaration_type</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">one_time_assumption</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">12</property>
+                        <property name="name">purpose_goods</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">13</property>
+                        <property name="name">registration_number</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">14</property>
+                        <property name="name">status</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">15</property>
+                        <property name="name">transit_period</property>
+                        <property name="dataType">date</property>
+                    </structure>
+                    <structure>
+                        <property name="position">16</property>
+                        <property name="name">type_movement_goods</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">17</property>
+                        <property name="name">created_by</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">18</property>
+                        <property name="name">updated_by</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">19</property>
+                        <property name="name">carrier</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">20</property>
+                        <property name="name">consignment</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">21</property>
+                        <property name="name">customs_department</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">22</property>
+                        <property name="name">customs_office_departure</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">23</property>
+                        <property name="name">customs_office_destination</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">24</property>
+                        <property name="name">decision_customs_authority</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">25</property>
+                        <property name="name">declarant</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">26</property>
+                        <property name="name">departure_country</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">27</property>
+                        <property name="name">destination_country</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">28</property>
+                        <property name="name">railway_station</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">29</property>
+                        <property name="name">registration_number_tir_carnet</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">30</property>
+                        <property name="name">transport_kind</property>
                         <property name="dataType">decimal</property>
                     </structure>
                 </list-property>
@@ -839,17 +1144,218 @@ where TransitDec.id = ?]]></xml-property>
             <list-property name="resultSet">
                 <structure>
                     <property name="position">1</property>
-                    <property name="name">count</property>
-                    <property name="nativeName">count</property>
+                    <property name="name">id</property>
+                    <property name="nativeName">id</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">-5</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">archived</property>
+                    <property name="nativeName">archived</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">-7</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">import_id</property>
+                    <property name="nativeName">import_id</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">import_origin</property>
+                    <property name="nativeName">import_origin</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">process_instance_id</property>
+                    <property name="nativeName">process_instance_id</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">version</property>
+                    <property name="nativeName">version</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">created_on</property>
+                    <property name="nativeName">created_on</property>
+                    <property name="dataType">date-time</property>
+                    <property name="nativeDataType">93</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">updated_on</property>
+                    <property name="nativeName">updated_on</property>
+                    <property name="dataType">date-time</property>
+                    <property name="nativeDataType">93</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">attrs</property>
+                    <property name="nativeName">attrs</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">10</property>
+                    <property name="name">declaration_type</property>
+                    <property name="nativeName">declaration_type</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">11</property>
+                    <property name="name">one_time_assumption</property>
+                    <property name="nativeName">one_time_assumption</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">-7</property>
+                </structure>
+                <structure>
+                    <property name="position">12</property>
+                    <property name="name">purpose_goods</property>
+                    <property name="nativeName">purpose_goods</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">13</property>
+                    <property name="name">registration_number</property>
+                    <property name="nativeName">registration_number</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">14</property>
+                    <property name="name">status</property>
+                    <property name="nativeName">status</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">15</property>
+                    <property name="name">transit_period</property>
+                    <property name="nativeName">transit_period</property>
+                    <property name="dataType">date</property>
+                    <property name="nativeDataType">91</property>
+                </structure>
+                <structure>
+                    <property name="position">16</property>
+                    <property name="name">type_movement_goods</property>
+                    <property name="nativeName">type_movement_goods</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">17</property>
+                    <property name="name">created_by</property>
+                    <property name="nativeName">created_by</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">-5</property>
+                </structure>
+                <structure>
+                    <property name="position">18</property>
+                    <property name="name">updated_by</property>
+                    <property name="nativeName">updated_by</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">-5</property>
+                </structure>
+                <structure>
+                    <property name="position">19</property>
+                    <property name="name">carrier</property>
+                    <property name="nativeName">carrier</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">-5</property>
+                </structure>
+                <structure>
+                    <property name="position">20</property>
+                    <property name="name">consignment</property>
+                    <property name="nativeName">consignment</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">-5</property>
+                </structure>
+                <structure>
+                    <property name="position">21</property>
+                    <property name="name">customs_department</property>
+                    <property name="nativeName">customs_department</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">-5</property>
+                </structure>
+                <structure>
+                    <property name="position">22</property>
+                    <property name="name">customs_office_departure</property>
+                    <property name="nativeName">customs_office_departure</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">-5</property>
+                </structure>
+                <structure>
+                    <property name="position">23</property>
+                    <property name="name">customs_office_destination</property>
+                    <property name="nativeName">customs_office_destination</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">-5</property>
+                </structure>
+                <structure>
+                    <property name="position">24</property>
+                    <property name="name">decision_customs_authority</property>
+                    <property name="nativeName">decision_customs_authority</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">-5</property>
+                </structure>
+                <structure>
+                    <property name="position">25</property>
+                    <property name="name">declarant</property>
+                    <property name="nativeName">declarant</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">-5</property>
+                </structure>
+                <structure>
+                    <property name="position">26</property>
+                    <property name="name">departure_country</property>
+                    <property name="nativeName">departure_country</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">-5</property>
+                </structure>
+                <structure>
+                    <property name="position">27</property>
+                    <property name="name">destination_country</property>
+                    <property name="nativeName">destination_country</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">-5</property>
+                </structure>
+                <structure>
+                    <property name="position">28</property>
+                    <property name="name">railway_station</property>
+                    <property name="nativeName">railway_station</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">-5</property>
+                </structure>
+                <structure>
+                    <property name="position">29</property>
+                    <property name="name">registration_number_tir_carnet</property>
+                    <property name="nativeName">registration_number_tir_carnet</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">-5</property>
+                </structure>
+                <structure>
+                    <property name="position">30</property>
+                    <property name="name">transport_kind</property>
+                    <property name="nativeName">transport_kind</property>
                     <property name="dataType">decimal</property>
                     <property name="nativeDataType">-5</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[select COUNT(*)
-from public.transitcontrolsystem_transit_declaration as TransitDec
-join dictionary_commodity_consignment as Commodity on(Commodity.id = TransitDec.consignment)
-join dictionary_goods as Goods on (Commodity.id = Goods.commodity_consignment)
-where TransitDec.id = ?]]></xml-property>
+            <xml-property name="queryText"><![CDATA[select *
+from public.transitcontrolsystem_transit_declaration
+where transitcontrolsystem_transit_declaration.id = ?]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
   <Version>2.0</Version>
@@ -1492,6 +1998,1956 @@ where TransitDec.id = ?]]></xml-property>
   </design:ResultSets>
 </model:DesignValues>]]></xml-property>
         </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Country" id="3186">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">id</property>
+                    <text-property name="displayName">id</text-property>
+                    <text-property name="heading">id</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">archived</property>
+                    <text-property name="displayName">archived</text-property>
+                    <text-property name="heading">archived</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">import_id</property>
+                    <text-property name="displayName">import_id</text-property>
+                    <text-property name="heading">import_id</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">import_origin</property>
+                    <text-property name="displayName">import_origin</text-property>
+                    <text-property name="heading">import_origin</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">process_instance_id</property>
+                    <text-property name="displayName">process_instance_id</text-property>
+                    <text-property name="heading">process_instance_id</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">version</property>
+                    <text-property name="displayName">version</text-property>
+                    <text-property name="heading">version</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">created_on</property>
+                    <text-property name="displayName">created_on</text-property>
+                    <text-property name="heading">created_on</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">updated_on</property>
+                    <text-property name="displayName">updated_on</text-property>
+                    <text-property name="heading">updated_on</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">alpha2code</property>
+                    <text-property name="displayName">alpha2code</text-property>
+                    <text-property name="heading">alpha2code</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">alpha3code</property>
+                    <text-property name="displayName">alpha3code</text-property>
+                    <text-property name="heading">alpha3code</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">attrs</property>
+                    <text-property name="displayName">attrs</text-property>
+                    <text-property name="heading">attrs</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">cog</property>
+                    <text-property name="displayName">cog</text-property>
+                    <text-property name="heading">cog</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">is_ispm_required</property>
+                    <text-property name="displayName">is_ispm_required</text-property>
+                    <text-property name="heading">is_ispm_required</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">name</property>
+                    <text-property name="displayName">name</text-property>
+                    <text-property name="heading">name</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">numeric_code</property>
+                    <text-property name="displayName">numeric_code</text-property>
+                    <text-property name="heading">numeric_code</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">phone_prefix</property>
+                    <text-property name="displayName">phone_prefix</text-property>
+                    <text-property name="heading">phone_prefix</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">created_by</property>
+                    <text-property name="displayName">created_by</text-property>
+                    <text-property name="heading">created_by</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">updated_by</property>
+                    <text-property name="displayName">updated_by</text-property>
+                    <text-property name="heading">updated_by</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">citizenship</property>
+                    <text-property name="displayName">citizenship</text-property>
+                    <text-property name="heading">citizenship</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">economic_area</property>
+                    <text-property name="displayName">economic_area</text-property>
+                    <text-property name="heading">economic_area</text-property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">id</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">archived</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">import_id</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">import_origin</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">process_instance_id</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">version</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">created_on</property>
+                        <property name="dataType">date-time</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">updated_on</property>
+                        <property name="dataType">date-time</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">alpha2code</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">alpha3code</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">attrs</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">12</property>
+                        <property name="name">cog</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">13</property>
+                        <property name="name">is_ispm_required</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">14</property>
+                        <property name="name">name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">15</property>
+                        <property name="name">numeric_code</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">16</property>
+                        <property name="name">phone_prefix</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">17</property>
+                        <property name="name">created_by</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">18</property>
+                        <property name="name">updated_by</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">19</property>
+                        <property name="name">citizenship</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">20</property>
+                        <property name="name">economic_area</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">SmartLocalDataBase</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">id</property>
+                    <property name="nativeName">id</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">-5</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">archived</property>
+                    <property name="nativeName">archived</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">-7</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">import_id</property>
+                    <property name="nativeName">import_id</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">import_origin</property>
+                    <property name="nativeName">import_origin</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">process_instance_id</property>
+                    <property name="nativeName">process_instance_id</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">version</property>
+                    <property name="nativeName">version</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">created_on</property>
+                    <property name="nativeName">created_on</property>
+                    <property name="dataType">date-time</property>
+                    <property name="nativeDataType">93</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">updated_on</property>
+                    <property name="nativeName">updated_on</property>
+                    <property name="dataType">date-time</property>
+                    <property name="nativeDataType">93</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">alpha2code</property>
+                    <property name="nativeName">alpha2code</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">10</property>
+                    <property name="name">alpha3code</property>
+                    <property name="nativeName">alpha3code</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">11</property>
+                    <property name="name">attrs</property>
+                    <property name="nativeName">attrs</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">12</property>
+                    <property name="name">cog</property>
+                    <property name="nativeName">cog</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">13</property>
+                    <property name="name">is_ispm_required</property>
+                    <property name="nativeName">is_ispm_required</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">-7</property>
+                </structure>
+                <structure>
+                    <property name="position">14</property>
+                    <property name="name">name</property>
+                    <property name="nativeName">name</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">15</property>
+                    <property name="name">numeric_code</property>
+                    <property name="nativeName">numeric_code</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">16</property>
+                    <property name="name">phone_prefix</property>
+                    <property name="nativeName">phone_prefix</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">17</property>
+                    <property name="name">created_by</property>
+                    <property name="nativeName">created_by</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">-5</property>
+                </structure>
+                <structure>
+                    <property name="position">18</property>
+                    <property name="name">updated_by</property>
+                    <property name="nativeName">updated_by</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">-5</property>
+                </structure>
+                <structure>
+                    <property name="position">19</property>
+                    <property name="name">citizenship</property>
+                    <property name="nativeName">citizenship</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">-5</property>
+                </structure>
+                <structure>
+                    <property name="position">20</property>
+                    <property name="name">economic_area</property>
+                    <property name="nativeName">economic_area</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">-5</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select *
+from public.base_country]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>id</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>-5</design:nativeDataTypeCode>
+            <design:precision>19</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>id</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>id</design:label>
+            <design:formattingHints>
+              <design:displaySize>20</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>archived</design:name>
+              <design:position>2</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>-7</design:nativeDataTypeCode>
+            <design:precision>1</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>archived</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>archived</design:label>
+            <design:formattingHints>
+              <design:displaySize>1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>import_id</design:name>
+              <design:position>3</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>import_id</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>import_id</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>import_origin</design:name>
+              <design:position>4</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>import_origin</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>import_origin</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>process_instance_id</design:name>
+              <design:position>5</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>process_instance_id</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>process_instance_id</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>version</design:name>
+              <design:position>6</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>version</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>version</design:label>
+            <design:formattingHints>
+              <design:displaySize>11</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>created_on</design:name>
+              <design:position>7</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>93</design:nativeDataTypeCode>
+            <design:precision>29</design:precision>
+            <design:scale>6</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>created_on</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>created_on</design:label>
+            <design:formattingHints>
+              <design:displaySize>29</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>updated_on</design:name>
+              <design:position>8</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>93</design:nativeDataTypeCode>
+            <design:precision>29</design:precision>
+            <design:scale>6</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>updated_on</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>updated_on</design:label>
+            <design:formattingHints>
+              <design:displaySize>29</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>alpha2code</design:name>
+              <design:position>9</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>2</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>alpha2code</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>alpha2code</design:label>
+            <design:formattingHints>
+              <design:displaySize>2</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>alpha3code</design:name>
+              <design:position>10</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>3</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>alpha3code</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>alpha3code</design:label>
+            <design:formattingHints>
+              <design:displaySize>3</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>attrs</design:name>
+              <design:position>11</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>2147483647</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>attrs</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>attrs</design:label>
+            <design:formattingHints>
+              <design:displaySize>2147483647</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>cog</design:name>
+              <design:position>12</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>cog</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>cog</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>is_ispm_required</design:name>
+              <design:position>13</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>-7</design:nativeDataTypeCode>
+            <design:precision>1</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>is_ispm_required</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>is_ispm_required</design:label>
+            <design:formattingHints>
+              <design:displaySize>1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>name</design:name>
+              <design:position>14</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>name</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>name</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>numeric_code</design:name>
+              <design:position>15</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>3</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>numeric_code</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>numeric_code</design:label>
+            <design:formattingHints>
+              <design:displaySize>3</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>phone_prefix</design:name>
+              <design:position>16</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>phone_prefix</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>phone_prefix</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>created_by</design:name>
+              <design:position>17</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>-5</design:nativeDataTypeCode>
+            <design:precision>19</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>created_by</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>created_by</design:label>
+            <design:formattingHints>
+              <design:displaySize>20</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>updated_by</design:name>
+              <design:position>18</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>-5</design:nativeDataTypeCode>
+            <design:precision>19</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>updated_by</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>updated_by</design:label>
+            <design:formattingHints>
+              <design:displaySize>20</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>citizenship</design:name>
+              <design:position>19</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>-5</design:nativeDataTypeCode>
+            <design:precision>19</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>citizenship</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>citizenship</design:label>
+            <design:formattingHints>
+              <design:displaySize>20</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>economic_area</design:name>
+              <design:position>20</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>-5</design:nativeDataTypeCode>
+            <design:precision>19</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>economic_area</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>economic_area</design:label>
+            <design:formattingHints>
+              <design:displaySize>20</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+        <joint-data-set name="Страна отправления" id="3187">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">Country::attrs</property>
+                    <property name="alias">Country::attrs</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">Country::attrs</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Transit Declaration::process_instance_id</property>
+                    <property name="alias">Transit Declaration::process_instance_id</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">Transit Declaration::process_instance_id</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Transit Declaration::transport_kind</property>
+                    <property name="alias">transport_kind</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">Transit Declaration::transport_kind</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Country::id</property>
+                    <property name="alias">Country::id</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">Country::id</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Transit Declaration::version</property>
+                    <property name="alias">Transit Declaration::version</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">Transit Declaration::version</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Transit Declaration::one_time_assumption</property>
+                    <property name="alias">one_time_assumption</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">Transit Declaration::one_time_assumption</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Transit Declaration::registration_number_tir_carnet</property>
+                    <property name="alias">registration_number_tir_carnet</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">Transit Declaration::registration_number_tir_carnet</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Transit Declaration::import_id</property>
+                    <property name="alias">Transit Declaration::import_id</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">Transit Declaration::import_id</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Transit Declaration::customs_office_departure</property>
+                    <property name="alias">customs_office_departure</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">Transit Declaration::customs_office_departure</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Country::updated_on</property>
+                    <property name="alias">Country::updated_on</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">Country::updated_on</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Transit Declaration::customs_department</property>
+                    <property name="alias">customs_department</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">Transit Declaration::customs_department</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Transit Declaration::attrs</property>
+                    <property name="alias">Transit Declaration::attrs</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">Transit Declaration::attrs</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Country::updated_by</property>
+                    <property name="alias">Country::updated_by</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">Country::updated_by</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Country::archived</property>
+                    <property name="alias">Country::archived</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">Country::archived</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Country::alpha2code</property>
+                    <property name="alias">alpha2code</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">Country::alpha2code</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Transit Declaration::declaration_type</property>
+                    <property name="alias">declaration_type</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">Transit Declaration::declaration_type</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Country::created_on</property>
+                    <property name="alias">Country::created_on</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">Country::created_on</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Country::name</property>
+                    <property name="alias">name</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">Country::name</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Country::process_instance_id</property>
+                    <property name="alias">Country::process_instance_id</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">Country::process_instance_id</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Transit Declaration::created_by</property>
+                    <property name="alias">Transit Declaration::created_by</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">Transit Declaration::created_by</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Country::created_by</property>
+                    <property name="alias">Country::created_by</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">Country::created_by</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Transit Declaration::status</property>
+                    <property name="alias">status</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">Transit Declaration::status</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Country::phone_prefix</property>
+                    <property name="alias">phone_prefix</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">Country::phone_prefix</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Transit Declaration::customs_office_destination</property>
+                    <property name="alias">customs_office_destination</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">Transit Declaration::customs_office_destination</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Transit Declaration::destination_country</property>
+                    <property name="alias">destination_country</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">Transit Declaration::destination_country</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Transit Declaration::created_on</property>
+                    <property name="alias">Transit Declaration::created_on</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">Transit Declaration::created_on</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Country::alpha3code</property>
+                    <property name="alias">alpha3code</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">Country::alpha3code</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Transit Declaration::registration_number</property>
+                    <property name="alias">registration_number</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">Transit Declaration::registration_number</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Transit Declaration::updated_by</property>
+                    <property name="alias">Transit Declaration::updated_by</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">Transit Declaration::updated_by</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Transit Declaration::type_movement_goods</property>
+                    <property name="alias">type_movement_goods</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">Transit Declaration::type_movement_goods</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Transit Declaration::decision_customs_authority</property>
+                    <property name="alias">decision_customs_authority</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">Transit Declaration::decision_customs_authority</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Country::import_origin</property>
+                    <property name="alias">Country::import_origin</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">Country::import_origin</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Transit Declaration::updated_on</property>
+                    <property name="alias">Transit Declaration::updated_on</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">Transit Declaration::updated_on</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Transit Declaration::purpose_goods</property>
+                    <property name="alias">purpose_goods</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">Transit Declaration::purpose_goods</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Transit Declaration::consignment</property>
+                    <property name="alias">consignment</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">Transit Declaration::consignment</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Transit Declaration::declarant</property>
+                    <property name="alias">declarant</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">Transit Declaration::declarant</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Country::import_id</property>
+                    <property name="alias">Country::import_id</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">Country::import_id</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Country::version</property>
+                    <property name="alias">Country::version</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">Country::version</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Transit Declaration::archived</property>
+                    <property name="alias">Transit Declaration::archived</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">Transit Declaration::archived</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Country::is_ispm_required</property>
+                    <property name="alias">is_ispm_required</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">Country::is_ispm_required</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Transit Declaration::import_origin</property>
+                    <property name="alias">Transit Declaration::import_origin</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">Transit Declaration::import_origin</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Country::citizenship</property>
+                    <property name="alias">citizenship</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">Country::citizenship</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Transit Declaration::id</property>
+                    <property name="alias">Transit Declaration::id</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">Transit Declaration::id</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Transit Declaration::departure_country</property>
+                    <property name="alias">departure_country</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">Transit Declaration::departure_country</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Transit Declaration::carrier</property>
+                    <property name="alias">carrier</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">Transit Declaration::carrier</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Country::numeric_code</property>
+                    <property name="alias">numeric_code</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">Country::numeric_code</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Transit Declaration::railway_station</property>
+                    <property name="alias">railway_station</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">Transit Declaration::railway_station</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Country::economic_area</property>
+                    <property name="alias">economic_area</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">Country::economic_area</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Transit Declaration::transit_period</property>
+                    <property name="alias">transit_period</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">Transit Declaration::transit_period</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Country::cog</property>
+                    <property name="alias">cog</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">Country::cog</text-property>
+                </structure>
+            </list-property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">Transit Declaration::param_1</property>
+                    <property name="dataType">decimal</property>
+                    <property name="position">0</property>
+                    <property name="isOptional">false</property>
+                    <property name="allowNull">false</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">Transit Declaration::id</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">Transit Declaration::archived</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">Transit Declaration::import_id</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">Transit Declaration::import_origin</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">Transit Declaration::process_instance_id</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">Transit Declaration::version</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">Transit Declaration::created_on</property>
+                        <property name="dataType">date-time</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">Transit Declaration::updated_on</property>
+                        <property name="dataType">date-time</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">Transit Declaration::attrs</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">declaration_type</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">one_time_assumption</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">12</property>
+                        <property name="name">purpose_goods</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">13</property>
+                        <property name="name">registration_number</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">14</property>
+                        <property name="name">status</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">15</property>
+                        <property name="name">transit_period</property>
+                        <property name="dataType">date</property>
+                    </structure>
+                    <structure>
+                        <property name="position">16</property>
+                        <property name="name">type_movement_goods</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">17</property>
+                        <property name="name">Transit Declaration::created_by</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">18</property>
+                        <property name="name">Transit Declaration::updated_by</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">19</property>
+                        <property name="name">carrier</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">20</property>
+                        <property name="name">consignment</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">21</property>
+                        <property name="name">customs_department</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">22</property>
+                        <property name="name">customs_office_departure</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">23</property>
+                        <property name="name">customs_office_destination</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">24</property>
+                        <property name="name">decision_customs_authority</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">25</property>
+                        <property name="name">declarant</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">26</property>
+                        <property name="name">departure_country</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">27</property>
+                        <property name="name">destination_country</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">28</property>
+                        <property name="name">railway_station</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">29</property>
+                        <property name="name">registration_number_tir_carnet</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">30</property>
+                        <property name="name">transport_kind</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">31</property>
+                        <property name="name">Country::id</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">32</property>
+                        <property name="name">Country::archived</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">33</property>
+                        <property name="name">Country::import_id</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">34</property>
+                        <property name="name">Country::import_origin</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">35</property>
+                        <property name="name">Country::process_instance_id</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">36</property>
+                        <property name="name">Country::version</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">37</property>
+                        <property name="name">Country::created_on</property>
+                        <property name="dataType">date-time</property>
+                    </structure>
+                    <structure>
+                        <property name="position">38</property>
+                        <property name="name">Country::updated_on</property>
+                        <property name="dataType">date-time</property>
+                    </structure>
+                    <structure>
+                        <property name="position">39</property>
+                        <property name="name">alpha2code</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">40</property>
+                        <property name="name">alpha3code</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">41</property>
+                        <property name="name">Country::attrs</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">42</property>
+                        <property name="name">cog</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">43</property>
+                        <property name="name">is_ispm_required</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">44</property>
+                        <property name="name">name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">45</property>
+                        <property name="name">numeric_code</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">46</property>
+                        <property name="name">phone_prefix</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">47</property>
+                        <property name="name">Country::created_by</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">48</property>
+                        <property name="name">Country::updated_by</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">49</property>
+                        <property name="name">citizenship</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">50</property>
+                        <property name="name">economic_area</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <simple-property-list name="dataSets">
+                <value>Transit Declaration</value>
+                <value>Country</value>
+            </simple-property-list>
+            <list-property name="joinConditions">
+                <structure>
+                    <property name="joinType">right-out</property>
+                    <property name="joinOperator">eq</property>
+                    <property name="leftDataSet">Transit Declaration</property>
+                    <property name="rightDataSet">Country</property>
+                    <expression name="leftExpression">dataSetRow["departure_country"]</expression>
+                    <expression name="rightExpression">dataSetRow["id"]</expression>
+                </structure>
+            </list-property>
+        </joint-data-set>
+        <joint-data-set name="Страна назначения" id="3188">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">Country::attrs</property>
+                    <property name="alias">Country::attrs</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">Country::attrs</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Transit Declaration::process_instance_id</property>
+                    <property name="alias">Transit Declaration::process_instance_id</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">Transit Declaration::process_instance_id</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Transit Declaration::transport_kind</property>
+                    <property name="alias">transport_kind</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">Transit Declaration::transport_kind</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Country::id</property>
+                    <property name="alias">Country::id</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">Country::id</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Transit Declaration::version</property>
+                    <property name="alias">Transit Declaration::version</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">Transit Declaration::version</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Transit Declaration::one_time_assumption</property>
+                    <property name="alias">one_time_assumption</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">Transit Declaration::one_time_assumption</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Transit Declaration::registration_number_tir_carnet</property>
+                    <property name="alias">registration_number_tir_carnet</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">Transit Declaration::registration_number_tir_carnet</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Transit Declaration::import_id</property>
+                    <property name="alias">Transit Declaration::import_id</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">Transit Declaration::import_id</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Transit Declaration::customs_office_departure</property>
+                    <property name="alias">customs_office_departure</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">Transit Declaration::customs_office_departure</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Country::updated_on</property>
+                    <property name="alias">Country::updated_on</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">Country::updated_on</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Transit Declaration::customs_department</property>
+                    <property name="alias">customs_department</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">Transit Declaration::customs_department</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Transit Declaration::attrs</property>
+                    <property name="alias">Transit Declaration::attrs</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">Transit Declaration::attrs</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Country::updated_by</property>
+                    <property name="alias">Country::updated_by</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">Country::updated_by</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Country::archived</property>
+                    <property name="alias">Country::archived</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">Country::archived</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Country::alpha2code</property>
+                    <property name="alias">alpha2code</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">Country::alpha2code</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Transit Declaration::declaration_type</property>
+                    <property name="alias">declaration_type</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">Transit Declaration::declaration_type</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Country::created_on</property>
+                    <property name="alias">Country::created_on</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">Country::created_on</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Country::name</property>
+                    <property name="alias">name</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">Country::name</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Country::process_instance_id</property>
+                    <property name="alias">Country::process_instance_id</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">Country::process_instance_id</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Transit Declaration::created_by</property>
+                    <property name="alias">Transit Declaration::created_by</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">Transit Declaration::created_by</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Country::created_by</property>
+                    <property name="alias">Country::created_by</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">Country::created_by</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Transit Declaration::status</property>
+                    <property name="alias">status</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">Transit Declaration::status</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Country::phone_prefix</property>
+                    <property name="alias">phone_prefix</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">Country::phone_prefix</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Transit Declaration::customs_office_destination</property>
+                    <property name="alias">customs_office_destination</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">Transit Declaration::customs_office_destination</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Transit Declaration::destination_country</property>
+                    <property name="alias">destination_country</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">Transit Declaration::destination_country</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Transit Declaration::created_on</property>
+                    <property name="alias">Transit Declaration::created_on</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">Transit Declaration::created_on</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Country::alpha3code</property>
+                    <property name="alias">alpha3code</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">Country::alpha3code</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Transit Declaration::registration_number</property>
+                    <property name="alias">registration_number</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">Transit Declaration::registration_number</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Transit Declaration::updated_by</property>
+                    <property name="alias">Transit Declaration::updated_by</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">Transit Declaration::updated_by</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Transit Declaration::type_movement_goods</property>
+                    <property name="alias">type_movement_goods</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">Transit Declaration::type_movement_goods</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Transit Declaration::decision_customs_authority</property>
+                    <property name="alias">decision_customs_authority</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">Transit Declaration::decision_customs_authority</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Country::import_origin</property>
+                    <property name="alias">Country::import_origin</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">Country::import_origin</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Transit Declaration::updated_on</property>
+                    <property name="alias">Transit Declaration::updated_on</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">Transit Declaration::updated_on</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Transit Declaration::purpose_goods</property>
+                    <property name="alias">purpose_goods</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">Transit Declaration::purpose_goods</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Transit Declaration::consignment</property>
+                    <property name="alias">consignment</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">Transit Declaration::consignment</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Transit Declaration::declarant</property>
+                    <property name="alias">declarant</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">Transit Declaration::declarant</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Country::import_id</property>
+                    <property name="alias">Country::import_id</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">Country::import_id</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Country::version</property>
+                    <property name="alias">Country::version</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">Country::version</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Transit Declaration::archived</property>
+                    <property name="alias">Transit Declaration::archived</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">Transit Declaration::archived</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Country::is_ispm_required</property>
+                    <property name="alias">is_ispm_required</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">Country::is_ispm_required</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Transit Declaration::import_origin</property>
+                    <property name="alias">Transit Declaration::import_origin</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">Transit Declaration::import_origin</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Country::citizenship</property>
+                    <property name="alias">citizenship</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">Country::citizenship</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Transit Declaration::id</property>
+                    <property name="alias">Transit Declaration::id</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">Transit Declaration::id</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Transit Declaration::departure_country</property>
+                    <property name="alias">departure_country</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">Transit Declaration::departure_country</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Transit Declaration::carrier</property>
+                    <property name="alias">carrier</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">Transit Declaration::carrier</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Country::numeric_code</property>
+                    <property name="alias">numeric_code</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">Country::numeric_code</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Transit Declaration::railway_station</property>
+                    <property name="alias">railway_station</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">Transit Declaration::railway_station</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Country::economic_area</property>
+                    <property name="alias">economic_area</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">Country::economic_area</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Transit Declaration::transit_period</property>
+                    <property name="alias">transit_period</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">Transit Declaration::transit_period</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Country::cog</property>
+                    <property name="alias">cog</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">Country::cog</text-property>
+                </structure>
+            </list-property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">Transit Declaration::param_1</property>
+                    <property name="dataType">decimal</property>
+                    <property name="position">0</property>
+                    <property name="isOptional">false</property>
+                    <property name="allowNull">false</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">Transit Declaration::id</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">Transit Declaration::archived</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">Transit Declaration::import_id</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">Transit Declaration::import_origin</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">Transit Declaration::process_instance_id</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">Transit Declaration::version</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">Transit Declaration::created_on</property>
+                        <property name="dataType">date-time</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">Transit Declaration::updated_on</property>
+                        <property name="dataType">date-time</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">Transit Declaration::attrs</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">declaration_type</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">one_time_assumption</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">12</property>
+                        <property name="name">purpose_goods</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">13</property>
+                        <property name="name">registration_number</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">14</property>
+                        <property name="name">status</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">15</property>
+                        <property name="name">transit_period</property>
+                        <property name="dataType">date</property>
+                    </structure>
+                    <structure>
+                        <property name="position">16</property>
+                        <property name="name">type_movement_goods</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">17</property>
+                        <property name="name">Transit Declaration::created_by</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">18</property>
+                        <property name="name">Transit Declaration::updated_by</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">19</property>
+                        <property name="name">carrier</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">20</property>
+                        <property name="name">consignment</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">21</property>
+                        <property name="name">customs_department</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">22</property>
+                        <property name="name">customs_office_departure</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">23</property>
+                        <property name="name">customs_office_destination</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">24</property>
+                        <property name="name">decision_customs_authority</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">25</property>
+                        <property name="name">declarant</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">26</property>
+                        <property name="name">departure_country</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">27</property>
+                        <property name="name">destination_country</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">28</property>
+                        <property name="name">railway_station</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">29</property>
+                        <property name="name">registration_number_tir_carnet</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">30</property>
+                        <property name="name">transport_kind</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">31</property>
+                        <property name="name">Country::id</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">32</property>
+                        <property name="name">Country::archived</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">33</property>
+                        <property name="name">Country::import_id</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">34</property>
+                        <property name="name">Country::import_origin</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">35</property>
+                        <property name="name">Country::process_instance_id</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">36</property>
+                        <property name="name">Country::version</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">37</property>
+                        <property name="name">Country::created_on</property>
+                        <property name="dataType">date-time</property>
+                    </structure>
+                    <structure>
+                        <property name="position">38</property>
+                        <property name="name">Country::updated_on</property>
+                        <property name="dataType">date-time</property>
+                    </structure>
+                    <structure>
+                        <property name="position">39</property>
+                        <property name="name">alpha2code</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">40</property>
+                        <property name="name">alpha3code</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">41</property>
+                        <property name="name">Country::attrs</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">42</property>
+                        <property name="name">cog</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">43</property>
+                        <property name="name">is_ispm_required</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">44</property>
+                        <property name="name">name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">45</property>
+                        <property name="name">numeric_code</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">46</property>
+                        <property name="name">phone_prefix</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">47</property>
+                        <property name="name">Country::created_by</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">48</property>
+                        <property name="name">Country::updated_by</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">49</property>
+                        <property name="name">citizenship</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">50</property>
+                        <property name="name">economic_area</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <simple-property-list name="dataSets">
+                <value>Transit Declaration</value>
+                <value>Country</value>
+            </simple-property-list>
+            <list-property name="joinConditions">
+                <structure>
+                    <property name="joinType">right-out</property>
+                    <property name="joinOperator">eq</property>
+                    <property name="leftDataSet">Transit Declaration</property>
+                    <property name="rightDataSet">Country</property>
+                    <expression name="leftExpression">dataSetRow["destination_country"]</expression>
+                    <expression name="rightExpression">dataSetRow["id"]</expression>
+                </structure>
+            </list-property>
+        </joint-data-set>
     </data-sets>
     <styles>
         <style name="declarationHead" id="52">
@@ -1500,10 +3956,11 @@ where TransitDec.id = ?]]></xml-property>
         </style>
     </styles>
     <page-setup>
-        <simple-master-page name="Simple MasterPage" id="2">
+        <simple-master-page name="First" id="2">
             <property name="showHeaderOnFirst">true</property>
+            <property name="showFooterOnLast">false</property>
             <property name="headerHeight">1.1in</property>
-            <property name="footerHeight">6in</property>
+            <property name="footerHeight">0in</property>
             <page-header>
                 <grid id="3024">
                     <property name="verticalAlign">top</property>
@@ -1512,6 +3969,12 @@ where TransitDec.id = ?]]></xml-property>
                     <row id="3026">
                         <property name="height">10.15625in</property>
                         <cell id="3027">
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
                             <grid id="3028">
                                 <property name="height">1.3541666666666667in</property>
                                 <property name="width">7.875in</property>
@@ -1527,10 +3990,6 @@ where TransitDec.id = ?]]></xml-property>
                                 <row id="3032">
                                     <property name="height">1.3541666666666667in</property>
                                     <cell id="3033">
-                                        <property name="borderLeftStyle">solid</property>
-                                        <property name="borderLeftWidth">thin</property>
-                                        <property name="borderTopStyle">solid</property>
-                                        <property name="borderTopWidth">thin</property>
                                         <grid id="3034">
                                             <property name="height">0.19791666666666666in</property>
                                             <column id="3035"/>
@@ -1609,8 +4068,6 @@ where TransitDec.id = ?]]></xml-property>
                                         <property name="borderBottomWidth">thin</property>
                                         <property name="borderLeftStyle">solid</property>
                                         <property name="borderLeftWidth">thin</property>
-                                        <property name="borderTopStyle">solid</property>
-                                        <property name="borderTopWidth">thin</property>
                                         <grid id="3058">
                                             <property name="height">1.53125in</property>
                                             <property name="width">1.4583333333333333in</property>
@@ -1789,7 +4246,7 @@ where TransitDec.id = ?]]></xml-property>
                                                                                                         <property name="fontSize">5pt</property>
                                                                                                         <property name="fontWeight">bold</property>
                                                                                                         <property name="textAlign">center</property>
-                                                                                                        <property name="dataSet">Transaction Declaration</property>
+                                                                                                        <property name="dataSet">Product Transit Declaration</property>
                                                                                                         <list-property name="boundDataColumns">
                                                                                                             <structure>
                                                                                                                 <property name="name">quantity</property>
@@ -1823,7 +4280,7 @@ where TransitDec.id = ?]]></xml-property>
                                                                                                         <property name="fontSize">5pt</property>
                                                                                                         <property name="fontWeight">bold</property>
                                                                                                         <property name="textAlign">center</property>
-                                                                                                        <property name="dataSet">Transaction Declaration</property>
+                                                                                                        <property name="dataSet">Product Transit Declaration</property>
                                                                                                         <list-property name="boundDataColumns">
                                                                                                             <structure>
                                                                                                                 <property name="name">cargo_quantity</property>
@@ -1855,10 +4312,6 @@ where TransitDec.id = ?]]></xml-property>
                                         <property name="borderBottomWidth">thin</property>
                                         <property name="borderLeftStyle">solid</property>
                                         <property name="borderLeftWidth">thin</property>
-                                        <property name="borderRightStyle">solid</property>
-                                        <property name="borderRightWidth">thin</property>
-                                        <property name="borderTopStyle">solid</property>
-                                        <property name="borderTopWidth">thin</property>
                                         <grid id="3123">
                                             <property name="height">0.34375in</property>
                                             <column id="3124"/>
@@ -1880,7 +4333,7 @@ where TransitDec.id = ?]]></xml-property>
                 </grid>
             </page-header>
         </simple-master-page>
-        <simple-master-page name="Second Page Master Page" id="2623">
+        <simple-master-page name="Second" id="2623">
             <property name="orientation">auto</property>
             <property name="display">inline</property>
             <property name="pageBreakAfter">always</property>
@@ -1890,6 +4343,7 @@ where TransitDec.id = ?]]></xml-property>
             <property name="showHeaderOnFirst">true</property>
             <property name="showFooterOnLast">false</property>
             <property name="headerHeight">1in</property>
+            <property name="footerHeight">0in</property>
             <page-header>
                 <grid id="2751">
                     <property name="verticalAlign">top</property>
@@ -1898,6 +4352,12 @@ where TransitDec.id = ?]]></xml-property>
                     <row id="2753">
                         <property name="height">10.15625in</property>
                         <cell id="2754">
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
                             <grid id="2755">
                                 <property name="height">1.3541666666666667in</property>
                                 <property name="width">7.875in</property>
@@ -1913,10 +4373,6 @@ where TransitDec.id = ?]]></xml-property>
                                 <row id="2759">
                                     <property name="height">1.3541666666666667in</property>
                                     <cell id="2760">
-                                        <property name="borderLeftStyle">solid</property>
-                                        <property name="borderLeftWidth">thin</property>
-                                        <property name="borderTopStyle">solid</property>
-                                        <property name="borderTopWidth">thin</property>
                                         <grid id="2761">
                                             <property name="height">0.19791666666666666in</property>
                                             <column id="2762"/>
@@ -1964,9 +4420,10 @@ where TransitDec.id = ?]]></xml-property>
                                                                     <row id="2780">
                                                                         <property name="height">0.3333333333333333in</property>
                                                                         <cell id="2781">
-                                                                            <label id="2782">
+                                                                            <label id="3311">
                                                                                 <property name="fontSize">5pt</property>
-                                                                                <text-property name="text">2 Отправитель/ Экспортер </text-property>
+                                                                                <property name="masterPage">First</property>
+                                                                                <text-property name="text">8 Получатель</text-property>
                                                                             </label>
                                                                         </cell>
                                                                         <cell id="2784">
@@ -1990,8 +4447,6 @@ where TransitDec.id = ?]]></xml-property>
                                         <property name="borderBottomWidth">thin</property>
                                         <property name="borderLeftStyle">solid</property>
                                         <property name="borderLeftWidth">thin</property>
-                                        <property name="borderTopStyle">solid</property>
-                                        <property name="borderTopWidth">thin</property>
                                         <grid id="2788">
                                             <property name="height">1.53125in</property>
                                             <property name="width">1.4583333333333333in</property>
@@ -2072,7 +4527,7 @@ where TransitDec.id = ?]]></xml-property>
                                                                         <property name="height">0.90625in</property>
                                                                         <cell id="2814">
                                                                             <grid id="2815">
-                                                                                <property name="height">0.3229166666666667in</property>
+                                                                                <property name="height">0.5833333333333334in</property>
                                                                                 <property name="width">1.2708333333333333in</property>
                                                                                 <column id="2816">
                                                                                     <property name="width">0.7708333333333334in</property>
@@ -2084,7 +4539,7 @@ where TransitDec.id = ?]]></xml-property>
                                                                                     <property name="width">0.2708333333333333in</property>
                                                                                 </column>
                                                                                 <row id="2819">
-                                                                                    <property name="height">0.3229166666666667in</property>
+                                                                                    <property name="height">0.5833333333333334in</property>
                                                                                     <cell id="2820">
                                                                                         <grid id="2821">
                                                                                             <property name="height">0.5520833333333334in</property>
@@ -2131,57 +4586,10 @@ where TransitDec.id = ?]]></xml-property>
                                                                                     <cell id="2836">
                                                                                         <property name="borderLeftStyle">solid</property>
                                                                                         <property name="borderLeftWidth">thin</property>
-                                                                                    </cell>
-                                                                                    <cell id="2837"/>
-                                                                                </row>
-                                                                            </grid>
-                                                                            <grid id="2846">
-                                                                                <property name="height">0.3541666666666667in</property>
-                                                                                <property name="width">1.2708333333333333in</property>
-                                                                                <column id="2847">
-                                                                                    <property name="width">0.7708333333333334in</property>
-                                                                                </column>
-                                                                                <column id="2848">
-                                                                                    <property name="width">0.5in</property>
-                                                                                </column>
-                                                                                <row id="2849">
-                                                                                    <property name="height">0.3541666666666667in</property>
-                                                                                    <cell id="2850">
                                                                                         <property name="borderRightStyle">solid</property>
                                                                                         <property name="borderRightWidth">thin</property>
-                                                                                        <grid id="2852">
-                                                                                            <property name="height">0.3333333333333333in</property>
-                                                                                            <column id="2853"/>
-                                                                                            <row id="2854">
-                                                                                                <property name="height">0.16666666666666666in</property>
-                                                                                                <cell id="2855">
-                                                                                                    <label id="2858">
-                                                                                                        <property name="fontSize">5pt</property>
-                                                                                                        <text-property name="text">5 всего т-ов</text-property>
-                                                                                                    </label>
-                                                                                                </cell>
-                                                                                            </row>
-                                                                                            <row id="2856">
-                                                                                                <cell id="2857">
-                                                                                                    <data id="2859">
-                                                                                                        <property name="fontSize">5pt</property>
-                                                                                                        <property name="textAlign">center</property>
-                                                                                                        <property name="dataSet">ProductCount</property>
-                                                                                                        <list-property name="boundDataColumns">
-                                                                                                            <structure>
-                                                                                                                <property name="name">count</property>
-                                                                                                                <text-property name="displayName">count</text-property>
-                                                                                                                <expression name="expression" type="javascript">dataSetRow["count"]</expression>
-                                                                                                                <property name="dataType">decimal</property>
-                                                                                                            </structure>
-                                                                                                        </list-property>
-                                                                                                        <property name="resultSetColumn">count</property>
-                                                                                                    </data>
-                                                                                                </cell>
-                                                                                            </row>
-                                                                                        </grid>
                                                                                     </cell>
-                                                                                    <cell id="2851"/>
+                                                                                    <cell id="2837"/>
                                                                                 </row>
                                                                             </grid>
                                                                         </cell>
@@ -2199,10 +4607,6 @@ where TransitDec.id = ?]]></xml-property>
                                         <property name="borderBottomWidth">thin</property>
                                         <property name="borderLeftStyle">solid</property>
                                         <property name="borderLeftWidth">thin</property>
-                                        <property name="borderRightStyle">solid</property>
-                                        <property name="borderRightWidth">thin</property>
-                                        <property name="borderTopStyle">solid</property>
-                                        <property name="borderTopWidth">thin</property>
                                         <grid id="2839">
                                             <property name="height">0.34375in</property>
                                             <column id="2840"/>
@@ -2231,30 +4635,559 @@ where TransitDec.id = ?]]></xml-property>
     </page-setup>
     <body>
         <grid id="2615">
-            <property name="height">3.4375in</property>
-            <property name="width">7.895833333333333in</property>
+            <property name="height">2.7291666666666665in</property>
+            <property name="width">8in</property>
             <column id="2616">
                 <property name="width">0.8229166666666666in</property>
             </column>
             <column id="2617">
-                <property name="width">2.2083333333333335in</property>
+                <property name="width">2.21875in</property>
             </column>
             <column id="2618">
-                <property name="width">4.864583333333333in</property>
+                <property name="width">4.958333333333333in</property>
             </column>
             <row id="2619">
-                <property name="height">3.4375in</property>
+                <property name="height">2.7291666666666665in</property>
                 <cell id="2620">
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
                     <property name="borderRightStyle">solid</property>
                     <property name="borderRightWidth">thin</property>
                 </cell>
                 <cell id="2621">
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <property name="borderTopStyle">solid</property>
+                    <property name="borderTopWidth">thin</property>
+                    <grid id="3138">
+                        <property name="height">0.8020833333333334in</property>
+                        <column id="3139"/>
+                        <row id="3140">
+                            <property name="height">0.8020833333333334in</property>
+                            <cell id="3141">
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <grid id="3146">
+                                    <property name="height">0.1875in</property>
+                                    <property name="width">2.0833333333333335in</property>
+                                    <column id="3147">
+                                        <property name="width">1.5520833333333333in</property>
+                                    </column>
+                                    <column id="3148">
+                                        <property name="width">0.53125in</property>
+                                    </column>
+                                    <row id="3149">
+                                        <property name="height">0.1875in</property>
+                                        <cell id="3150">
+                                            <label id="3152">
+                                                <property name="fontSize">5pt</property>
+                                                <property name="masterPage">First</property>
+                                                <text-property name="text">8 Получатель</text-property>
+                                            </label>
+                                        </cell>
+                                        <cell id="3151">
+                                            <label id="3153">
+                                                <property name="fontSize">5pt</property>
+                                                <text-property name="text"> №</text-property>
+                                            </label>
+                                        </cell>
+                                    </row>
+                                </grid>
+                            </cell>
+                        </row>
+                    </grid>
+                    <grid id="3154">
+                        <property name="height">0.7291666666666666in</property>
+                        <column id="3155"/>
+                        <row id="3156">
+                            <property name="height">0.7291666666666666in</property>
+                            <cell id="3157">
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                            </cell>
+                        </row>
+                    </grid>
+                    <grid id="3194">
+                        <property name="height">0.2708333333333333in</property>
+                        <column id="3195"/>
+                        <row id="3196">
+                            <property name="height">0.2708333333333333in</property>
+                            <cell id="3197">
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                            </cell>
+                        </row>
+                    </grid>
+                    <grid id="3198">
+                        <property name="height">0.23958333333333334in</property>
+                        <column id="3199"/>
+                        <row id="3200">
+                            <property name="height">0.23958333333333334in</property>
+                            <cell id="3201">
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                            </cell>
+                        </row>
+                    </grid>
+                    <grid id="3202">
+                        <property name="height">0.25in</property>
+                        <column id="3203"/>
+                        <row id="3204">
+                            <property name="height">0.25in</property>
+                            <cell id="3205"/>
+                        </row>
+                    </grid>
+                    <grid id="3206">
+                        <column id="3207"/>
+                        <row id="3208">
+                            <cell id="3209"/>
+                        </row>
+                    </grid>
+                </cell>
+                <cell id="2622">
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <property name="borderTopStyle">solid</property>
+                    <property name="borderTopWidth">thin</property>
+                    <grid id="3142">
+                        <property name="height">0.8020833333333334in</property>
+                        <column id="3143"/>
+                        <row id="3144">
+                            <property name="height">0.8020833333333334in</property>
+                            <cell id="3145">
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                            </cell>
+                        </row>
+                    </grid>
+                    <grid id="3158">
+                        <property name="height">0.7291666666666666in</property>
+                        <column id="3159"/>
+                        <row id="3160">
+                            <property name="height">0.7291666666666666in</property>
+                            <cell id="3161">
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <grid id="3162">
+                                    <property name="height">0.6979166666666666in</property>
+                                    <column id="3163"/>
+                                    <column id="3164"/>
+                                    <row id="3165">
+                                        <property name="height">0.3125in</property>
+                                        <cell id="3166">
+                                            <property name="borderBottomStyle">solid</property>
+                                            <property name="borderBottomWidth">thin</property>
+                                            <grid id="3171">
+                                                <property name="height">0.3125in</property>
+                                                <column id="3172"/>
+                                                <row id="3173">
+                                                    <property name="height">0.14583333333333334in</property>
+                                                    <cell id="3174">
+                                                        <label id="3177">
+                                                            <property name="fontSize">5pt</property>
+                                                            <text-property name="text">15 Старана отправления</text-property>
+                                                        </label>
+                                                    </cell>
+                                                </row>
+                                                <row id="3175">
+                                                    <cell id="3176">
+                                                        <data id="3193">
+                                                            <property name="fontSize">5pt</property>
+                                                            <property name="fontWeight">bold</property>
+                                                            <property name="dataSet">Страна отправления</property>
+                                                            <list-property name="boundDataColumns">
+                                                                <structure>
+                                                                    <property name="name">name</property>
+                                                                    <text-property name="displayName">Country::name</text-property>
+                                                                    <expression name="expression" type="javascript">dataSetRow["name"]</expression>
+                                                                    <property name="dataType">string</property>
+                                                                </structure>
+                                                            </list-property>
+                                                            <property name="resultSetColumn">name</property>
+                                                        </data>
+                                                    </cell>
+                                                </row>
+                                            </grid>
+                                        </cell>
+                                        <cell id="3167">
+                                            <property name="borderBottomStyle">solid</property>
+                                            <property name="borderBottomWidth">thin</property>
+                                            <property name="borderLeftStyle">solid</property>
+                                            <property name="borderLeftWidth">thin</property>
+                                        </cell>
+                                    </row>
+                                    <row id="3168">
+                                        <property name="height">0.3854166666666667in</property>
+                                        <cell id="3169">
+                                            <property name="borderRightStyle">solid</property>
+                                            <property name="borderRightWidth">thin</property>
+                                        </cell>
+                                        <cell id="3170">
+                                            <grid id="3178">
+                                                <property name="height">0.34375in</property>
+                                                <column id="3179"/>
+                                                <row id="3180">
+                                                    <property name="height">0.16666666666666666in</property>
+                                                    <cell id="3181">
+                                                        <label id="3184">
+                                                            <property name="fontSize">5pt</property>
+                                                            <text-property name="text">15 Старана отправления</text-property>
+                                                        </label>
+                                                    </cell>
+                                                </row>
+                                                <row id="3182">
+                                                    <cell id="3183">
+                                                        <data id="3192">
+                                                            <property name="fontSize">5pt</property>
+                                                            <property name="fontWeight">bold</property>
+                                                            <property name="dataSet">Страна назначения</property>
+                                                            <list-property name="boundDataColumns">
+                                                                <structure>
+                                                                    <property name="name">name</property>
+                                                                    <text-property name="displayName">Country::name</text-property>
+                                                                    <expression name="expression" type="javascript">dataSetRow["name"]</expression>
+                                                                    <property name="dataType">string</property>
+                                                                </structure>
+                                                            </list-property>
+                                                            <property name="resultSetColumn">name</property>
+                                                        </data>
+                                                    </cell>
+                                                </row>
+                                            </grid>
+                                        </cell>
+                                    </row>
+                                </grid>
+                            </cell>
+                        </row>
+                    </grid>
+                    <grid id="3210">
+                        <property name="height">0.2708333333333333in</property>
+                        <column id="3211"/>
+                        <row id="3212">
+                            <property name="height">0.2708333333333333in</property>
+                            <cell id="3213">
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                            </cell>
+                        </row>
+                    </grid>
+                    <grid id="3214">
+                        <property name="height">0.23958333333333334in</property>
+                        <column id="3215"/>
+                        <row id="3216">
+                            <property name="height">0.23958333333333334in</property>
+                            <cell id="3217">
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                            </cell>
+                        </row>
+                    </grid>
+                    <grid id="3218">
+                        <column id="3219"/>
+                        <row id="3220">
+                            <cell id="3221"/>
+                        </row>
+                    </grid>
+                </cell>
+            </row>
+        </grid>
+        <grid id="3222">
+            <property name="height">0.4583333333333333in</property>
+            <column id="3223"/>
+            <row id="3224">
+                <property name="height">0.4583333333333333in</property>
+                <cell id="3225">
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <grid id="3250">
+                        <property name="height">0.3958333333333333in</property>
+                        <property name="width">7.875in</property>
+                        <column id="3251">
+                            <property name="width">0.78125in</property>
+                        </column>
+                        <column id="3252">
+                            <property name="width">7.09375in</property>
+                        </column>
+                        <row id="3253">
+                            <property name="height">0.3958333333333333in</property>
+                            <cell id="3254">
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">thin</property>
+                            </cell>
+                            <cell id="3255"/>
+                        </row>
+                    </grid>
+                </cell>
+            </row>
+        </grid>
+        <grid id="3226">
+            <property name="height">0.5833333333333334in</property>
+            <column id="3227"/>
+            <row id="3228">
+                <property name="height">0.5833333333333334in</property>
+                <cell id="3229">
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <grid id="3256">
+                        <property name="height">0.5104166666666666in</property>
+                        <property name="width">7.875in</property>
+                        <column id="3257">
+                            <property name="width">0.78125in</property>
+                        </column>
+                        <column id="3258">
+                            <property name="width">7.09375in</property>
+                        </column>
+                        <row id="3259">
+                            <property name="height">0.5104166666666666in</property>
+                            <cell id="3260">
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">thin</property>
+                            </cell>
+                            <cell id="3261"/>
+                        </row>
+                    </grid>
+                </cell>
+            </row>
+        </grid>
+        <grid id="3246">
+            <property name="height">0.96875in</property>
+            <column id="3247"/>
+            <row id="3248">
+                <property name="height">0.96875in</property>
+                <cell id="3249">
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <grid id="3262">
+                        <property name="height">0.9166666666666666in</property>
+                        <property name="width">7.875in</property>
+                        <column id="3263">
+                            <property name="width">0.78125in</property>
+                        </column>
+                        <column id="3264">
+                            <property name="width">7.09375in</property>
+                        </column>
+                        <row id="3265">
+                            <property name="height">0.9166666666666666in</property>
+                            <cell id="3266">
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">thin</property>
+                            </cell>
+                            <cell id="3267"/>
+                        </row>
+                    </grid>
+                </cell>
+            </row>
+        </grid>
+        <grid id="3242">
+            <property name="height">1.1875in</property>
+            <column id="3243"/>
+            <row id="3244">
+                <property name="height">1.1875in</property>
+                <cell id="3245">
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <grid id="3268">
+                        <property name="height">1.1354166666666667in</property>
+                        <property name="width">7.875in</property>
+                        <column id="3269">
+                            <property name="width">0.7708333333333334in</property>
+                        </column>
+                        <column id="3270">
+                            <property name="width">7.104166666666667in</property>
+                        </column>
+                        <row id="3271">
+                            <property name="height">1.1354166666666667in</property>
+                            <cell id="3272">
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">thin</property>
+                            </cell>
+                            <cell id="3273"/>
+                        </row>
+                    </grid>
+                </cell>
+            </row>
+        </grid>
+        <grid id="3238">
+            <property name="height">0.6354166666666666in</property>
+            <column id="3239"/>
+            <row id="3240">
+                <property name="height">0.6354166666666666in</property>
+                <cell id="3241">
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <grid id="3274">
+                        <property name="height">0.6041666666666666in</property>
+                        <property name="width">7.875in</property>
+                        <column id="3275">
+                            <property name="width">0.7708333333333334in</property>
+                        </column>
+                        <column id="3276">
+                            <property name="width">7.104166666666667in</property>
+                        </column>
+                        <row id="3277">
+                            <property name="height">0.6041666666666666in</property>
+                            <cell id="3278">
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">thin</property>
+                            </cell>
+                            <cell id="3279"/>
+                        </row>
+                    </grid>
+                </cell>
+            </row>
+        </grid>
+        <grid id="3234">
+            <property name="height">1.0625in</property>
+            <column id="3235"/>
+            <row id="3236">
+                <property name="height">1.0625in</property>
+                <cell id="3237">
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <grid id="3280">
+                        <property name="height">1.5625in</property>
+                        <property name="width">7.875in</property>
+                        <column id="3281">
+                            <property name="width">0.7708333333333334in</property>
+                        </column>
+                        <column id="3282">
+                            <property name="width">7.104166666666667in</property>
+                        </column>
+                        <row id="3283">
+                            <property name="height">1.5625in</property>
+                            <cell id="3284">
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">thin</property>
+                            </cell>
+                            <cell id="3285"/>
+                        </row>
+                    </grid>
+                </cell>
+            </row>
+        </grid>
+        <grid id="3230">
+            <property name="height">1.34375in</property>
+            <column id="3231"/>
+            <row id="3232">
+                <property name="height">1.34375in</property>
+                <cell id="3233">
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
                     <property name="borderRightStyle">solid</property>
                     <property name="borderRightWidth">thin</property>
                 </cell>
-                <cell id="2622">
-                    <property name="borderRightStyle">solid</property>
-                    <property name="borderRightWidth">thin</property>
+            </row>
+        </grid>
+        <grid id="3286">
+            <property name="height">5.052083333333333in</property>
+            <property name="width">8.020833333333334in</property>
+            <column id="3287">
+                <property name="width">8.020833333333334in</property>
+            </column>
+            <row id="3288">
+                <property name="height">5.052083333333333in</property>
+                <cell id="3289">
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderTopStyle">solid</property>
+                    <property name="borderTopWidth">thin</property>
+                    <list id="3296">
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="masterPage">Second</property>
+                        <property name="dataSet">Product Transit Declaration</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">id</property>
+                                <text-property name="displayName">id</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["id"]</expression>
+                                <property name="dataType">decimal</property>
+                            </structure>
+                        </list-property>
+                        <structure name="toc"/>
+                        <property name="pageBreakInterval">3</property>
+                        <detail>
+                            <grid id="3298">
+                                <property name="height">1.6458333333333333in</property>
+                                <property name="width">7.895833333333333in</property>
+                                <column id="3299">
+                                    <property name="width">0.7916666666666666in</property>
+                                </column>
+                                <column id="3300">
+                                    <property name="width">7.104166666666667in</property>
+                                </column>
+                                <row id="3301">
+                                    <property name="height">0.8333333333333334in</property>
+                                    <cell id="3302">
+                                        <property name="borderBottomStyle">solid</property>
+                                        <property name="borderBottomWidth">thin</property>
+                                        <property name="borderRightStyle">solid</property>
+                                        <property name="borderRightWidth">thin</property>
+                                        <label id="3307">
+                                            <text-property name="text">31</text-property>
+                                        </label>
+                                    </cell>
+                                    <cell id="3303">
+                                        <property name="borderBottomStyle">solid</property>
+                                        <property name="borderBottomWidth">thin</property>
+                                        <data id="3309">
+                                            <property name="resultSetColumn">id</property>
+                                        </data>
+                                    </cell>
+                                </row>
+                                <row id="3304">
+                                    <property name="height">0.8125in</property>
+                                    <cell id="3305">
+                                        <property name="borderBottomStyle">solid</property>
+                                        <property name="borderBottomWidth">thin</property>
+                                        <property name="borderRightStyle">solid</property>
+                                        <property name="borderRightWidth">thin</property>
+                                        <label id="3310">
+                                            <text-property name="text">44</text-property>
+                                        </label>
+                                    </cell>
+                                    <cell id="3306">
+                                        <property name="borderBottomStyle">solid</property>
+                                        <property name="borderBottomWidth">thin</property>
+                                        <property name="borderTopStyle">solid</property>
+                                        <property name="borderTopWidth">thin</property>
+                                    </cell>
+                                </row>
+                            </grid>
+                        </detail>
+                    </list>
                 </cell>
             </row>
         </grid>
