@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.24" id="1">
     <property name="createdBy">Eclipse BIRT Designer Version 4.9.0.v202203150031</property>
+    <list-property name="propertyBindings">
+        <structure>
+            <property name="name">queryText</property>
+            <property name="id">2845</property>
+        </structure>
+        <structure>
+            <property name="name">queryTimeOut</property>
+            <property name="id">2845</property>
+        </structure>
+        <structure>
+            <property name="name">rowFetchSize</property>
+            <property name="id">2845</property>
+        </structure>
+    </list-property>
     <property name="units">in</property>
     <property name="iconFile">/templates/blank_report.gif</property>
     <property name="bidiLayoutOrientation">ltr</property>
@@ -63,6 +77,18 @@
                     <text-property name="displayName">id</text-property>
                     <text-property name="heading">id</text-property>
                 </structure>
+                <structure>
+                    <property name="columnName">quantity</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">quantity</text-property>
+                    <text-property name="heading">quantity</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">cargo_quantity</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">cargo_quantity</text-property>
+                    <text-property name="heading">cargo_quantity</text-property>
+                </structure>
             </list-property>
             <list-property name="parameters">
                 <structure>
@@ -88,6 +114,16 @@
                         <property name="name">id</property>
                         <property name="dataType">decimal</property>
                     </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">quantity</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">cargo_quantity</property>
+                        <property name="dataType">integer</property>
+                    </structure>
                 </list-property>
             </structure>
             <property name="dataSource">SmartLocalDataBase</property>
@@ -106,8 +142,22 @@
                     <property name="dataType">decimal</property>
                     <property name="nativeDataType">-5</property>
                 </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">quantity</property>
+                    <property name="nativeName">quantity</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">cargo_quantity</property>
+                    <property name="nativeName">cargo_quantity</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[select Goods.name,Goods.id
+            <xml-property name="queryText"><![CDATA[select Goods.name,Goods.id,Goods.quantity,Goods.cargo_quantity
 from public.transitcontrolsystem_transit_declaration as TransitDec
 join dictionary_commodity_consignment as Commodity on(Commodity.id = TransitDec.consignment)
 join dictionary_goods as Goods on (Commodity.id = Goods.commodity_consignment)
@@ -115,23 +165,694 @@ where TransitDec.id = ?]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
   <Version>2.0</Version>
-  <DataSetParameters>
-    <parameter>
-      <design:ParameterDefinition>
-        <design:inOutMode>In</design:inOutMode>
-        <design:attributes>
-          <design:identifier>
-            <design:name></design:name>
-            <design:position>1</design:position>
-          </design:identifier>
-          <design:nativeDataTypeCode>-5</design:nativeDataTypeCode>
-          <design:precision>0</design:precision>
-          <design:scale>0</design:scale>
-          <design:nullability>Unknown</design:nullability>
-        </design:attributes>
-      </design:ParameterDefinition>
-    </parameter>
-  </DataSetParameters>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>id</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>-5</design:nativeDataTypeCode>
+            <design:precision>19</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>id</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>id</design:label>
+            <design:formattingHints>
+              <design:displaySize>20</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>archived</design:name>
+              <design:position>2</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>-7</design:nativeDataTypeCode>
+            <design:precision>1</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>archived</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>archived</design:label>
+            <design:formattingHints>
+              <design:displaySize>1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>import_id</design:name>
+              <design:position>3</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>import_id</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>import_id</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>import_origin</design:name>
+              <design:position>4</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>import_origin</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>import_origin</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>process_instance_id</design:name>
+              <design:position>5</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>process_instance_id</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>process_instance_id</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>version</design:name>
+              <design:position>6</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>version</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>version</design:label>
+            <design:formattingHints>
+              <design:displaySize>11</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>created_on</design:name>
+              <design:position>7</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>93</design:nativeDataTypeCode>
+            <design:precision>29</design:precision>
+            <design:scale>6</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>created_on</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>created_on</design:label>
+            <design:formattingHints>
+              <design:displaySize>29</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>updated_on</design:name>
+              <design:position>8</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>93</design:nativeDataTypeCode>
+            <design:precision>29</design:precision>
+            <design:scale>6</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>updated_on</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>updated_on</design:label>
+            <design:formattingHints>
+              <design:displaySize>29</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>attrs</design:name>
+              <design:position>9</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>2147483647</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>attrs</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>attrs</design:label>
+            <design:formattingHints>
+              <design:displaySize>2147483647</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>declaration_type</design:name>
+              <design:position>10</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>declaration_type</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>declaration_type</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>one_time_assumption</design:name>
+              <design:position>11</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>-7</design:nativeDataTypeCode>
+            <design:precision>1</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>one_time_assumption</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>one_time_assumption</design:label>
+            <design:formattingHints>
+              <design:displaySize>1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>purpose_goods</design:name>
+              <design:position>12</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>purpose_goods</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>purpose_goods</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>registration_number</design:name>
+              <design:position>13</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>registration_number</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>registration_number</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>status</design:name>
+              <design:position>14</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>status</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>status</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>transit_period</design:name>
+              <design:position>15</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>91</design:nativeDataTypeCode>
+            <design:precision>13</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>transit_period</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>transit_period</design:label>
+            <design:formattingHints>
+              <design:displaySize>13</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>type_movement_goods</design:name>
+              <design:position>16</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>type_movement_goods</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>type_movement_goods</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>created_by</design:name>
+              <design:position>17</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>-5</design:nativeDataTypeCode>
+            <design:precision>19</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>created_by</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>created_by</design:label>
+            <design:formattingHints>
+              <design:displaySize>20</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>updated_by</design:name>
+              <design:position>18</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>-5</design:nativeDataTypeCode>
+            <design:precision>19</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>updated_by</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>updated_by</design:label>
+            <design:formattingHints>
+              <design:displaySize>20</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>carrier</design:name>
+              <design:position>19</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>-5</design:nativeDataTypeCode>
+            <design:precision>19</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>carrier</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>carrier</design:label>
+            <design:formattingHints>
+              <design:displaySize>20</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>consignment</design:name>
+              <design:position>20</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>-5</design:nativeDataTypeCode>
+            <design:precision>19</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>consignment</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>consignment</design:label>
+            <design:formattingHints>
+              <design:displaySize>20</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>customs_department</design:name>
+              <design:position>21</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>-5</design:nativeDataTypeCode>
+            <design:precision>19</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>customs_department</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>customs_department</design:label>
+            <design:formattingHints>
+              <design:displaySize>20</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>customs_office_departure</design:name>
+              <design:position>22</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>-5</design:nativeDataTypeCode>
+            <design:precision>19</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>customs_office_departure</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>customs_office_departure</design:label>
+            <design:formattingHints>
+              <design:displaySize>20</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>customs_office_destination</design:name>
+              <design:position>23</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>-5</design:nativeDataTypeCode>
+            <design:precision>19</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>customs_office_destination</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>customs_office_destination</design:label>
+            <design:formattingHints>
+              <design:displaySize>20</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>decision_customs_authority</design:name>
+              <design:position>24</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>-5</design:nativeDataTypeCode>
+            <design:precision>19</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>decision_customs_authority</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>decision_customs_authority</design:label>
+            <design:formattingHints>
+              <design:displaySize>20</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>declarant</design:name>
+              <design:position>25</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>-5</design:nativeDataTypeCode>
+            <design:precision>19</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>declarant</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>declarant</design:label>
+            <design:formattingHints>
+              <design:displaySize>20</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>departure_country</design:name>
+              <design:position>26</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>-5</design:nativeDataTypeCode>
+            <design:precision>19</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>departure_country</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>departure_country</design:label>
+            <design:formattingHints>
+              <design:displaySize>20</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>destination_country</design:name>
+              <design:position>27</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>-5</design:nativeDataTypeCode>
+            <design:precision>19</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>destination_country</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>destination_country</design:label>
+            <design:formattingHints>
+              <design:displaySize>20</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>railway_station</design:name>
+              <design:position>28</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>-5</design:nativeDataTypeCode>
+            <design:precision>19</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>railway_station</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>railway_station</design:label>
+            <design:formattingHints>
+              <design:displaySize>20</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>registration_number_tir_carnet</design:name>
+              <design:position>29</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>-5</design:nativeDataTypeCode>
+            <design:precision>19</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>registration_number_tir_carnet</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>registration_number_tir_carnet</design:label>
+            <design:formattingHints>
+              <design:displaySize>20</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>transport_kind</design:name>
+              <design:position>30</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>-5</design:nativeDataTypeCode>
+            <design:precision>19</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>transport_kind</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>transport_kind</design:label>
+            <design:formattingHints>
+              <design:displaySize>20</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="ProductCount" id="2845">
+            <property name="nullsOrdering">nulls lowest</property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">count</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">count</text-property>
+                    <text-property name="heading">count</text-property>
+                </structure>
+            </list-property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">param_1</property>
+                    <property name="paramName">TransitDeclarationId</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">-5</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">count</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">SmartLocalDataBase</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">count</property>
+                    <property name="nativeName">count</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">-5</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select COUNT(*)
+from public.transitcontrolsystem_transit_declaration as TransitDec
+join dictionary_commodity_consignment as Commodity on(Commodity.id = TransitDec.consignment)
+join dictionary_goods as Goods on (Commodity.id = Goods.commodity_consignment)
+where TransitDec.id = ?]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
   <design:ResultSets derivedMetaData="true">
     <design:resultSetDefinitions>
       <design:resultSetColumns>
@@ -781,44 +1502,44 @@ where TransitDec.id = ?]]></xml-property>
     <page-setup>
         <simple-master-page name="Simple MasterPage" id="2">
             <property name="showHeaderOnFirst">true</property>
-            <property name="headerHeight">1in</property>
+            <property name="headerHeight">1.1in</property>
             <property name="footerHeight">6in</property>
             <page-header>
-                <grid id="1557">
+                <grid id="3024">
                     <property name="verticalAlign">top</property>
                     <property name="height">10.15625in</property>
-                    <column id="1558"/>
-                    <row id="1559">
+                    <column id="3025"/>
+                    <row id="3026">
                         <property name="height">10.15625in</property>
-                        <cell id="1560">
-                            <grid id="1561">
-                                <property name="height">1.3125in</property>
+                        <cell id="3027">
+                            <grid id="3028">
+                                <property name="height">1.3541666666666667in</property>
                                 <property name="width">7.875in</property>
-                                <column id="1562">
+                                <column id="3029">
                                     <property name="width">3.0104166666666665in</property>
                                 </column>
-                                <column id="1563">
+                                <column id="3030">
                                     <property name="width">1.4375in</property>
                                 </column>
-                                <column id="1564">
+                                <column id="3031">
                                     <property name="width">3.4270833333333335in</property>
                                 </column>
-                                <row id="1565">
-                                    <property name="height">1.3125in</property>
-                                    <cell id="1566">
+                                <row id="3032">
+                                    <property name="height">1.3541666666666667in</property>
+                                    <cell id="3033">
                                         <property name="borderLeftStyle">solid</property>
                                         <property name="borderLeftWidth">thin</property>
                                         <property name="borderTopStyle">solid</property>
                                         <property name="borderTopWidth">thin</property>
-                                        <grid id="1567">
+                                        <grid id="3034">
                                             <property name="height">0.19791666666666666in</property>
-                                            <column id="1568"/>
-                                            <row id="1569">
+                                            <column id="3035"/>
+                                            <row id="3036">
                                                 <property name="height">0.19791666666666666in</property>
-                                                <cell id="1570">
+                                                <cell id="3037">
                                                     <property name="borderBottomStyle">solid</property>
                                                     <property name="borderBottomWidth">thin</property>
-                                                    <label id="1571">
+                                                    <label id="3038">
                                                         <property name="style">declarationHead</property>
                                                         <property name="fontSize">8pt</property>
                                                         <property name="paddingBottom">5pt</property>
@@ -828,61 +1549,428 @@ where TransitDec.id = ?]]></xml-property>
                                                 </cell>
                                             </row>
                                         </grid>
-                                        <grid id="1572">
+                                        <grid id="3039">
                                             <property name="height">0.9583333333333334in</property>
                                             <property name="width">2.9375in</property>
-                                            <column id="1573">
+                                            <column id="3040">
                                                 <property name="width">0.7708333333333334in</property>
                                             </column>
-                                            <column id="1574">
+                                            <column id="3041">
                                                 <property name="width">2.1666666666666665in</property>
                                             </column>
-                                            <row id="1575">
+                                            <row id="3042">
                                                 <property name="height">0.9583333333333334in</property>
-                                                <cell id="1576">
+                                                <cell id="3043">
                                                     <property name="borderRightStyle">solid</property>
                                                     <property name="borderRightWidth">thin</property>
-                                                    <auto-text id="2748">
-                                                        <property name="type">page-number</property>
-                                                    </auto-text>
                                                 </cell>
-                                                <cell id="1577">
-                                                    <grid id="1578">
+                                                <cell id="3044">
+                                                    <grid id="3045">
                                                         <property name="height">0.7916666666666666in</property>
-                                                        <column id="1579"/>
-                                                        <row id="1580">
+                                                        <column id="3046"/>
+                                                        <row id="3047">
                                                             <property name="height">0.7916666666666666in</property>
-                                                            <cell id="1581">
-                                                                <grid id="1582">
+                                                            <cell id="3048">
+                                                                <grid id="3049">
                                                                     <property name="height">0.3333333333333333in</property>
-                                                                    <column id="1583"/>
-                                                                    <column id="1584"/>
-                                                                    <row id="1585">
+                                                                    <property name="width">2.03125in</property>
+                                                                    <column id="3050">
+                                                                        <property name="width">1.5833333333333333in</property>
+                                                                    </column>
+                                                                    <column id="3051">
+                                                                        <property name="width">0.4479166666666667in</property>
+                                                                    </column>
+                                                                    <row id="3052">
                                                                         <property name="height">0.3333333333333333in</property>
-                                                                        <cell id="1586">
-                                                                            <label id="1587">
+                                                                        <cell id="3053">
+                                                                            <label id="3054">
                                                                                 <property name="fontSize">5pt</property>
-                                                                                <text-property name="text">8.Получатель</text-property>
-                                                                            </label>
-                                                                            <label id="2247">
-                                                                                <property name="fontSize">5pt</property>
-                                                                                <list-property name="visibility">
-                                                                                    <structure>
-                                                                                        <property name="format">all</property>
-                                                                                        <expression name="valueExpr" type="javascript">var e = reportContext.getDesignHandle().getElementById(2748);
-e == 1</expression>
-                                                                                    </structure>
-                                                                                </list-property>
-                                                                                <text-property name="text">8.Получатель</text-property>
+                                                                                <text-property name="text">2 Отправитель/ Экспортер </text-property>
                                                                             </label>
                                                                         </cell>
-                                                                        <cell id="1588">
-                                                                            <label id="1589">
+                                                                        <cell id="3055">
+                                                                            <label id="3056">
                                                                                 <property name="fontSize">5pt</property>
-                                                                                <property name="textAlign">center</property>
+                                                                                <property name="textAlign">left</property>
                                                                                 <text-property name="text">№</text-property>
                                                                             </label>
-                                                                            <label id="2248">
+                                                                        </cell>
+                                                                    </row>
+                                                                </grid>
+                                                            </cell>
+                                                        </row>
+                                                    </grid>
+                                                </cell>
+                                            </row>
+                                        </grid>
+                                    </cell>
+                                    <cell id="3057">
+                                        <property name="borderBottomStyle">solid</property>
+                                        <property name="borderBottomWidth">thin</property>
+                                        <property name="borderLeftStyle">solid</property>
+                                        <property name="borderLeftWidth">thin</property>
+                                        <property name="borderTopStyle">solid</property>
+                                        <property name="borderTopWidth">thin</property>
+                                        <grid id="3058">
+                                            <property name="height">1.53125in</property>
+                                            <property name="width">1.4583333333333333in</property>
+                                            <column id="3059">
+                                                <property name="width">1.4583333333333333in</property>
+                                            </column>
+                                            <row id="3060">
+                                                <property name="height">1.53125in</property>
+                                                <cell id="3061">
+                                                    <grid id="3062">
+                                                        <property name="height">1.3333333333333333in</property>
+                                                        <property name="width">1.4166666666666667in</property>
+                                                        <column id="3063">
+                                                            <property name="width">1.4166666666666667in</property>
+                                                        </column>
+                                                        <row id="3064">
+                                                            <property name="height">0.15625in</property>
+                                                            <cell id="3065">
+                                                                <property name="borderRightStyle">solid</property>
+                                                                <property name="borderRightWidth">thin</property>
+                                                                <label id="3066">
+                                                                    <property name="fontSize">5pt</property>
+                                                                    <text-property name="text">1 ДЕКЛАРАЦИЯ</text-property>
+                                                                </label>
+                                                            </cell>
+                                                        </row>
+                                                        <row id="3067">
+                                                            <property name="height">1.1770833333333333in</property>
+                                                            <cell id="3068">
+                                                                <property name="borderRightStyle">solid</property>
+                                                                <property name="borderRightWidth">thin</property>
+                                                                <grid id="3069">
+                                                                    <property name="height">1.0520833333333333in</property>
+                                                                    <column id="3070"/>
+                                                                    <row id="3071">
+                                                                        <property name="height">0.20833333333333334in</property>
+                                                                        <cell id="3072">
+                                                                            <property name="borderBottomStyle">solid</property>
+                                                                            <property name="borderBottomWidth">thin</property>
+                                                                            <grid id="3073">
+                                                                                <property name="height">0.19791666666666666in</property>
+                                                                                <property name="width">1.2708333333333333in</property>
+                                                                                <column id="3074">
+                                                                                    <property name="width">0.4270833333333333in</property>
+                                                                                </column>
+                                                                                <column id="3075">
+                                                                                    <property name="width">0.34375in</property>
+                                                                                </column>
+                                                                                <column id="3076">
+                                                                                    <property name="width">0.5in</property>
+                                                                                </column>
+                                                                                <row id="3077">
+                                                                                    <property name="height">0.19791666666666666in</property>
+                                                                                    <cell id="3078">
+                                                                                        <property name="borderRightStyle">solid</property>
+                                                                                        <property name="borderRightWidth">thin</property>
+                                                                                        <label id="3079">
+                                                                                            <property name="fontSize">5pt</property>
+                                                                                            <property name="textAlign">center</property>
+                                                                                            <text-property name="text">TT</text-property>
+                                                                                        </label>
+                                                                                    </cell>
+                                                                                    <cell id="3080"/>
+                                                                                    <cell id="3081">
+                                                                                        <property name="borderLeftStyle">solid</property>
+                                                                                        <property name="borderLeftWidth">thin</property>
+                                                                                        <label id="3082">
+                                                                                            <property name="fontSize">5pt</property>
+                                                                                            <property name="textAlign">center</property>
+                                                                                            <text-property name="text">ИМ</text-property>
+                                                                                        </label>
+                                                                                    </cell>
+                                                                                </row>
+                                                                            </grid>
+                                                                        </cell>
+                                                                    </row>
+                                                                    <row id="3083">
+                                                                        <property name="height">0.84375in</property>
+                                                                        <cell id="3084">
+                                                                            <grid id="3085">
+                                                                                <property name="height">0.2916666666666667in</property>
+                                                                                <property name="width">1.2708333333333333in</property>
+                                                                                <column id="3086">
+                                                                                    <property name="width">0.7708333333333334in</property>
+                                                                                </column>
+                                                                                <column id="3087">
+                                                                                    <property name="width">0.5in</property>
+                                                                                </column>
+                                                                                <row id="3089">
+                                                                                    <property name="height">0.2916666666666667in</property>
+                                                                                    <cell id="3090">
+                                                                                        <property name="borderBottomStyle">solid</property>
+                                                                                        <property name="borderBottomWidth">thin</property>
+                                                                                        <grid id="3091">
+                                                                                            <property name="height">0.53125in</property>
+                                                                                            <column id="3092"/>
+                                                                                            <row id="3093">
+                                                                                                <property name="height">0.13541666666666666in</property>
+                                                                                                <cell id="3094">
+                                                                                                    <label id="3095">
+                                                                                                        <property name="fontSize">5pt</property>
+                                                                                                        <text-property name="text"> 3 ФОРМЫ</text-property>
+                                                                                                    </label>
+                                                                                                </cell>
+                                                                                            </row>
+                                                                                            <row id="3096">
+                                                                                                <cell id="3097">
+                                                                                                    <grid id="3098">
+                                                                                                        <property name="height">0.3333333333333333in</property>
+                                                                                                        <column id="3099"/>
+                                                                                                        <column id="3100"/>
+                                                                                                        <row id="3101">
+                                                                                                            <property name="height">0.3333333333333333in</property>
+                                                                                                            <cell id="3102">
+                                                                                                                <auto-text id="3103">
+                                                                                                                    <property name="fontSize">5pt</property>
+                                                                                                                    <property name="fontWeight">bold</property>
+                                                                                                                    <property name="textAlign">center</property>
+                                                                                                                    <property name="type">page-number</property>
+                                                                                                                </auto-text>
+                                                                                                            </cell>
+                                                                                                            <cell id="3104">
+                                                                                                                <property name="borderLeftStyle">solid</property>
+                                                                                                                <property name="borderLeftWidth">thin</property>
+                                                                                                                <auto-text id="3105">
+                                                                                                                    <property name="fontSize">5pt</property>
+                                                                                                                    <property name="fontWeight">bold</property>
+                                                                                                                    <property name="textAlign">center</property>
+                                                                                                                    <property name="type">total-page</property>
+                                                                                                                </auto-text>
+                                                                                                            </cell>
+                                                                                                        </row>
+                                                                                                    </grid>
+                                                                                                </cell>
+                                                                                            </row>
+                                                                                        </grid>
+                                                                                    </cell>
+                                                                                    <cell id="3106">
+                                                                                        <property name="borderBottomStyle">solid</property>
+                                                                                        <property name="borderBottomWidth">thin</property>
+                                                                                        <property name="borderLeftStyle">solid</property>
+                                                                                        <property name="borderLeftWidth">thin</property>
+                                                                                    </cell>
+                                                                                </row>
+                                                                            </grid>
+                                                                            <grid id="3108">
+                                                                                <property name="height">0.4270833333333333in</property>
+                                                                                <property name="width">1.2708333333333333in</property>
+                                                                                <column id="3109">
+                                                                                    <property name="width">0.7708333333333334in</property>
+                                                                                </column>
+                                                                                <column id="3110">
+                                                                                    <property name="width">0.5in</property>
+                                                                                </column>
+                                                                                <row id="3111">
+                                                                                    <property name="height">0.4270833333333333in</property>
+                                                                                    <cell id="3112">
+                                                                                        <property name="borderRightStyle">solid</property>
+                                                                                        <property name="borderRightWidth">thin</property>
+                                                                                        <grid id="3113">
+                                                                                            <property name="height">0.34375in</property>
+                                                                                            <column id="3114"/>
+                                                                                            <row id="3115">
+                                                                                                <property name="height">0.14583333333333334in</property>
+                                                                                                <cell id="3116">
+                                                                                                    <label id="3117">
+                                                                                                        <property name="fontSize">4pt</property>
+                                                                                                        <text-property name="text">5 всего т-ов</text-property>
+                                                                                                    </label>
+                                                                                                </cell>
+                                                                                            </row>
+                                                                                            <row id="3118">
+                                                                                                <property name="height">0.19791666666666666in</property>
+                                                                                                <cell id="3119">
+                                                                                                    <data id="3136">
+                                                                                                        <property name="fontSize">5pt</property>
+                                                                                                        <property name="fontWeight">bold</property>
+                                                                                                        <property name="textAlign">center</property>
+                                                                                                        <property name="dataSet">Transaction Declaration</property>
+                                                                                                        <list-property name="boundDataColumns">
+                                                                                                            <structure>
+                                                                                                                <property name="name">quantity</property>
+                                                                                                                <text-property name="displayName">quantity</text-property>
+                                                                                                                <expression name="expression" type="javascript">dataSetRow["quantity"]</expression>
+                                                                                                                <property name="dataType">integer</property>
+                                                                                                            </structure>
+                                                                                                        </list-property>
+                                                                                                        <property name="resultSetColumn">quantity</property>
+                                                                                                    </data>
+                                                                                                </cell>
+                                                                                            </row>
+                                                                                        </grid>
+                                                                                    </cell>
+                                                                                    <cell id="3121">
+                                                                                        <grid id="3129">
+                                                                                            <property name="height">0.3229166666666667in</property>
+                                                                                            <column id="3130"/>
+                                                                                            <row id="3131">
+                                                                                                <property name="height">0.14583333333333334in</property>
+                                                                                                <cell id="3132">
+                                                                                                    <label id="3135">
+                                                                                                        <property name="fontSize">4pt</property>
+                                                                                                        <text-property name="text">6 Всего мест</text-property>
+                                                                                                    </label>
+                                                                                                </cell>
+                                                                                            </row>
+                                                                                            <row id="3133">
+                                                                                                <cell id="3134">
+                                                                                                    <data id="3137">
+                                                                                                        <property name="fontSize">5pt</property>
+                                                                                                        <property name="fontWeight">bold</property>
+                                                                                                        <property name="textAlign">center</property>
+                                                                                                        <property name="dataSet">Transaction Declaration</property>
+                                                                                                        <list-property name="boundDataColumns">
+                                                                                                            <structure>
+                                                                                                                <property name="name">cargo_quantity</property>
+                                                                                                                <text-property name="displayName">cargo_quantity</text-property>
+                                                                                                                <expression name="expression" type="javascript">dataSetRow["cargo_quantity"]</expression>
+                                                                                                                <property name="dataType">integer</property>
+                                                                                                            </structure>
+                                                                                                        </list-property>
+                                                                                                        <property name="resultSetColumn">cargo_quantity</property>
+                                                                                                    </data>
+                                                                                                </cell>
+                                                                                            </row>
+                                                                                        </grid>
+                                                                                    </cell>
+                                                                                </row>
+                                                                            </grid>
+                                                                        </cell>
+                                                                    </row>
+                                                                </grid>
+                                                            </cell>
+                                                        </row>
+                                                    </grid>
+                                                </cell>
+                                            </row>
+                                        </grid>
+                                    </cell>
+                                    <cell id="3122">
+                                        <property name="borderBottomStyle">solid</property>
+                                        <property name="borderBottomWidth">thin</property>
+                                        <property name="borderLeftStyle">solid</property>
+                                        <property name="borderLeftWidth">thin</property>
+                                        <property name="borderRightStyle">solid</property>
+                                        <property name="borderRightWidth">thin</property>
+                                        <property name="borderTopStyle">solid</property>
+                                        <property name="borderTopWidth">thin</property>
+                                        <grid id="3123">
+                                            <property name="height">0.34375in</property>
+                                            <column id="3124"/>
+                                            <row id="3125">
+                                                <property name="height">0.34375in</property>
+                                                <cell id="3126">
+                                                    <label id="3127">
+                                                        <property name="fontSize">5pt</property>
+                                                        <text-property name="text">А ОРГАН ОТПРАВЛЕНИЯ</text-property>
+                                                    </label>
+                                                </cell>
+                                            </row>
+                                        </grid>
+                                    </cell>
+                                </row>
+                            </grid>
+                        </cell>
+                    </row>
+                </grid>
+            </page-header>
+        </simple-master-page>
+        <simple-master-page name="Second Page Master Page" id="2623">
+            <property name="orientation">auto</property>
+            <property name="display">inline</property>
+            <property name="pageBreakAfter">always</property>
+            <property name="pageBreakBefore">always</property>
+            <property name="pageBreakInside">avoid</property>
+            <property name="showIfBlank">true</property>
+            <property name="showHeaderOnFirst">true</property>
+            <property name="showFooterOnLast">false</property>
+            <property name="headerHeight">1in</property>
+            <page-header>
+                <grid id="2751">
+                    <property name="verticalAlign">top</property>
+                    <property name="height">10.15625in</property>
+                    <column id="2752"/>
+                    <row id="2753">
+                        <property name="height">10.15625in</property>
+                        <cell id="2754">
+                            <grid id="2755">
+                                <property name="height">1.3541666666666667in</property>
+                                <property name="width">7.875in</property>
+                                <column id="2756">
+                                    <property name="width">3.0104166666666665in</property>
+                                </column>
+                                <column id="2757">
+                                    <property name="width">1.4375in</property>
+                                </column>
+                                <column id="2758">
+                                    <property name="width">3.4270833333333335in</property>
+                                </column>
+                                <row id="2759">
+                                    <property name="height">1.3541666666666667in</property>
+                                    <cell id="2760">
+                                        <property name="borderLeftStyle">solid</property>
+                                        <property name="borderLeftWidth">thin</property>
+                                        <property name="borderTopStyle">solid</property>
+                                        <property name="borderTopWidth">thin</property>
+                                        <grid id="2761">
+                                            <property name="height">0.19791666666666666in</property>
+                                            <column id="2762"/>
+                                            <row id="2763">
+                                                <property name="height">0.19791666666666666in</property>
+                                                <cell id="2764">
+                                                    <property name="borderBottomStyle">solid</property>
+                                                    <property name="borderBottomWidth">thin</property>
+                                                    <label id="2765">
+                                                        <property name="style">declarationHead</property>
+                                                        <property name="fontSize">8pt</property>
+                                                        <property name="paddingBottom">5pt</property>
+                                                        <property name="textAlign">center</property>
+                                                        <text-property name="text">ТРАНЗИТНАЯ ДЕКЛАРАЦИЯ</text-property>
+                                                    </label>
+                                                </cell>
+                                            </row>
+                                        </grid>
+                                        <grid id="2766">
+                                            <property name="height">0.9583333333333334in</property>
+                                            <property name="width">2.9375in</property>
+                                            <column id="2767">
+                                                <property name="width">0.7708333333333334in</property>
+                                            </column>
+                                            <column id="2768">
+                                                <property name="width">2.1666666666666665in</property>
+                                            </column>
+                                            <row id="2769">
+                                                <property name="height">0.9583333333333334in</property>
+                                                <cell id="2770">
+                                                    <property name="borderRightStyle">solid</property>
+                                                    <property name="borderRightWidth">thin</property>
+                                                </cell>
+                                                <cell id="2772">
+                                                    <grid id="2773">
+                                                        <property name="height">0.7916666666666666in</property>
+                                                        <column id="2774"/>
+                                                        <row id="2775">
+                                                            <property name="height">0.7916666666666666in</property>
+                                                            <cell id="2776">
+                                                                <grid id="2777">
+                                                                    <property name="height">0.3333333333333333in</property>
+                                                                    <column id="2778"/>
+                                                                    <column id="2779"/>
+                                                                    <row id="2780">
+                                                                        <property name="height">0.3333333333333333in</property>
+                                                                        <cell id="2781">
+                                                                            <label id="2782">
+                                                                                <property name="fontSize">5pt</property>
+                                                                                <text-property name="text">2 Отправитель/ Экспортер </text-property>
+                                                                            </label>
+                                                                        </cell>
+                                                                        <cell id="2784">
+                                                                            <label id="2785">
                                                                                 <property name="fontSize">5pt</property>
                                                                                 <property name="textAlign">center</property>
                                                                                 <text-property name="text">№</text-property>
@@ -897,138 +1985,138 @@ e == 1</expression>
                                             </row>
                                         </grid>
                                     </cell>
-                                    <cell id="1590">
+                                    <cell id="2787">
                                         <property name="borderBottomStyle">solid</property>
                                         <property name="borderBottomWidth">thin</property>
                                         <property name="borderLeftStyle">solid</property>
                                         <property name="borderLeftWidth">thin</property>
                                         <property name="borderTopStyle">solid</property>
                                         <property name="borderTopWidth">thin</property>
-                                        <grid id="1591">
-                                            <property name="height">1.2395833333333333in</property>
+                                        <grid id="2788">
+                                            <property name="height">1.53125in</property>
                                             <property name="width">1.4583333333333333in</property>
-                                            <column id="1592">
+                                            <column id="2789">
                                                 <property name="width">1.4583333333333333in</property>
                                             </column>
-                                            <row id="1593">
-                                                <property name="height">1.2395833333333333in</property>
-                                                <cell id="1594">
-                                                    <grid id="1595">
-                                                        <property name="height">1.0729166666666667in</property>
+                                            <row id="2790">
+                                                <property name="height">1.53125in</property>
+                                                <cell id="2791">
+                                                    <grid id="2792">
+                                                        <property name="height">1.3958333333333333in</property>
                                                         <property name="width">1.4166666666666667in</property>
-                                                        <column id="1596">
+                                                        <column id="2793">
                                                             <property name="width">1.4166666666666667in</property>
                                                         </column>
-                                                        <row id="1597">
+                                                        <row id="2794">
                                                             <property name="height">0.21875in</property>
-                                                            <cell id="1598">
+                                                            <cell id="2795">
                                                                 <property name="borderRightStyle">solid</property>
                                                                 <property name="borderRightWidth">thin</property>
-                                                                <label id="1601">
+                                                                <label id="2796">
                                                                     <property name="fontSize">5pt</property>
                                                                     <text-property name="text">1 ДЕКЛАРАЦИЯ</text-property>
                                                                 </label>
                                                             </cell>
                                                         </row>
-                                                        <row id="1599">
-                                                            <property name="height">0.8541666666666666in</property>
-                                                            <cell id="1600">
+                                                        <row id="2797">
+                                                            <property name="height">1.1770833333333333in</property>
+                                                            <cell id="2798">
                                                                 <property name="borderRightStyle">solid</property>
                                                                 <property name="borderRightWidth">thin</property>
-                                                                <grid id="2073">
-                                                                    <property name="height">0.84375in</property>
-                                                                    <column id="2074"/>
-                                                                    <row id="2075">
+                                                                <grid id="2799">
+                                                                    <property name="height">1.15625in</property>
+                                                                    <column id="2800"/>
+                                                                    <row id="2801">
                                                                         <property name="height">0.25in</property>
-                                                                        <cell id="2076">
+                                                                        <cell id="2802">
                                                                             <property name="borderBottomStyle">solid</property>
                                                                             <property name="borderBottomWidth">thin</property>
-                                                                            <grid id="2079">
+                                                                            <grid id="2803">
                                                                                 <property name="height">0.19791666666666666in</property>
                                                                                 <property name="width">1.2708333333333333in</property>
-                                                                                <column id="2080">
+                                                                                <column id="2804">
                                                                                     <property name="width">0.4270833333333333in</property>
                                                                                 </column>
-                                                                                <column id="2081">
+                                                                                <column id="2805">
                                                                                     <property name="width">0.34375in</property>
                                                                                 </column>
-                                                                                <column id="2082">
+                                                                                <column id="2806">
                                                                                     <property name="width">0.5in</property>
                                                                                 </column>
-                                                                                <row id="2083">
+                                                                                <row id="2807">
                                                                                     <property name="height">0.19791666666666666in</property>
-                                                                                    <cell id="2084">
+                                                                                    <cell id="2808">
                                                                                         <property name="borderRightStyle">solid</property>
                                                                                         <property name="borderRightWidth">thin</property>
-                                                                                        <label id="2087">
+                                                                                        <label id="2809">
                                                                                             <property name="fontSize">5pt</property>
                                                                                             <property name="textAlign">center</property>
                                                                                             <text-property name="text">TT</text-property>
                                                                                         </label>
                                                                                     </cell>
-                                                                                    <cell id="2085"/>
-                                                                                    <cell id="2086">
+                                                                                    <cell id="2810"/>
+                                                                                    <cell id="2811">
                                                                                         <property name="borderLeftStyle">solid</property>
                                                                                         <property name="borderLeftWidth">thin</property>
-                                                                                        <label id="2088">
+                                                                                        <label id="2812">
                                                                                             <property name="fontSize">5pt</property>
                                                                                             <property name="textAlign">center</property>
-                                                                                            <text-property name="text">TT</text-property>
+                                                                                            <text-property name="text">ИМ</text-property>
                                                                                         </label>
                                                                                     </cell>
                                                                                 </row>
                                                                             </grid>
                                                                         </cell>
                                                                     </row>
-                                                                    <row id="2077">
-                                                                        <property name="height">0.59375in</property>
-                                                                        <cell id="2078">
-                                                                            <grid id="2089">
-                                                                                <property name="height">0.6145833333333334in</property>
+                                                                    <row id="2813">
+                                                                        <property name="height">0.90625in</property>
+                                                                        <cell id="2814">
+                                                                            <grid id="2815">
+                                                                                <property name="height">0.3229166666666667in</property>
                                                                                 <property name="width">1.2708333333333333in</property>
-                                                                                <column id="2090">
+                                                                                <column id="2816">
                                                                                     <property name="width">0.7708333333333334in</property>
                                                                                 </column>
-                                                                                <column id="2091">
+                                                                                <column id="2817">
                                                                                     <property name="width">0.22916666666666666in</property>
                                                                                 </column>
-                                                                                <column id="2092">
+                                                                                <column id="2818">
                                                                                     <property name="width">0.2708333333333333in</property>
                                                                                 </column>
-                                                                                <row id="2093">
-                                                                                    <property name="height">0.6145833333333334in</property>
-                                                                                    <cell id="2094">
-                                                                                        <grid id="2097">
+                                                                                <row id="2819">
+                                                                                    <property name="height">0.3229166666666667in</property>
+                                                                                    <cell id="2820">
+                                                                                        <grid id="2821">
                                                                                             <property name="height">0.5520833333333334in</property>
-                                                                                            <column id="2098"/>
-                                                                                            <row id="2099">
+                                                                                            <column id="2822"/>
+                                                                                            <row id="2823">
                                                                                                 <property name="height">0.15625in</property>
-                                                                                                <cell id="2100">
-                                                                                                    <label id="2103">
+                                                                                                <cell id="2824">
+                                                                                                    <label id="2825">
                                                                                                         <property name="fontSize">5pt</property>
                                                                                                         <text-property name="text"> 3 ФОРМЫ</text-property>
                                                                                                     </label>
                                                                                                 </cell>
                                                                                             </row>
-                                                                                            <row id="2101">
-                                                                                                <cell id="2102">
-                                                                                                    <grid id="2104">
+                                                                                            <row id="2826">
+                                                                                                <cell id="2827">
+                                                                                                    <grid id="2828">
                                                                                                         <property name="height">0.3333333333333333in</property>
-                                                                                                        <column id="2105"/>
-                                                                                                        <column id="2106"/>
-                                                                                                        <row id="2107">
+                                                                                                        <column id="2829"/>
+                                                                                                        <column id="2830"/>
+                                                                                                        <row id="2831">
                                                                                                             <property name="height">0.3333333333333333in</property>
-                                                                                                            <cell id="2108">
-                                                                                                                <auto-text id="2110">
+                                                                                                            <cell id="2832">
+                                                                                                                <auto-text id="2833">
                                                                                                                     <property name="fontSize">5pt</property>
                                                                                                                     <property name="textAlign">center</property>
                                                                                                                     <property name="type">page-number</property>
                                                                                                                 </auto-text>
                                                                                                             </cell>
-                                                                                                            <cell id="2109">
+                                                                                                            <cell id="2834">
                                                                                                                 <property name="borderLeftStyle">solid</property>
                                                                                                                 <property name="borderLeftWidth">thin</property>
-                                                                                                                <auto-text id="2111">
+                                                                                                                <auto-text id="2835">
                                                                                                                     <property name="fontSize">5pt</property>
                                                                                                                     <property name="textAlign">center</property>
                                                                                                                     <property name="type">total-page</property>
@@ -1040,14 +2128,60 @@ e == 1</expression>
                                                                                             </row>
                                                                                         </grid>
                                                                                     </cell>
-                                                                                    <cell id="2095">
+                                                                                    <cell id="2836">
                                                                                         <property name="borderLeftStyle">solid</property>
                                                                                         <property name="borderLeftWidth">thin</property>
                                                                                     </cell>
-                                                                                    <cell id="2096">
-                                                                                        <property name="borderLeftStyle">solid</property>
-                                                                                        <property name="borderLeftWidth">thin</property>
+                                                                                    <cell id="2837"/>
+                                                                                </row>
+                                                                            </grid>
+                                                                            <grid id="2846">
+                                                                                <property name="height">0.3541666666666667in</property>
+                                                                                <property name="width">1.2708333333333333in</property>
+                                                                                <column id="2847">
+                                                                                    <property name="width">0.7708333333333334in</property>
+                                                                                </column>
+                                                                                <column id="2848">
+                                                                                    <property name="width">0.5in</property>
+                                                                                </column>
+                                                                                <row id="2849">
+                                                                                    <property name="height">0.3541666666666667in</property>
+                                                                                    <cell id="2850">
+                                                                                        <property name="borderRightStyle">solid</property>
+                                                                                        <property name="borderRightWidth">thin</property>
+                                                                                        <grid id="2852">
+                                                                                            <property name="height">0.3333333333333333in</property>
+                                                                                            <column id="2853"/>
+                                                                                            <row id="2854">
+                                                                                                <property name="height">0.16666666666666666in</property>
+                                                                                                <cell id="2855">
+                                                                                                    <label id="2858">
+                                                                                                        <property name="fontSize">5pt</property>
+                                                                                                        <text-property name="text">5 всего т-ов</text-property>
+                                                                                                    </label>
+                                                                                                </cell>
+                                                                                            </row>
+                                                                                            <row id="2856">
+                                                                                                <cell id="2857">
+                                                                                                    <data id="2859">
+                                                                                                        <property name="fontSize">5pt</property>
+                                                                                                        <property name="textAlign">center</property>
+                                                                                                        <property name="dataSet">ProductCount</property>
+                                                                                                        <list-property name="boundDataColumns">
+                                                                                                            <structure>
+                                                                                                                <property name="name">count</property>
+                                                                                                                <text-property name="displayName">count</text-property>
+                                                                                                                <expression name="expression" type="javascript">dataSetRow["count"]</expression>
+                                                                                                                <property name="dataType">decimal</property>
+                                                                                                            </structure>
+                                                                                                        </list-property>
+                                                                                                        <property name="resultSetColumn">count</property>
+                                                                                                    </data>
+                                                                                                </cell>
+                                                                                            </row>
+                                                                                        </grid>
                                                                                     </cell>
+                                                                                    <cell id="2851"/>
                                                                                 </row>
                                                                             </grid>
                                                                         </cell>
@@ -1060,7 +2194,7 @@ e == 1</expression>
                                             </row>
                                         </grid>
                                     </cell>
-                                    <cell id="1602">
+                                    <cell id="2838">
                                         <property name="borderBottomStyle">solid</property>
                                         <property name="borderBottomWidth">thin</property>
                                         <property name="borderLeftStyle">solid</property>
@@ -1069,17 +2203,17 @@ e == 1</expression>
                                         <property name="borderRightWidth">thin</property>
                                         <property name="borderTopStyle">solid</property>
                                         <property name="borderTopWidth">thin</property>
-                                        <grid id="1603">
+                                        <grid id="2839">
                                             <property name="height">0.34375in</property>
-                                            <column id="1604"/>
-                                            <row id="1605">
+                                            <column id="2840"/>
+                                            <row id="2841">
                                                 <property name="height">0.34375in</property>
-                                                <cell id="1606">
-                                                    <label id="1607">
+                                                <cell id="2842">
+                                                    <label id="2843">
                                                         <property name="fontSize">5pt</property>
                                                         <text-property name="text">А ОРГАН ОТПРАВЛЕНИЯ</text-property>
                                                     </label>
-                                                    <label id="1608">
+                                                    <label id="2844">
                                                         <property name="fontSize">5pt</property>
                                                         <text-property name="text">цацуцуапуцуцуц</text-property>
                                                     </label>
@@ -1094,24 +2228,11 @@ e == 1</expression>
                 </grid>
             </page-header>
         </simple-master-page>
-        <simple-master-page name="NewSimpleMasterPage" id="2623">
-            <property name="display">inline</property>
-            <property name="pageBreakAfter">always</property>
-            <property name="pageBreakBefore">always</property>
-            <property name="pageBreakInside">avoid</property>
-            <property name="showIfBlank">true</property>
-            <property name="showHeaderOnFirst">false</property>
-            <page-header>
-                <label id="2624">
-                    <text-property name="text">rgdhhfd</text-property>
-                </label>
-            </page-header>
-        </simple-master-page>
     </page-setup>
     <body>
         <grid id="2615">
             <property name="height">3.4375in</property>
-            <property name="width">7.875in</property>
+            <property name="width">7.895833333333333in</property>
             <column id="2616">
                 <property name="width">0.8229166666666666in</property>
             </column>
@@ -1119,7 +2240,7 @@ e == 1</expression>
                 <property name="width">2.2083333333333335in</property>
             </column>
             <column id="2618">
-                <property name="width">4.84375in</property>
+                <property name="width">4.864583333333333in</property>
             </column>
             <row id="2619">
                 <property name="height">3.4375in</property>
@@ -1130,36 +2251,6 @@ e == 1</expression>
                 <cell id="2621">
                     <property name="borderRightStyle">solid</property>
                     <property name="borderRightWidth">thin</property>
-                    <grid id="2627">
-                        <property name="height">0.875in</property>
-                        <column id="2628"/>
-                        <row id="2631">
-                            <cell id="2632">
-                                <label id="2747">
-                                    <text-property name="text">dgffddfdfdgdfdf df</text-property>
-                                </label>
-                            </cell>
-                        </row>
-                    </grid>
-                    <list id="2742">
-                        <property name="pageBreakBefore">always</property>
-                        <property name="dataSet">Transaction Declaration</property>
-                        <list-property name="boundDataColumns">
-                            <structure>
-                                <property name="name">id</property>
-                                <text-property name="displayName">id</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["id"]</expression>
-                                <property name="dataType">decimal</property>
-                            </structure>
-                        </list-property>
-                        <property name="pageBreakInterval">3</property>
-                        <detail>
-                            <data id="2743">
-                                <structure name="toc"/>
-                                <property name="resultSetColumn">id</property>
-                            </data>
-                        </detail>
-                    </list>
                 </cell>
                 <cell id="2622">
                     <property name="borderRightStyle">solid</property>
