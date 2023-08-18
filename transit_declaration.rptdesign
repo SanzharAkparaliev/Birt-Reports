@@ -4352,8 +4352,6 @@ from public.base_country]]></xml-property>
                     <row id="2753">
                         <property name="height">10.15625in</property>
                         <cell id="2754">
-                            <property name="borderLeftStyle">solid</property>
-                            <property name="borderLeftWidth">thin</property>
                             <property name="borderRightStyle">solid</property>
                             <property name="borderRightWidth">thin</property>
                             <property name="borderTopStyle">solid</property>
@@ -4373,6 +4371,8 @@ from public.base_country]]></xml-property>
                                 <row id="2759">
                                     <property name="height">1.3541666666666667in</property>
                                     <cell id="2760">
+                                        <property name="borderLeftStyle">solid</property>
+                                        <property name="borderLeftWidth">thin</property>
                                         <grid id="2761">
                                             <property name="height">0.19791666666666666in</property>
                                             <column id="2762"/>
@@ -4923,6 +4923,10 @@ from public.base_country]]></xml-property>
                             <cell id="3254">
                                 <property name="borderRightStyle">solid</property>
                                 <property name="borderRightWidth">thin</property>
+                                <label id="3312">
+                                    <property name="fontSize">5pt</property>
+                                    <text-property name="text">31  Грузовые места и описание товаров</text-property>
+                                </label>
                             </cell>
                             <cell id="3255"/>
                         </row>
@@ -4956,6 +4960,10 @@ from public.base_country]]></xml-property>
                             <cell id="3260">
                                 <property name="borderRightStyle">solid</property>
                                 <property name="borderRightWidth">thin</property>
+                                <label id="3315">
+                                    <property name="fontSize">5pt</property>
+                                    <text-property name="text">44 Дополнит информация Предствал документы</text-property>
+                                </label>
                             </cell>
                             <cell id="3261"/>
                         </row>
@@ -5111,19 +5119,19 @@ from public.base_country]]></xml-property>
             </row>
         </grid>
         <grid id="3286">
-            <property name="height">5.052083333333333in</property>
+            <property name="height">6.114583333333333in</property>
             <property name="width">8.020833333333334in</property>
             <column id="3287">
                 <property name="width">8.020833333333334in</property>
             </column>
             <row id="3288">
-                <property name="height">5.052083333333333in</property>
+                <property name="height">6.114583333333333in</property>
                 <cell id="3289">
-                    <property name="borderLeftStyle">solid</property>
-                    <property name="borderLeftWidth">thin</property>
                     <property name="borderTopStyle">solid</property>
                     <property name="borderTopWidth">thin</property>
                     <list id="3296">
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
                         <property name="borderRightStyle">solid</property>
                         <property name="borderRightWidth">thin</property>
                         <property name="masterPage">Second</property>
@@ -5140,7 +5148,7 @@ from public.base_country]]></xml-property>
                         <property name="pageBreakInterval">3</property>
                         <detail>
                             <grid id="3298">
-                                <property name="height">1.6458333333333333in</property>
+                                <property name="height">1.9479166666666667in</property>
                                 <property name="width">7.895833333333333in</property>
                                 <column id="3299">
                                     <property name="width">0.7916666666666666in</property>
@@ -5149,14 +5157,15 @@ from public.base_country]]></xml-property>
                                     <property name="width">7.104166666666667in</property>
                                 </column>
                                 <row id="3301">
-                                    <property name="height">0.8333333333333334in</property>
+                                    <property name="height">0.9166666666666666in</property>
                                     <cell id="3302">
                                         <property name="borderBottomStyle">solid</property>
                                         <property name="borderBottomWidth">thin</property>
                                         <property name="borderRightStyle">solid</property>
                                         <property name="borderRightWidth">thin</property>
                                         <label id="3307">
-                                            <text-property name="text">31</text-property>
+                                            <property name="fontSize">5pt</property>
+                                            <text-property name="text">31  Грузовые места и описание товаров</text-property>
                                         </label>
                                     </cell>
                                     <cell id="3303">
@@ -5168,14 +5177,15 @@ from public.base_country]]></xml-property>
                                     </cell>
                                 </row>
                                 <row id="3304">
-                                    <property name="height">0.8125in</property>
+                                    <property name="height">1.03125in</property>
                                     <cell id="3305">
                                         <property name="borderBottomStyle">solid</property>
                                         <property name="borderBottomWidth">thin</property>
                                         <property name="borderRightStyle">solid</property>
                                         <property name="borderRightWidth">thin</property>
-                                        <label id="3310">
-                                            <text-property name="text">44</text-property>
+                                        <label id="3313">
+                                            <property name="fontSize">5pt</property>
+                                            <text-property name="text">44 Дополнит информация Предствал документы</text-property>
                                         </label>
                                     </cell>
                                     <cell id="3306">
