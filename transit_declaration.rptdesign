@@ -4174,6 +4174,18 @@ WHERE TransitDec.id = ?;
                     <text-property name="displayName">cargo_quantity</text-property>
                     <text-property name="heading">cargo_quantity</text-property>
                 </structure>
+                <structure>
+                    <property name="columnName">total_price</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">total_price</text-property>
+                    <text-property name="heading">total_price</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">currency</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">currency</text-property>
+                    <text-property name="heading">currency</text-property>
+                </structure>
             </list-property>
             <list-property name="parameters">
                 <structure>
@@ -4209,6 +4221,16 @@ WHERE TransitDec.id = ?;
                         <property name="name">cargo_quantity</property>
                         <property name="dataType">integer</property>
                     </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">total_price</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">currency</property>
+                        <property name="dataType">string</property>
+                    </structure>
                 </list-property>
             </structure>
             <property name="dataSource">SmartLocalDataBase</property>
@@ -4241,11 +4263,26 @@ WHERE TransitDec.id = ?;
                     <property name="dataType">integer</property>
                     <property name="nativeDataType">4</property>
                 </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">total_price</property>
+                    <property name="nativeName">total_price</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">currency</property>
+                    <property name="nativeName">currency</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[SELECT Goods.name, Goods.id, Goods.quantity, Goods.cargo_quantity
+            <xml-property name="queryText"><![CDATA[SELECT Goods.name, Goods.id, Goods.quantity, Goods.cargo_quantity,Commodity.total_price,Currency.name as Currency
 FROM public.transitcontrolsystem_transit_declaration AS TransitDec
 JOIN preliminaryinformation_commodity_consignment AS Commodity ON (Commodity.id = TransitDec.consignment)
 JOIN preliminaryinformation_goods AS Goods ON (Commodity.id = Goods.commodity_consignment)
+JOIN base_currency AS Currency ON (Currency.id = Commodity.currency)
 WHERE TransitDec.id = ?
 ORDER BY Goods.id
 LIMIT 1;
@@ -4253,23 +4290,6 @@ LIMIT 1;
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
   <Version>2.0</Version>
-  <DataSetParameters>
-    <parameter>
-      <design:ParameterDefinition>
-        <design:inOutMode>In</design:inOutMode>
-        <design:attributes>
-          <design:identifier>
-            <design:name></design:name>
-            <design:position>1</design:position>
-          </design:identifier>
-          <design:nativeDataTypeCode>-5</design:nativeDataTypeCode>
-          <design:precision>0</design:precision>
-          <design:scale>0</design:scale>
-          <design:nullability>Unknown</design:nullability>
-        </design:attributes>
-      </design:ParameterDefinition>
-    </parameter>
-  </DataSetParameters>
   <design:ResultSets derivedMetaData="true">
     <design:resultSetDefinitions>
       <design:resultSetColumns>
@@ -5112,7 +5132,7 @@ LIMIT 1;
     </page-setup>
     <body>
         <grid id="2615">
-            <property name="height">2.7291666666666665in</property>
+            <property name="height">2.8541666666666665in</property>
             <property name="width">8in</property>
             <column id="2616">
                 <property name="width">0.8229166666666666in</property>
@@ -5124,7 +5144,7 @@ LIMIT 1;
                 <property name="width">4.958333333333333in</property>
             </column>
             <row id="2619">
-                <property name="height">2.7291666666666665in</property>
+                <property name="height">2.8541666666666665in</property>
                 <cell id="2620">
                     <property name="borderBottomStyle">solid</property>
                     <property name="borderBottomWidth">thin</property>
@@ -5267,17 +5287,58 @@ LIMIT 1;
                         </row>
                     </grid>
                     <grid id="3202">
-                        <property name="height">0.25in</property>
-                        <column id="3203"/>
+                        <property name="height">0.2916666666666667in</property>
+                        <property name="width">2.1979166666666665in</property>
+                        <column id="3203">
+                            <property name="width">2.1979166666666665in</property>
+                        </column>
                         <row id="3204">
-                            <property name="height">0.25in</property>
-                            <cell id="3205"/>
-                        </row>
-                    </grid>
-                    <grid id="3206">
-                        <column id="3207"/>
-                        <row id="3208">
-                            <cell id="3209"/>
+                            <property name="height">0.2916666666666667in</property>
+                            <cell id="3205">
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <grid id="3403">
+                                    <property name="height">0.4479166666666667in</property>
+                                    <property name="width">2.125in</property>
+                                    <column id="3404">
+                                        <property name="width">1.8125in</property>
+                                    </column>
+                                    <column id="3405">
+                                        <property name="width">0.3125in</property>
+                                    </column>
+                                    <row id="3406">
+                                        <property name="height">0.4479166666666667in</property>
+                                        <cell id="3407">
+                                            <label id="3409">
+                                                <property name="fontSize">5pt</property>
+                                                <text-property name="text">25 вид транспорта</text-property>
+                                            </label>
+                                            <grid id="3410">
+                                                <property name="height">0.25in</property>
+                                                <property name="width">1.7395833333333333in</property>
+                                                <column id="3411">
+                                                    <property name="width">0.3541666666666667in</property>
+                                                </column>
+                                                <column id="3412">
+                                                    <property name="width">1.3854166666666667in</property>
+                                                </column>
+                                                <row id="3413">
+                                                    <property name="height">0.25in</property>
+                                                    <cell id="3414">
+                                                        <property name="borderRightStyle">solid</property>
+                                                        <property name="borderRightWidth">thin</property>
+                                                    </cell>
+                                                    <cell id="3415"/>
+                                                </row>
+                                            </grid>
+                                        </cell>
+                                        <cell id="3408">
+                                            <property name="borderLeftStyle">solid</property>
+                                            <property name="borderLeftWidth">thin</property>
+                                        </cell>
+                                    </row>
+                                </grid>
+                            </cell>
                         </row>
                     </grid>
                 </cell>
@@ -5411,13 +5472,96 @@ LIMIT 1;
                         </row>
                     </grid>
                     <grid id="3214">
-                        <property name="height">0.23958333333333334in</property>
+                        <property name="height">0.25in</property>
                         <column id="3215"/>
                         <row id="3216">
-                            <property name="height">0.23958333333333334in</property>
+                            <property name="height">0.25in</property>
                             <cell id="3217">
                                 <property name="borderBottomStyle">solid</property>
                                 <property name="borderBottomWidth">thin</property>
+                                <grid id="3367">
+                                    <property name="height">0.6145833333333334in</property>
+                                    <property name="width">4.822916666666667in</property>
+                                    <column id="3368">
+                                        <property name="width">2.4166666666666665in</property>
+                                    </column>
+                                    <column id="3369">
+                                        <property name="width">1.28125in</property>
+                                    </column>
+                                    <column id="3370">
+                                        <property name="width">1.125in</property>
+                                    </column>
+                                    <row id="3371">
+                                        <property name="height">0.6145833333333334in</property>
+                                        <cell id="3372">
+                                            <property name="borderRightStyle">solid</property>
+                                            <property name="borderRightWidth">thin</property>
+                                            <label id="3375">
+                                                <property name="fontSize">5pt</property>
+                                                <text-property name="text">22  валюта и общая сумма по счету</text-property>
+                                            </label>
+                                            <grid id="3376">
+                                                <property name="height">0.1875in</property>
+                                                <column id="3377"/>
+                                                <column id="3378"/>
+                                                <row id="3379">
+                                                    <property name="height">0.1875in</property>
+                                                    <cell id="3380">
+                                                        <data id="3383">
+                                                            <property name="fontSize">5pt</property>
+                                                            <property name="dataSet">First Product</property>
+                                                            <list-property name="boundDataColumns">
+                                                                <structure>
+                                                                    <property name="name">currency</property>
+                                                                    <text-property name="displayName">currency</text-property>
+                                                                    <expression name="expression" type="javascript">dataSetRow["currency"]</expression>
+                                                                    <property name="dataType">string</property>
+                                                                </structure>
+                                                            </list-property>
+                                                            <property name="resultSetColumn">currency</property>
+                                                        </data>
+                                                    </cell>
+                                                    <cell id="3381">
+                                                        <property name="borderLeftStyle">solid</property>
+                                                        <property name="borderLeftWidth">thin</property>
+                                                        <data id="3382">
+                                                            <property name="fontSize">5pt</property>
+                                                            <property name="dataSet">First Product</property>
+                                                            <list-property name="boundDataColumns">
+                                                                <structure>
+                                                                    <property name="name">total_price</property>
+                                                                    <text-property name="displayName">total_price</text-property>
+                                                                    <expression name="expression" type="javascript">dataSetRow["total_price"]</expression>
+                                                                    <property name="dataType">decimal</property>
+                                                                </structure>
+                                                            </list-property>
+                                                            <property name="resultSetColumn">total_price</property>
+                                                        </data>
+                                                    </cell>
+                                                </row>
+                                            </grid>
+                                        </cell>
+                                        <cell id="3373">
+                                            <property name="borderRightStyle">solid</property>
+                                            <property name="borderRightWidth">thin</property>
+                                        </cell>
+                                        <cell id="3374">
+                                            <grid id="3384">
+                                                <property name="height">0.22916666666666666in</property>
+                                                <column id="3385"/>
+                                                <column id="3386"/>
+                                                <row id="3387">
+                                                    <property name="height">0.22916666666666666in</property>
+                                                    <cell id="3388">
+                                                        <property name="borderRightStyle">solid</property>
+                                                        <property name="borderRightWidth">thin</property>
+                                                    </cell>
+                                                    <cell id="3389"/>
+                                                </row>
+                                            </grid>
+                                        </cell>
+                                    </row>
+                                </grid>
                             </cell>
                         </row>
                     </grid>
@@ -5431,10 +5575,13 @@ LIMIT 1;
             </row>
         </grid>
         <grid id="3222">
-            <property name="height">0.4583333333333333in</property>
-            <column id="3223"/>
+            <property name="height">1.8854166666666667in</property>
+            <property name="width">8in</property>
+            <column id="3223">
+                <property name="width">8in</property>
+            </column>
             <row id="3224">
-                <property name="height">0.4583333333333333in</property>
+                <property name="height">1.8854166666666667in</property>
                 <cell id="3225">
                     <property name="borderBottomStyle">solid</property>
                     <property name="borderBottomWidth">thin</property>
@@ -5443,72 +5590,385 @@ LIMIT 1;
                     <property name="borderRightStyle">solid</property>
                     <property name="borderRightWidth">thin</property>
                     <grid id="3250">
-                        <property name="height">0.3958333333333333in</property>
-                        <property name="width">7.875in</property>
+                        <property name="height">2.0416666666666665in</property>
+                        <property name="width">7.979166666666667in</property>
                         <column id="3251">
                             <property name="width">0.78125in</property>
                         </column>
                         <column id="3252">
-                            <property name="width">7.09375in</property>
+                            <property name="width">7.197916666666667in</property>
                         </column>
                         <row id="3253">
-                            <property name="height">0.3958333333333333in</property>
+                            <property name="height">2.0416666666666665in</property>
                             <cell id="3254">
                                 <property name="borderRightStyle">solid</property>
                                 <property name="borderRightWidth">thin</property>
-                                <label id="3312">
-                                    <property name="fontSize">5pt</property>
-                                    <text-property name="text">31  Грузовые места и описание товаров</text-property>
-                                </label>
+                                <grid id="3521">
+                                    <property name="height">1.78125in</property>
+                                    <column id="3522"/>
+                                    <row id="3523">
+                                        <property name="height">1.1041666666666667in</property>
+                                        <cell id="3524">
+                                            <property name="borderBottomStyle">solid</property>
+                                            <property name="borderBottomWidth">thin</property>
+                                            <label id="3527">
+                                                <property name="fontSize">5pt</property>
+                                                <text-property name="text">31  Грузовые места и описание товаров</text-property>
+                                            </label>
+                                        </cell>
+                                    </row>
+                                    <row id="3525">
+                                        <property name="height">0.6770833333333334in</property>
+                                        <cell id="3526">
+                                            <label id="3528">
+                                                <property name="fontSize">5pt</property>
+                                                <text-property name="text">44 Дополнит информация</text-property>
+                                            </label>
+                                        </cell>
+                                    </row>
+                                </grid>
                             </cell>
-                            <cell id="3255"/>
-                        </row>
-                    </grid>
-                </cell>
-            </row>
-        </grid>
-        <grid id="3226">
-            <property name="height">0.5833333333333334in</property>
-            <column id="3227"/>
-            <row id="3228">
-                <property name="height">0.5833333333333334in</property>
-                <cell id="3229">
-                    <property name="borderBottomStyle">solid</property>
-                    <property name="borderBottomWidth">thin</property>
-                    <property name="borderLeftStyle">solid</property>
-                    <property name="borderLeftWidth">thin</property>
-                    <property name="borderRightStyle">solid</property>
-                    <property name="borderRightWidth">thin</property>
-                    <grid id="3256">
-                        <property name="height">0.5104166666666666in</property>
-                        <property name="width">7.875in</property>
-                        <column id="3257">
-                            <property name="width">0.78125in</property>
-                        </column>
-                        <column id="3258">
-                            <property name="width">7.09375in</property>
-                        </column>
-                        <row id="3259">
-                            <property name="height">0.5104166666666666in</property>
-                            <cell id="3260">
-                                <property name="borderRightStyle">solid</property>
-                                <property name="borderRightWidth">thin</property>
-                                <label id="3315">
-                                    <property name="fontSize">5pt</property>
-                                    <text-property name="text">44 Дополнит информация Предствал документы</text-property>
-                                </label>
+                            <cell id="3255">
+                                <grid id="3529">
+                                    <property name="height">2.0208333333333335in</property>
+                                    <property name="width">7.239583333333333in</property>
+                                    <column id="3530">
+                                        <property name="width">2.875in</property>
+                                    </column>
+                                    <column id="3531">
+                                        <property name="width">0.59375in</property>
+                                    </column>
+                                    <column id="3602">
+                                        <property name="width">3.7708333333333335in</property>
+                                    </column>
+                                    <row id="3532">
+                                        <property name="height">2.0208333333333335in</property>
+                                        <cell id="3533">
+                                            <grid id="3535">
+                                                <property name="height">2.2395833333333335in</property>
+                                                <column id="3536"/>
+                                                <row id="3537">
+                                                    <property name="height">1.0833333333333333in</property>
+                                                    <cell id="3538">
+                                                        <property name="borderBottomStyle">solid</property>
+                                                        <property name="borderBottomWidth">thin</property>
+                                                        <grid id="3545">
+                                                            <property name="height">1.09375in</property>
+                                                            <property name="width">3.9166666666666665in</property>
+                                                            <column id="3546">
+                                                                <property name="width">3.9166666666666665in</property>
+                                                            </column>
+                                                            <row id="3548">
+                                                                <property name="height">1.09375in</property>
+                                                                <cell id="3549">
+                                                                    <label id="3615">
+                                                                        <property name="fontSize">5pt</property>
+                                                                        <property name="masterPage">First</property>
+                                                                        <text-property name="text">Маркировка и количество - Номер контейнера - Количество и отличительные особенности</text-property>
+                                                                    </label>
+                                                                </cell>
+                                                            </row>
+                                                        </grid>
+                                                    </cell>
+                                                </row>
+                                                <row id="3539">
+                                                    <property name="height">1.15625in</property>
+                                                    <cell id="3540"/>
+                                                </row>
+                                            </grid>
+                                        </cell>
+                                        <cell id="3534">
+                                            <grid id="3603">
+                                                <property name="height">0.21875in</property>
+                                                <property name="width">0.6041666666666666in</property>
+                                                <column id="3604">
+                                                    <property name="width">0.6041666666666666in</property>
+                                                </column>
+                                                <row id="3605">
+                                                    <property name="height">0.21875in</property>
+                                                    <cell id="3606">
+                                                        <property name="borderBottomStyle">solid</property>
+                                                        <property name="borderBottomWidth">thin</property>
+                                                        <property name="borderLeftStyle">solid</property>
+                                                        <property name="borderLeftWidth">thin</property>
+                                                        <property name="borderRightStyle">solid</property>
+                                                        <property name="borderRightWidth">thin</property>
+                                                        <label id="3607">
+                                                            <property name="fontSize">5pt</property>
+                                                            <text-property name="text">32 товар</text-property>
+                                                        </label>
+                                                        <grid id="3608">
+                                                            <property name="height">0.125in</property>
+                                                            <column id="3609"/>
+                                                            <column id="3610"/>
+                                                            <row id="3611">
+                                                                <property name="height">0.125in</property>
+                                                                <cell id="3612">
+                                                                    <property name="borderRightStyle">solid</property>
+                                                                    <property name="borderRightWidth">thin</property>
+                                                                </cell>
+                                                                <cell id="3613">
+                                                                    <label id="3614">
+                                                                        <property name="fontSize">5pt</property>
+                                                                        <text-property name="text"> №</text-property>
+                                                                    </label>
+                                                                </cell>
+                                                            </row>
+                                                        </grid>
+                                                    </cell>
+                                                </row>
+                                            </grid>
+                                            <grid id="3618">
+                                                <property name="height">0.8541666666666666in</property>
+                                                <property name="width">0.6041666666666666in</property>
+                                                <column id="3619">
+                                                    <property name="width">0.6041666666666666in</property>
+                                                </column>
+                                                <row id="3620">
+                                                    <property name="height">0.8541666666666666in</property>
+                                                    <cell id="3621">
+                                                        <property name="borderBottomStyle">solid</property>
+                                                        <property name="borderBottomWidth">thin</property>
+                                                        <property name="borderRightStyle">solid</property>
+                                                        <property name="borderRightWidth">thin</property>
+                                                    </cell>
+                                                </row>
+                                            </grid>
+                                            <grid id="3634">
+                                                <property name="height">0.7291666666666666in</property>
+                                                <property name="width">0.6041666666666666in</property>
+                                                <column id="3635">
+                                                    <property name="width">0.6041666666666666in</property>
+                                                </column>
+                                                <row id="3636">
+                                                    <property name="height">0.7291666666666666in</property>
+                                                    <cell id="3637">
+                                                        <property name="borderRightStyle">solid</property>
+                                                        <property name="borderRightWidth">thin</property>
+                                                    </cell>
+                                                </row>
+                                            </grid>
+                                        </cell>
+                                        <cell id="3601">
+                                            <grid id="3622">
+                                                <property name="height">1.8020833333333333in</property>
+                                                <property name="width">3.59375in</property>
+                                                <column id="3623">
+                                                    <property name="width">3.59375in</property>
+                                                </column>
+                                                <row id="3624">
+                                                    <property name="height">0.21875in</property>
+                                                    <cell id="3625">
+                                                        <property name="borderBottomStyle">solid</property>
+                                                        <property name="borderBottomWidth">thin</property>
+                                                        <property name="borderLeftStyle">solid</property>
+                                                        <property name="borderLeftWidth">thin</property>
+                                                        <grid id="3646">
+                                                            <property name="height">0.25in</property>
+                                                            <property name="width">3.5208333333333335in</property>
+                                                            <column id="3647">
+                                                                <property name="width">1.1770833333333333in</property>
+                                                            </column>
+                                                            <column id="3648">
+                                                                <property name="width">0.3854166666666667in</property>
+                                                            </column>
+                                                            <column id="3649">
+                                                                <property name="width">0.4791666666666667in</property>
+                                                            </column>
+                                                            <column id="3650">
+                                                                <property name="width">0.3958333333333333in</property>
+                                                            </column>
+                                                            <column id="3651">
+                                                                <property name="width">1.0833333333333333in</property>
+                                                            </column>
+                                                            <row id="3652">
+                                                                <property name="height">0.25in</property>
+                                                                <cell id="3653">
+                                                                    <property name="borderRightStyle">solid</property>
+                                                                    <property name="borderRightWidth">thin</property>
+                                                                    <label id="3658">
+                                                                        <property name="fontSize">5pt</property>
+                                                                        <text-property name="text">33 код товара</text-property>
+                                                                    </label>
+                                                                </cell>
+                                                                <cell id="3654">
+                                                                    <property name="borderRightStyle">solid</property>
+                                                                    <property name="borderRightWidth">thin</property>
+                                                                </cell>
+                                                                <cell id="3655">
+                                                                    <property name="borderRightStyle">solid</property>
+                                                                    <property name="borderRightWidth">thin</property>
+                                                                </cell>
+                                                                <cell id="3656">
+                                                                    <property name="borderRightStyle">solid</property>
+                                                                    <property name="borderRightWidth">thin</property>
+                                                                </cell>
+                                                                <cell id="3657"/>
+                                                            </row>
+                                                        </grid>
+                                                    </cell>
+                                                </row>
+                                                <row id="3626">
+                                                    <property name="height">0.4270833333333333in</property>
+                                                    <cell id="3627">
+                                                        <property name="borderBottomStyle">solid</property>
+                                                        <property name="borderBottomWidth">thin</property>
+                                                        <property name="borderLeftStyle">solid</property>
+                                                        <property name="borderLeftWidth">thin</property>
+                                                        <grid id="3659">
+                                                            <property name="height">0.4791666666666667in</property>
+                                                            <column id="3660"/>
+                                                            <column id="3661"/>
+                                                            <column id="3662"/>
+                                                            <row id="3663">
+                                                                <property name="height">0.4791666666666667in</property>
+                                                                <cell id="3664">
+                                                                    <grid id="3693">
+                                                                        <property name="height">0.34375in</property>
+                                                                        <column id="3694"/>
+                                                                        <row id="3695">
+                                                                            <property name="height">0.13541666666666666in</property>
+                                                                            <cell id="3696">
+                                                                                <property name="borderBottomStyle">solid</property>
+                                                                                <property name="borderBottomWidth">thin</property>
+                                                                            </cell>
+                                                                        </row>
+                                                                        <row id="3697">
+                                                                            <property name="height">0.20833333333333334in</property>
+                                                                            <cell id="3698"/>
+                                                                        </row>
+                                                                    </grid>
+                                                                </cell>
+                                                                <cell id="3665">
+                                                                    <property name="borderLeftStyle">solid</property>
+                                                                    <property name="borderLeftWidth">thin</property>
+                                                                    <property name="borderRightStyle">solid</property>
+                                                                    <property name="borderRightWidth">thin</property>
+                                                                    <grid id="3699">
+                                                                        <property name="height">0.3645833333333333in</property>
+                                                                        <column id="3700"/>
+                                                                        <row id="3701">
+                                                                            <property name="height">0.13541666666666666in</property>
+                                                                            <cell id="3702">
+                                                                                <property name="borderBottomStyle">solid</property>
+                                                                                <property name="borderBottomWidth">thin</property>
+                                                                                <label id="3705">
+                                                                                    <property name="fontSize">5pt</property>
+                                                                                    <text-property name="text">35 вес брутто</text-property>
+                                                                                </label>
+                                                                            </cell>
+                                                                        </row>
+                                                                        <row id="3703">
+                                                                            <property name="height">0.22916666666666666in</property>
+                                                                            <cell id="3704"/>
+                                                                        </row>
+                                                                    </grid>
+                                                                </cell>
+                                                                <cell id="3666">
+                                                                    <label id="3706">
+                                                                        <property name="fontSize">5pt</property>
+                                                                        <text-property name="text">40 Общая декларация</text-property>
+                                                                    </label>
+                                                                </cell>
+                                                            </row>
+                                                        </grid>
+                                                    </cell>
+                                                </row>
+                                                <row id="3628">
+                                                    <property name="height">0.28125in</property>
+                                                    <cell id="3629">
+                                                        <property name="borderBottomStyle">solid</property>
+                                                        <property name="borderBottomWidth">thin</property>
+                                                        <property name="borderLeftStyle">solid</property>
+                                                        <property name="borderLeftWidth">thin</property>
+                                                    </cell>
+                                                </row>
+                                                <row id="3630">
+                                                    <property name="height">0.3333333333333333in</property>
+                                                    <cell id="3631">
+                                                        <property name="borderBottomStyle">solid</property>
+                                                        <property name="borderBottomWidth">thin</property>
+                                                        <property name="borderLeftStyle">solid</property>
+                                                        <property name="borderLeftWidth">thin</property>
+                                                        <grid id="3708">
+                                                            <property name="height">0.2916666666666667in</property>
+                                                            <property name="width">3.5208333333333335in</property>
+                                                            <column id="3709">
+                                                                <property name="width">1.46875in</property>
+                                                            </column>
+                                                            <column id="3710">
+                                                                <property name="width">2.0520833333333335in</property>
+                                                            </column>
+                                                            <row id="3711">
+                                                                <property name="height">0.2916666666666667in</property>
+                                                                <cell id="3712">
+                                                                    <property name="borderRightStyle">solid</property>
+                                                                    <property name="borderRightWidth">thin</property>
+                                                                </cell>
+                                                                <cell id="3713"/>
+                                                            </row>
+                                                        </grid>
+                                                    </cell>
+                                                </row>
+                                                <row id="3632">
+                                                    <property name="height">0.5416666666666666in</property>
+                                                    <cell id="3633">
+                                                        <grid id="3714">
+                                                            <property name="height">0.5729166666666666in</property>
+                                                            <property name="width">3.5208333333333335in</property>
+                                                            <column id="3715">
+                                                                <property name="width">1.4791666666666667in</property>
+                                                            </column>
+                                                            <column id="3716">
+                                                                <property name="width">0.53125in</property>
+                                                            </column>
+                                                            <column id="3717">
+                                                                <property name="width">1.5104166666666667in</property>
+                                                            </column>
+                                                            <row id="3718">
+                                                                <property name="height">0.23958333333333334in</property>
+                                                                <cell id="3719"/>
+                                                                <cell id="3720">
+                                                                    <property name="borderBottomStyle">solid</property>
+                                                                    <property name="borderBottomWidth">thin</property>
+                                                                    <property name="borderLeftStyle">solid</property>
+                                                                    <property name="borderLeftWidth">thin</property>
+                                                                    <property name="borderRightStyle">solid</property>
+                                                                    <property name="borderRightWidth">thin</property>
+                                                                </cell>
+                                                                <cell id="3721"/>
+                                                            </row>
+                                                            <row id="3722">
+                                                                <property name="height">0.3333333333333333in</property>
+                                                                <cell id="3723">
+                                                                    <property name="borderLeftStyle">dashed</property>
+                                                                    <property name="borderLeftWidth">thin</property>
+                                                                    <property name="borderRightStyle">solid</property>
+                                                                    <property name="borderRightWidth">thin</property>
+                                                                    <property name="borderTopStyle">dashed</property>
+                                                                    <property name="borderTopWidth">thin</property>
+                                                                </cell>
+                                                                <cell id="3724"/>
+                                                                <cell id="3725"/>
+                                                            </row>
+                                                        </grid>
+                                                    </cell>
+                                                </row>
+                                            </grid>
+                                        </cell>
+                                    </row>
+                                </grid>
                             </cell>
-                            <cell id="3261"/>
                         </row>
                     </grid>
                 </cell>
             </row>
         </grid>
         <grid id="3246">
-            <property name="height">0.96875in</property>
+            <property name="height">1.1458333333333333in</property>
             <column id="3247"/>
             <row id="3248">
-                <property name="height">0.96875in</property>
+                <property name="height">1.1458333333333333in</property>
                 <cell id="3249">
                     <property name="borderBottomStyle">solid</property>
                     <property name="borderBottomWidth">thin</property>
@@ -5517,7 +5977,7 @@ LIMIT 1;
                     <property name="borderRightStyle">solid</property>
                     <property name="borderRightWidth">thin</property>
                     <grid id="3262">
-                        <property name="height">0.9166666666666666in</property>
+                        <property name="height">1.3125in</property>
                         <property name="width">7.875in</property>
                         <column id="3263">
                             <property name="width">0.78125in</property>
@@ -5526,7 +5986,7 @@ LIMIT 1;
                             <property name="width">7.09375in</property>
                         </column>
                         <row id="3265">
-                            <property name="height">0.9166666666666666in</property>
+                            <property name="height">1.3125in</property>
                             <cell id="3266">
                                 <property name="borderRightStyle">solid</property>
                                 <property name="borderRightWidth">thin</property>
@@ -5542,10 +6002,10 @@ LIMIT 1;
             </row>
         </grid>
         <grid id="3242">
-            <property name="height">1.1875in</property>
+            <property name="height">1in</property>
             <column id="3243"/>
             <row id="3244">
-                <property name="height">1.1875in</property>
+                <property name="height">1in</property>
                 <cell id="3245">
                     <property name="borderBottomStyle">solid</property>
                     <property name="borderBottomWidth">thin</property>
@@ -5612,10 +6072,10 @@ LIMIT 1;
             </row>
         </grid>
         <grid id="3234">
-            <property name="height">1.0625in</property>
+            <property name="height">0.3645833333333333in</property>
             <column id="3235"/>
             <row id="3236">
-                <property name="height">1.0625in</property>
+                <property name="height">0.3645833333333333in</property>
                 <cell id="3237">
                     <property name="borderBottomStyle">solid</property>
                     <property name="borderBottomWidth">thin</property>
@@ -5705,56 +6165,808 @@ LIMIT 1;
                         <property name="pageBreakInterval">3</property>
                         <detail>
                             <grid id="3298">
-                                <property name="height">1.9479166666666667in</property>
+                                <property name="height">1.8229166666666667in</property>
                                 <property name="width">7.895833333333333in</property>
-                                <column id="3299">
-                                    <property name="width">0.7916666666666666in</property>
-                                </column>
                                 <column id="3300">
                                     <property name="width">7.104166666666667in</property>
                                 </column>
                                 <row id="3301">
-                                    <property name="height">0.9166666666666666in</property>
-                                    <cell id="3302">
-                                        <property name="borderBottomStyle">solid</property>
-                                        <property name="borderBottomWidth">thin</property>
-                                        <property name="borderRightStyle">solid</property>
-                                        <property name="borderRightWidth">thin</property>
-                                        <label id="3307">
-                                            <property name="fontSize">5pt</property>
-                                            <text-property name="text">31  Грузовые места и описание товаров</text-property>
-                                        </label>
-                                    </cell>
+                                    <property name="height">1.8229166666666667in</property>
                                     <cell id="3303">
                                         <property name="borderBottomStyle">solid</property>
                                         <property name="borderBottomWidth">thin</property>
-                                        <data id="3309">
-                                            <property name="resultSetColumn">id</property>
-                                        </data>
-                                    </cell>
-                                </row>
-                                <row id="3304">
-                                    <property name="height">1.03125in</property>
-                                    <cell id="3305">
-                                        <property name="borderBottomStyle">solid</property>
-                                        <property name="borderBottomWidth">thin</property>
-                                        <property name="borderRightStyle">solid</property>
-                                        <property name="borderRightWidth">thin</property>
-                                        <label id="3313">
-                                            <property name="fontSize">5pt</property>
-                                            <text-property name="text">44 Дополнит информация Предствал документы</text-property>
-                                        </label>
-                                    </cell>
-                                    <cell id="3306">
-                                        <property name="borderBottomStyle">solid</property>
-                                        <property name="borderBottomWidth">thin</property>
-                                        <property name="borderTopStyle">solid</property>
-                                        <property name="borderTopWidth">thin</property>
+                                        <grid id="3850">
+                                            <property name="height">2.0416666666666665in</property>
+                                            <property name="width">7.979166666666667in</property>
+                                            <column id="3851">
+                                                <property name="width">0.78125in</property>
+                                            </column>
+                                            <column id="3852">
+                                                <property name="width">7.197916666666667in</property>
+                                            </column>
+                                            <row id="3853">
+                                                <property name="height">2.0416666666666665in</property>
+                                                <cell id="3854">
+                                                    <property name="borderRightStyle">solid</property>
+                                                    <property name="borderRightWidth">thin</property>
+                                                    <grid id="3855">
+                                                        <property name="height">1.78125in</property>
+                                                        <column id="3856"/>
+                                                        <row id="3857">
+                                                            <property name="height">1.1041666666666667in</property>
+                                                            <cell id="3858">
+                                                                <property name="borderBottomStyle">solid</property>
+                                                                <property name="borderBottomWidth">thin</property>
+                                                                <label id="3859">
+                                                                    <property name="fontSize">5pt</property>
+                                                                    <property name="masterPage">Second</property>
+                                                                    <text-property name="text">31  Грузовые места и описание товаров</text-property>
+                                                                </label>
+                                                            </cell>
+                                                        </row>
+                                                        <row id="3860">
+                                                            <property name="height">0.6770833333333334in</property>
+                                                            <cell id="3861">
+                                                                <label id="3862">
+                                                                    <property name="fontSize">5pt</property>
+                                                                    <text-property name="text">44 Дополнит информация</text-property>
+                                                                </label>
+                                                            </cell>
+                                                        </row>
+                                                    </grid>
+                                                </cell>
+                                                <cell id="3863">
+                                                    <grid id="3864">
+                                                        <property name="height">2.0208333333333335in</property>
+                                                        <property name="width">7.239583333333333in</property>
+                                                        <column id="3865">
+                                                            <property name="width">2.875in</property>
+                                                        </column>
+                                                        <column id="3866">
+                                                            <property name="width">0.59375in</property>
+                                                        </column>
+                                                        <column id="3867">
+                                                            <property name="width">3.7708333333333335in</property>
+                                                        </column>
+                                                        <row id="3868">
+                                                            <property name="height">2.0208333333333335in</property>
+                                                            <cell id="3869">
+                                                                <grid id="3870">
+                                                                    <property name="height">2.2395833333333335in</property>
+                                                                    <column id="3871"/>
+                                                                    <row id="3872">
+                                                                        <property name="height">1.0833333333333333in</property>
+                                                                        <cell id="3873">
+                                                                            <property name="borderBottomStyle">solid</property>
+                                                                            <property name="borderBottomWidth">thin</property>
+                                                                            <grid id="3874">
+                                                                                <property name="height">1.09375in</property>
+                                                                                <property name="width">3.9166666666666665in</property>
+                                                                                <column id="3875">
+                                                                                    <property name="width">3.9166666666666665in</property>
+                                                                                </column>
+                                                                                <row id="3876">
+                                                                                    <property name="height">1.09375in</property>
+                                                                                    <cell id="3877">
+                                                                                        <label id="3878">
+                                                                                            <property name="fontSize">5pt</property>
+                                                                                            <text-property name="text">Маркировка и количество - Номер контейнера - Количество и отличительные особенности</text-property>
+                                                                                        </label>
+                                                                                    </cell>
+                                                                                </row>
+                                                                            </grid>
+                                                                        </cell>
+                                                                    </row>
+                                                                    <row id="3881">
+                                                                        <property name="height">1.15625in</property>
+                                                                        <cell id="3882"/>
+                                                                    </row>
+                                                                </grid>
+                                                            </cell>
+                                                            <cell id="3883">
+                                                                <grid id="3884">
+                                                                    <property name="height">0.21875in</property>
+                                                                    <property name="width">0.6041666666666666in</property>
+                                                                    <column id="3885">
+                                                                        <property name="width">0.6041666666666666in</property>
+                                                                    </column>
+                                                                    <row id="3886">
+                                                                        <property name="height">0.21875in</property>
+                                                                        <cell id="3887">
+                                                                            <property name="borderBottomStyle">solid</property>
+                                                                            <property name="borderBottomWidth">thin</property>
+                                                                            <property name="borderLeftStyle">solid</property>
+                                                                            <property name="borderLeftWidth">thin</property>
+                                                                            <property name="borderRightStyle">solid</property>
+                                                                            <property name="borderRightWidth">thin</property>
+                                                                            <label id="3888">
+                                                                                <property name="fontSize">5pt</property>
+                                                                                <text-property name="text">32 товар</text-property>
+                                                                            </label>
+                                                                            <grid id="3889">
+                                                                                <property name="height">0.125in</property>
+                                                                                <column id="3890"/>
+                                                                                <column id="3891"/>
+                                                                                <row id="3892">
+                                                                                    <property name="height">0.125in</property>
+                                                                                    <cell id="3893">
+                                                                                        <property name="borderRightStyle">solid</property>
+                                                                                        <property name="borderRightWidth">thin</property>
+                                                                                    </cell>
+                                                                                    <cell id="3894">
+                                                                                        <label id="3895">
+                                                                                            <property name="fontSize">5pt</property>
+                                                                                            <text-property name="text"> №</text-property>
+                                                                                        </label>
+                                                                                    </cell>
+                                                                                </row>
+                                                                            </grid>
+                                                                        </cell>
+                                                                    </row>
+                                                                </grid>
+                                                                <grid id="3896">
+                                                                    <property name="height">0.8541666666666666in</property>
+                                                                    <property name="width">0.6041666666666666in</property>
+                                                                    <column id="3897">
+                                                                        <property name="width">0.6041666666666666in</property>
+                                                                    </column>
+                                                                    <row id="3898">
+                                                                        <property name="height">0.8541666666666666in</property>
+                                                                        <cell id="3899">
+                                                                            <property name="borderBottomStyle">solid</property>
+                                                                            <property name="borderBottomWidth">thin</property>
+                                                                            <property name="borderRightStyle">solid</property>
+                                                                            <property name="borderRightWidth">thin</property>
+                                                                        </cell>
+                                                                    </row>
+                                                                </grid>
+                                                                <grid id="3900">
+                                                                    <property name="height">0.7291666666666666in</property>
+                                                                    <property name="width">0.6041666666666666in</property>
+                                                                    <column id="3901">
+                                                                        <property name="width">0.6041666666666666in</property>
+                                                                    </column>
+                                                                    <row id="3902">
+                                                                        <property name="height">0.7291666666666666in</property>
+                                                                        <cell id="3903">
+                                                                            <property name="borderRightStyle">solid</property>
+                                                                            <property name="borderRightWidth">thin</property>
+                                                                        </cell>
+                                                                    </row>
+                                                                </grid>
+                                                            </cell>
+                                                            <cell id="3904">
+                                                                <grid id="3905">
+                                                                    <property name="height">1.8020833333333333in</property>
+                                                                    <property name="width">3.59375in</property>
+                                                                    <column id="3906">
+                                                                        <property name="width">3.59375in</property>
+                                                                    </column>
+                                                                    <row id="3907">
+                                                                        <property name="height">0.21875in</property>
+                                                                        <cell id="3908">
+                                                                            <property name="borderBottomStyle">solid</property>
+                                                                            <property name="borderBottomWidth">thin</property>
+                                                                            <property name="borderLeftStyle">solid</property>
+                                                                            <property name="borderLeftWidth">thin</property>
+                                                                            <grid id="3909">
+                                                                                <property name="height">0.25in</property>
+                                                                                <property name="width">3.5208333333333335in</property>
+                                                                                <column id="3910">
+                                                                                    <property name="width">1.1770833333333333in</property>
+                                                                                </column>
+                                                                                <column id="3911">
+                                                                                    <property name="width">0.3854166666666667in</property>
+                                                                                </column>
+                                                                                <column id="3912">
+                                                                                    <property name="width">0.4791666666666667in</property>
+                                                                                </column>
+                                                                                <column id="3913">
+                                                                                    <property name="width">0.3958333333333333in</property>
+                                                                                </column>
+                                                                                <column id="3914">
+                                                                                    <property name="width">1.0833333333333333in</property>
+                                                                                </column>
+                                                                                <row id="3915">
+                                                                                    <property name="height">0.25in</property>
+                                                                                    <cell id="3916">
+                                                                                        <property name="borderRightStyle">solid</property>
+                                                                                        <property name="borderRightWidth">thin</property>
+                                                                                        <label id="3917">
+                                                                                            <property name="fontSize">5pt</property>
+                                                                                            <text-property name="text">33 код товара</text-property>
+                                                                                        </label>
+                                                                                    </cell>
+                                                                                    <cell id="3918">
+                                                                                        <property name="borderRightStyle">solid</property>
+                                                                                        <property name="borderRightWidth">thin</property>
+                                                                                    </cell>
+                                                                                    <cell id="3919">
+                                                                                        <property name="borderRightStyle">solid</property>
+                                                                                        <property name="borderRightWidth">thin</property>
+                                                                                    </cell>
+                                                                                    <cell id="3920">
+                                                                                        <property name="borderRightStyle">solid</property>
+                                                                                        <property name="borderRightWidth">thin</property>
+                                                                                    </cell>
+                                                                                    <cell id="3921"/>
+                                                                                </row>
+                                                                            </grid>
+                                                                        </cell>
+                                                                    </row>
+                                                                    <row id="3922">
+                                                                        <property name="height">0.4270833333333333in</property>
+                                                                        <cell id="3923">
+                                                                            <property name="borderBottomStyle">solid</property>
+                                                                            <property name="borderBottomWidth">thin</property>
+                                                                            <property name="borderLeftStyle">solid</property>
+                                                                            <property name="borderLeftWidth">thin</property>
+                                                                            <grid id="3924">
+                                                                                <property name="height">0.4791666666666667in</property>
+                                                                                <column id="3925"/>
+                                                                                <column id="3926"/>
+                                                                                <column id="3927"/>
+                                                                                <row id="3928">
+                                                                                    <property name="height">0.4791666666666667in</property>
+                                                                                    <cell id="3929">
+                                                                                        <grid id="3930">
+                                                                                            <property name="height">0.34375in</property>
+                                                                                            <column id="3931"/>
+                                                                                            <row id="3932">
+                                                                                                <property name="height">0.13541666666666666in</property>
+                                                                                                <cell id="3933">
+                                                                                                    <property name="borderBottomStyle">solid</property>
+                                                                                                    <property name="borderBottomWidth">thin</property>
+                                                                                                </cell>
+                                                                                            </row>
+                                                                                            <row id="3934">
+                                                                                                <property name="height">0.20833333333333334in</property>
+                                                                                                <cell id="3935"/>
+                                                                                            </row>
+                                                                                        </grid>
+                                                                                    </cell>
+                                                                                    <cell id="3936">
+                                                                                        <property name="borderLeftStyle">solid</property>
+                                                                                        <property name="borderLeftWidth">thin</property>
+                                                                                        <property name="borderRightStyle">solid</property>
+                                                                                        <property name="borderRightWidth">thin</property>
+                                                                                        <grid id="3937">
+                                                                                            <property name="height">0.3645833333333333in</property>
+                                                                                            <column id="3938"/>
+                                                                                            <row id="3939">
+                                                                                                <property name="height">0.13541666666666666in</property>
+                                                                                                <cell id="3940">
+                                                                                                    <property name="borderBottomStyle">solid</property>
+                                                                                                    <property name="borderBottomWidth">thin</property>
+                                                                                                    <label id="3941">
+                                                                                                        <property name="fontSize">5pt</property>
+                                                                                                        <text-property name="text">35 вес брутто</text-property>
+                                                                                                    </label>
+                                                                                                </cell>
+                                                                                            </row>
+                                                                                            <row id="3942">
+                                                                                                <property name="height">0.22916666666666666in</property>
+                                                                                                <cell id="3943"/>
+                                                                                            </row>
+                                                                                        </grid>
+                                                                                    </cell>
+                                                                                    <cell id="3944">
+                                                                                        <label id="3945">
+                                                                                            <property name="fontSize">5pt</property>
+                                                                                            <text-property name="text">40 Общая декларация</text-property>
+                                                                                        </label>
+                                                                                    </cell>
+                                                                                </row>
+                                                                            </grid>
+                                                                        </cell>
+                                                                    </row>
+                                                                    <row id="3946">
+                                                                        <property name="height">0.28125in</property>
+                                                                        <cell id="3947">
+                                                                            <property name="borderBottomStyle">solid</property>
+                                                                            <property name="borderBottomWidth">thin</property>
+                                                                            <property name="borderLeftStyle">solid</property>
+                                                                            <property name="borderLeftWidth">thin</property>
+                                                                        </cell>
+                                                                    </row>
+                                                                    <row id="3948">
+                                                                        <property name="height">0.3333333333333333in</property>
+                                                                        <cell id="3949">
+                                                                            <property name="borderBottomStyle">solid</property>
+                                                                            <property name="borderBottomWidth">thin</property>
+                                                                            <property name="borderLeftStyle">solid</property>
+                                                                            <property name="borderLeftWidth">thin</property>
+                                                                            <grid id="3950">
+                                                                                <property name="height">0.2916666666666667in</property>
+                                                                                <property name="width">3.5208333333333335in</property>
+                                                                                <column id="3951">
+                                                                                    <property name="width">1.46875in</property>
+                                                                                </column>
+                                                                                <column id="3952">
+                                                                                    <property name="width">2.0520833333333335in</property>
+                                                                                </column>
+                                                                                <row id="3953">
+                                                                                    <property name="height">0.2916666666666667in</property>
+                                                                                    <cell id="3954">
+                                                                                        <property name="borderRightStyle">solid</property>
+                                                                                        <property name="borderRightWidth">thin</property>
+                                                                                    </cell>
+                                                                                    <cell id="3955"/>
+                                                                                </row>
+                                                                            </grid>
+                                                                        </cell>
+                                                                    </row>
+                                                                    <row id="3956">
+                                                                        <property name="height">0.5416666666666666in</property>
+                                                                        <cell id="3957">
+                                                                            <grid id="3958">
+                                                                                <property name="height">0.5729166666666666in</property>
+                                                                                <property name="width">3.5208333333333335in</property>
+                                                                                <column id="3959">
+                                                                                    <property name="width">1.4791666666666667in</property>
+                                                                                </column>
+                                                                                <column id="3960">
+                                                                                    <property name="width">0.53125in</property>
+                                                                                </column>
+                                                                                <column id="3961">
+                                                                                    <property name="width">1.5104166666666667in</property>
+                                                                                </column>
+                                                                                <row id="3962">
+                                                                                    <property name="height">0.23958333333333334in</property>
+                                                                                    <cell id="3963"/>
+                                                                                    <cell id="3964">
+                                                                                        <property name="borderBottomStyle">solid</property>
+                                                                                        <property name="borderBottomWidth">thin</property>
+                                                                                        <property name="borderLeftStyle">solid</property>
+                                                                                        <property name="borderLeftWidth">thin</property>
+                                                                                        <property name="borderRightStyle">solid</property>
+                                                                                        <property name="borderRightWidth">thin</property>
+                                                                                    </cell>
+                                                                                    <cell id="3965"/>
+                                                                                </row>
+                                                                                <row id="3966">
+                                                                                    <property name="height">0.3333333333333333in</property>
+                                                                                    <cell id="3967">
+                                                                                        <property name="borderLeftStyle">dashed</property>
+                                                                                        <property name="borderLeftWidth">thin</property>
+                                                                                        <property name="borderRightStyle">solid</property>
+                                                                                        <property name="borderRightWidth">thin</property>
+                                                                                        <property name="borderTopStyle">dashed</property>
+                                                                                        <property name="borderTopWidth">thin</property>
+                                                                                    </cell>
+                                                                                    <cell id="3968"/>
+                                                                                    <cell id="3969"/>
+                                                                                </row>
+                                                                            </grid>
+                                                                        </cell>
+                                                                    </row>
+                                                                </grid>
+                                                            </cell>
+                                                        </row>
+                                                    </grid>
+                                                </cell>
+                                            </row>
+                                        </grid>
                                     </cell>
                                 </row>
                             </grid>
                         </detail>
                     </list>
+                </cell>
+            </row>
+        </grid>
+        <grid id="3726">
+            <property name="height">1.8854166666666667in</property>
+            <property name="width">8in</property>
+            <column id="3727">
+                <property name="width">8in</property>
+            </column>
+            <row id="3728">
+                <property name="height">1.8854166666666667in</property>
+                <cell id="3729">
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <grid id="3730">
+                        <property name="height">2.0416666666666665in</property>
+                        <property name="width">7.979166666666667in</property>
+                        <column id="3731">
+                            <property name="width">0.78125in</property>
+                        </column>
+                        <column id="3732">
+                            <property name="width">7.197916666666667in</property>
+                        </column>
+                        <row id="3733">
+                            <property name="height">2.0416666666666665in</property>
+                            <cell id="3734">
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">thin</property>
+                                <grid id="3735">
+                                    <property name="height">1.78125in</property>
+                                    <column id="3736"/>
+                                    <row id="3737">
+                                        <property name="height">1.1041666666666667in</property>
+                                        <cell id="3738">
+                                            <property name="borderBottomStyle">solid</property>
+                                            <property name="borderBottomWidth">thin</property>
+                                            <label id="3739">
+                                                <property name="fontSize">5pt</property>
+                                                <text-property name="text">31  Грузовые места и описание товаров</text-property>
+                                            </label>
+                                        </cell>
+                                    </row>
+                                    <row id="3740">
+                                        <property name="height">0.6770833333333334in</property>
+                                        <cell id="3741">
+                                            <label id="3742">
+                                                <property name="fontSize">5pt</property>
+                                                <text-property name="text">44 Дополнит информация</text-property>
+                                            </label>
+                                        </cell>
+                                    </row>
+                                </grid>
+                            </cell>
+                            <cell id="3743">
+                                <grid id="3744">
+                                    <property name="height">2.0208333333333335in</property>
+                                    <property name="width">7.239583333333333in</property>
+                                    <column id="3745">
+                                        <property name="width">2.875in</property>
+                                    </column>
+                                    <column id="3746">
+                                        <property name="width">0.59375in</property>
+                                    </column>
+                                    <column id="3747">
+                                        <property name="width">3.7708333333333335in</property>
+                                    </column>
+                                    <row id="3748">
+                                        <property name="height">2.0208333333333335in</property>
+                                        <cell id="3749">
+                                            <grid id="3750">
+                                                <property name="height">2.2395833333333335in</property>
+                                                <column id="3751"/>
+                                                <row id="3752">
+                                                    <property name="height">1.0833333333333333in</property>
+                                                    <cell id="3753">
+                                                        <property name="borderBottomStyle">solid</property>
+                                                        <property name="borderBottomWidth">thin</property>
+                                                        <grid id="3754">
+                                                            <property name="height">1.09375in</property>
+                                                            <property name="width">3.9166666666666665in</property>
+                                                            <column id="3755">
+                                                                <property name="width">3.9166666666666665in</property>
+                                                            </column>
+                                                            <row id="3756">
+                                                                <property name="height">1.09375in</property>
+                                                                <cell id="3757">
+                                                                    <label id="3758">
+                                                                        <property name="fontSize">5pt</property>
+                                                                        <text-property name="text">Маркировка и количество - Номер контейнера - Количество и отличительные особенности</text-property>
+                                                                    </label>
+                                                                    <data id="3759">
+                                                                        <property name="fontSize">5pt</property>
+                                                                        <property name="dataSet">First Product</property>
+                                                                        <list-property name="boundDataColumns">
+                                                                            <structure>
+                                                                                <property name="name">name</property>
+                                                                                <text-property name="displayName">name</text-property>
+                                                                                <expression name="expression" type="javascript">dataSetRow["name"]</expression>
+                                                                                <property name="dataType">string</property>
+                                                                            </structure>
+                                                                        </list-property>
+                                                                        <property name="resultSetColumn">name</property>
+                                                                    </data>
+                                                                    <data id="3760">
+                                                                        <property name="fontSize">5pt</property>
+                                                                        <property name="dataSet">First Product</property>
+                                                                        <list-property name="boundDataColumns">
+                                                                            <structure>
+                                                                                <property name="name">cargo_quantity</property>
+                                                                                <text-property name="displayName">cargo_quantity</text-property>
+                                                                                <expression name="expression" type="javascript">dataSetRow["cargo_quantity"]</expression>
+                                                                                <property name="dataType">integer</property>
+                                                                            </structure>
+                                                                        </list-property>
+                                                                        <property name="resultSetColumn">cargo_quantity</property>
+                                                                    </data>
+                                                                </cell>
+                                                            </row>
+                                                        </grid>
+                                                    </cell>
+                                                </row>
+                                                <row id="3761">
+                                                    <property name="height">1.15625in</property>
+                                                    <cell id="3762"/>
+                                                </row>
+                                            </grid>
+                                        </cell>
+                                        <cell id="3763">
+                                            <grid id="3764">
+                                                <property name="height">0.21875in</property>
+                                                <property name="width">0.6041666666666666in</property>
+                                                <column id="3765">
+                                                    <property name="width">0.6041666666666666in</property>
+                                                </column>
+                                                <row id="3766">
+                                                    <property name="height">0.21875in</property>
+                                                    <cell id="3767">
+                                                        <property name="borderBottomStyle">solid</property>
+                                                        <property name="borderBottomWidth">thin</property>
+                                                        <property name="borderLeftStyle">solid</property>
+                                                        <property name="borderLeftWidth">thin</property>
+                                                        <property name="borderRightStyle">solid</property>
+                                                        <property name="borderRightWidth">thin</property>
+                                                        <label id="3768">
+                                                            <property name="fontSize">5pt</property>
+                                                            <text-property name="text">32 товар</text-property>
+                                                        </label>
+                                                        <grid id="3769">
+                                                            <property name="height">0.125in</property>
+                                                            <column id="3770"/>
+                                                            <column id="3771"/>
+                                                            <row id="3772">
+                                                                <property name="height">0.125in</property>
+                                                                <cell id="3773">
+                                                                    <property name="borderRightStyle">solid</property>
+                                                                    <property name="borderRightWidth">thin</property>
+                                                                </cell>
+                                                                <cell id="3774">
+                                                                    <label id="3775">
+                                                                        <property name="fontSize">5pt</property>
+                                                                        <text-property name="text"> №</text-property>
+                                                                    </label>
+                                                                </cell>
+                                                            </row>
+                                                        </grid>
+                                                    </cell>
+                                                </row>
+                                            </grid>
+                                            <grid id="3776">
+                                                <property name="height">0.8541666666666666in</property>
+                                                <property name="width">0.6041666666666666in</property>
+                                                <column id="3777">
+                                                    <property name="width">0.6041666666666666in</property>
+                                                </column>
+                                                <row id="3778">
+                                                    <property name="height">0.8541666666666666in</property>
+                                                    <cell id="3779">
+                                                        <property name="borderBottomStyle">solid</property>
+                                                        <property name="borderBottomWidth">thin</property>
+                                                        <property name="borderRightStyle">solid</property>
+                                                        <property name="borderRightWidth">thin</property>
+                                                    </cell>
+                                                </row>
+                                            </grid>
+                                            <grid id="3780">
+                                                <property name="height">0.7291666666666666in</property>
+                                                <property name="width">0.6041666666666666in</property>
+                                                <column id="3781">
+                                                    <property name="width">0.6041666666666666in</property>
+                                                </column>
+                                                <row id="3782">
+                                                    <property name="height">0.7291666666666666in</property>
+                                                    <cell id="3783">
+                                                        <property name="borderRightStyle">solid</property>
+                                                        <property name="borderRightWidth">thin</property>
+                                                    </cell>
+                                                </row>
+                                            </grid>
+                                        </cell>
+                                        <cell id="3784">
+                                            <grid id="3785">
+                                                <property name="height">1.8020833333333333in</property>
+                                                <property name="width">3.59375in</property>
+                                                <column id="3786">
+                                                    <property name="width">3.59375in</property>
+                                                </column>
+                                                <row id="3787">
+                                                    <property name="height">0.21875in</property>
+                                                    <cell id="3788">
+                                                        <property name="borderBottomStyle">solid</property>
+                                                        <property name="borderBottomWidth">thin</property>
+                                                        <property name="borderLeftStyle">solid</property>
+                                                        <property name="borderLeftWidth">thin</property>
+                                                        <grid id="3789">
+                                                            <property name="height">0.25in</property>
+                                                            <property name="width">3.5208333333333335in</property>
+                                                            <column id="3790">
+                                                                <property name="width">1.1770833333333333in</property>
+                                                            </column>
+                                                            <column id="3791">
+                                                                <property name="width">0.3854166666666667in</property>
+                                                            </column>
+                                                            <column id="3792">
+                                                                <property name="width">0.4791666666666667in</property>
+                                                            </column>
+                                                            <column id="3793">
+                                                                <property name="width">0.3958333333333333in</property>
+                                                            </column>
+                                                            <column id="3794">
+                                                                <property name="width">1.0833333333333333in</property>
+                                                            </column>
+                                                            <row id="3795">
+                                                                <property name="height">0.25in</property>
+                                                                <cell id="3796">
+                                                                    <property name="borderRightStyle">solid</property>
+                                                                    <property name="borderRightWidth">thin</property>
+                                                                    <label id="3797">
+                                                                        <property name="fontSize">5pt</property>
+                                                                        <text-property name="text">33 код товара</text-property>
+                                                                    </label>
+                                                                </cell>
+                                                                <cell id="3798">
+                                                                    <property name="borderRightStyle">solid</property>
+                                                                    <property name="borderRightWidth">thin</property>
+                                                                </cell>
+                                                                <cell id="3799">
+                                                                    <property name="borderRightStyle">solid</property>
+                                                                    <property name="borderRightWidth">thin</property>
+                                                                </cell>
+                                                                <cell id="3800">
+                                                                    <property name="borderRightStyle">solid</property>
+                                                                    <property name="borderRightWidth">thin</property>
+                                                                </cell>
+                                                                <cell id="3801"/>
+                                                            </row>
+                                                        </grid>
+                                                    </cell>
+                                                </row>
+                                                <row id="3802">
+                                                    <property name="height">0.4270833333333333in</property>
+                                                    <cell id="3803">
+                                                        <property name="borderBottomStyle">solid</property>
+                                                        <property name="borderBottomWidth">thin</property>
+                                                        <property name="borderLeftStyle">solid</property>
+                                                        <property name="borderLeftWidth">thin</property>
+                                                        <grid id="3804">
+                                                            <property name="height">0.4791666666666667in</property>
+                                                            <column id="3805"/>
+                                                            <column id="3806"/>
+                                                            <column id="3807"/>
+                                                            <row id="3808">
+                                                                <property name="height">0.4791666666666667in</property>
+                                                                <cell id="3809">
+                                                                    <grid id="3810">
+                                                                        <property name="height">0.34375in</property>
+                                                                        <column id="3811"/>
+                                                                        <row id="3812">
+                                                                            <property name="height">0.13541666666666666in</property>
+                                                                            <cell id="3813">
+                                                                                <property name="borderBottomStyle">solid</property>
+                                                                                <property name="borderBottomWidth">thin</property>
+                                                                            </cell>
+                                                                        </row>
+                                                                        <row id="3814">
+                                                                            <property name="height">0.20833333333333334in</property>
+                                                                            <cell id="3815"/>
+                                                                        </row>
+                                                                    </grid>
+                                                                </cell>
+                                                                <cell id="3816">
+                                                                    <property name="borderLeftStyle">solid</property>
+                                                                    <property name="borderLeftWidth">thin</property>
+                                                                    <property name="borderRightStyle">solid</property>
+                                                                    <property name="borderRightWidth">thin</property>
+                                                                    <grid id="3817">
+                                                                        <property name="height">0.3645833333333333in</property>
+                                                                        <column id="3818"/>
+                                                                        <row id="3819">
+                                                                            <property name="height">0.13541666666666666in</property>
+                                                                            <cell id="3820">
+                                                                                <property name="borderBottomStyle">solid</property>
+                                                                                <property name="borderBottomWidth">thin</property>
+                                                                                <label id="3821">
+                                                                                    <property name="fontSize">5pt</property>
+                                                                                    <text-property name="text">35 вес брутто</text-property>
+                                                                                </label>
+                                                                            </cell>
+                                                                        </row>
+                                                                        <row id="3822">
+                                                                            <property name="height">0.22916666666666666in</property>
+                                                                            <cell id="3823"/>
+                                                                        </row>
+                                                                    </grid>
+                                                                </cell>
+                                                                <cell id="3824">
+                                                                    <label id="3825">
+                                                                        <property name="fontSize">5pt</property>
+                                                                        <text-property name="text">40 Общая декларация</text-property>
+                                                                    </label>
+                                                                </cell>
+                                                            </row>
+                                                        </grid>
+                                                    </cell>
+                                                </row>
+                                                <row id="3826">
+                                                    <property name="height">0.28125in</property>
+                                                    <cell id="3827">
+                                                        <property name="borderBottomStyle">solid</property>
+                                                        <property name="borderBottomWidth">thin</property>
+                                                        <property name="borderLeftStyle">solid</property>
+                                                        <property name="borderLeftWidth">thin</property>
+                                                    </cell>
+                                                </row>
+                                                <row id="3828">
+                                                    <property name="height">0.3333333333333333in</property>
+                                                    <cell id="3829">
+                                                        <property name="borderBottomStyle">solid</property>
+                                                        <property name="borderBottomWidth">thin</property>
+                                                        <property name="borderLeftStyle">solid</property>
+                                                        <property name="borderLeftWidth">thin</property>
+                                                        <grid id="3830">
+                                                            <property name="height">0.2916666666666667in</property>
+                                                            <property name="width">3.5208333333333335in</property>
+                                                            <column id="3831">
+                                                                <property name="width">1.46875in</property>
+                                                            </column>
+                                                            <column id="3832">
+                                                                <property name="width">2.0520833333333335in</property>
+                                                            </column>
+                                                            <row id="3833">
+                                                                <property name="height">0.2916666666666667in</property>
+                                                                <cell id="3834">
+                                                                    <property name="borderRightStyle">solid</property>
+                                                                    <property name="borderRightWidth">thin</property>
+                                                                </cell>
+                                                                <cell id="3835"/>
+                                                            </row>
+                                                        </grid>
+                                                    </cell>
+                                                </row>
+                                                <row id="3836">
+                                                    <property name="height">0.5416666666666666in</property>
+                                                    <cell id="3837">
+                                                        <grid id="3838">
+                                                            <property name="height">0.5729166666666666in</property>
+                                                            <property name="width">3.5208333333333335in</property>
+                                                            <column id="3839">
+                                                                <property name="width">1.4791666666666667in</property>
+                                                            </column>
+                                                            <column id="3840">
+                                                                <property name="width">0.53125in</property>
+                                                            </column>
+                                                            <column id="3841">
+                                                                <property name="width">1.5104166666666667in</property>
+                                                            </column>
+                                                            <row id="3842">
+                                                                <property name="height">0.23958333333333334in</property>
+                                                                <cell id="3843"/>
+                                                                <cell id="3844">
+                                                                    <property name="borderBottomStyle">solid</property>
+                                                                    <property name="borderBottomWidth">thin</property>
+                                                                    <property name="borderLeftStyle">solid</property>
+                                                                    <property name="borderLeftWidth">thin</property>
+                                                                    <property name="borderRightStyle">solid</property>
+                                                                    <property name="borderRightWidth">thin</property>
+                                                                </cell>
+                                                                <cell id="3845"/>
+                                                            </row>
+                                                            <row id="3846">
+                                                                <property name="height">0.3333333333333333in</property>
+                                                                <cell id="3847">
+                                                                    <property name="borderLeftStyle">dashed</property>
+                                                                    <property name="borderLeftWidth">thin</property>
+                                                                    <property name="borderRightStyle">solid</property>
+                                                                    <property name="borderRightWidth">thin</property>
+                                                                    <property name="borderTopStyle">dashed</property>
+                                                                    <property name="borderTopWidth">thin</property>
+                                                                </cell>
+                                                                <cell id="3848"/>
+                                                                <cell id="3849"/>
+                                                            </row>
+                                                        </grid>
+                                                    </cell>
+                                                </row>
+                                            </grid>
+                                        </cell>
+                                    </row>
+                                </grid>
+                            </cell>
+                        </row>
+                    </grid>
                 </cell>
             </row>
         </grid>
