@@ -24,6 +24,22 @@
                 <property name="category">Unformatted</property>
             </structure>
         </scalar-parameter>
+        <scalar-parameter name="Locale" id="4204">
+            <property name="valueType">static</property>
+            <property name="isRequired">true</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">ru</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="concealValue">false</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
     </parameters>
     <data-sources>
         <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="SmartLocalDataBase" id="4">
@@ -44,7 +60,7 @@
                 </ex-property>
             </list-property>
             <property name="odaDriverClass">org.postgresql.Driver</property>
-            <property name="odaURL">jdbc:postgresql://localhost:5432/smart</property>
+            <property name="odaURL">jdbc:postgresql://localhost:5432/smartNew</property>
             <property name="odaUser">admin</property>
             <encrypted-property name="odaPassword" encryptionID="base64">YWRtaW4=</encrypted-property>
         </oda-data-source>
@@ -75,6 +91,30 @@
                     <property name="analysis">measure</property>
                     <text-property name="displayName">cargo_quantity</text-property>
                     <text-property name="heading">cargo_quantity</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">code</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">code</text-property>
+                    <text-property name="heading">code</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">gross_weight</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">gross_weight</text-property>
+                    <text-property name="heading">gross_weight</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">price</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">price</text-property>
+                    <text-property name="heading">price</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">currency</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">currency</text-property>
+                    <text-property name="heading">currency</text-property>
                 </structure>
             </list-property>
             <list-property name="parameters">
@@ -111,6 +151,26 @@
                         <property name="name">cargo_quantity</property>
                         <property name="dataType">integer</property>
                     </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">code</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">gross_weight</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">price</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">currency</property>
+                        <property name="dataType">string</property>
+                    </structure>
                 </list-property>
             </structure>
             <property name="dataSource">SmartLocalDataBase</property>
@@ -143,11 +203,41 @@
                     <property name="dataType">integer</property>
                     <property name="nativeDataType">4</property>
                 </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">code</property>
+                    <property name="nativeName">code</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">gross_weight</property>
+                    <property name="nativeName">gross_weight</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">price</property>
+                    <property name="nativeName">price</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">currency</property>
+                    <property name="nativeName">currency</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[SELECT Goods.name, Goods.id, Goods.quantity, Goods.cargo_quantity
+            <xml-property name="queryText"><![CDATA[SELECT Goods.name, Goods.id, Goods.quantity, Goods.cargo_quantity, Code.code,Goods.gross_weight,Goods.price,	Currency.name as Currency
 FROM public.transitcontrolsystem_transit_declaration AS TransitDec
 JOIN preliminaryinformation_commodity_consignment AS Commodity ON (Commodity.id = TransitDec.consignment)
 JOIN preliminaryinformation_goods AS Goods ON (Commodity.id = Goods.commodity_consignment)
+JOIN base_currency AS Currency ON (Currency.id = Commodity.currency)
+JOIN dictionary_tnved_position_code AS Code ON (Code.id = Goods.tnved)
 WHERE TransitDec.id = ?
 AND Goods.id NOT IN (
     SELECT MIN(id) FROM preliminaryinformation_goods
@@ -4169,16 +4259,34 @@ WHERE TransitDec.id = ?;
                     <text-property name="heading">quantity</text-property>
                 </structure>
                 <structure>
+                    <property name="columnName">code</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">code</text-property>
+                    <text-property name="heading">code</text-property>
+                </structure>
+                <structure>
                     <property name="columnName">cargo_quantity</property>
                     <property name="analysis">measure</property>
                     <text-property name="displayName">cargo_quantity</text-property>
                     <text-property name="heading">cargo_quantity</text-property>
                 </structure>
                 <structure>
+                    <property name="columnName">price</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">price</text-property>
+                    <text-property name="heading">price</text-property>
+                </structure>
+                <structure>
                     <property name="columnName">total_price</property>
                     <property name="analysis">measure</property>
                     <text-property name="displayName">total_price</text-property>
                     <text-property name="heading">total_price</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">gross_weight</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">gross_weight</text-property>
+                    <text-property name="heading">gross_weight</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">currency</property>
@@ -4218,16 +4326,31 @@ WHERE TransitDec.id = ?;
                     </structure>
                     <structure>
                         <property name="position">4</property>
+                        <property name="name">code</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
                         <property name="name">cargo_quantity</property>
                         <property name="dataType">integer</property>
                     </structure>
                     <structure>
-                        <property name="position">5</property>
+                        <property name="position">6</property>
+                        <property name="name">price</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
                         <property name="name">total_price</property>
                         <property name="dataType">decimal</property>
                     </structure>
                     <structure>
-                        <property name="position">6</property>
+                        <property name="position">8</property>
+                        <property name="name">gross_weight</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
                         <property name="name">currency</property>
                         <property name="dataType">string</property>
                     </structure>
@@ -4258,30 +4381,57 @@ WHERE TransitDec.id = ?;
                 </structure>
                 <structure>
                     <property name="position">4</property>
+                    <property name="name">code</property>
+                    <property name="nativeName">code</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
                     <property name="name">cargo_quantity</property>
                     <property name="nativeName">cargo_quantity</property>
                     <property name="dataType">integer</property>
                     <property name="nativeDataType">4</property>
                 </structure>
                 <structure>
-                    <property name="position">5</property>
+                    <property name="position">6</property>
+                    <property name="name">price</property>
+                    <property name="nativeName">price</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
                     <property name="name">total_price</property>
                     <property name="nativeName">total_price</property>
                     <property name="dataType">decimal</property>
                     <property name="nativeDataType">2</property>
                 </structure>
                 <structure>
-                    <property name="position">6</property>
+                    <property name="position">8</property>
+                    <property name="name">gross_weight</property>
+                    <property name="nativeName">gross_weight</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
                     <property name="name">currency</property>
                     <property name="nativeName">currency</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">12</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[SELECT Goods.name, Goods.id, Goods.quantity, Goods.cargo_quantity,Commodity.total_price,Currency.name as Currency
+            <xml-property name="queryText"><![CDATA[SELECT Goods.name, Goods.id, Goods.quantity,Code.code ,
+		Goods.cargo_quantity,
+		Goods.price,
+		Commodity.total_price,
+		Goods.gross_weight,
+		Currency.name as Currency
 FROM public.transitcontrolsystem_transit_declaration AS TransitDec
 JOIN preliminaryinformation_commodity_consignment AS Commodity ON (Commodity.id = TransitDec.consignment)
 JOIN preliminaryinformation_goods AS Goods ON (Commodity.id = Goods.commodity_consignment)
+JOIN dictionary_tnved_position_code AS Code ON (Code.id = Goods.tnved)
 JOIN base_currency AS Currency ON (Currency.id = Commodity.currency)
 WHERE TransitDec.id = ?
 ORDER BY Goods.id
@@ -4383,15 +4533,178 @@ LIMIT 1;
   </design:ResultSets>
 </model:DesignValues>]]></xml-property>
         </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="TranslateDB" id="4205">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">message_key</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">message_key</text-property>
+                    <text-property name="heading">message_key</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">translation</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">translation</text-property>
+                    <text-property name="heading">translation</text-property>
+                </structure>
+            </list-property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">param_1</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                </structure>
+                <structure>
+                    <property name="name">param_2</property>
+                    <property name="paramName">Locale</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                    <property name="position">2</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">message_key</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">translation</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">SmartLocalDataBase</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">message_key</property>
+                    <property name="nativeName">message_key</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">translation</property>
+                    <property name="nativeName">translation</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select LangTranslate.message_key, LangTranslate.message_value as "translation" 
+from meta_translation as LangTranslate 
+where LangTranslate.message_key = ? and LangTranslate.language = ?]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <DataSetParameters>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name></design:name>
+            <design:position>1</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+          <design:precision>0</design:precision>
+          <design:scale>0</design:scale>
+          <design:nullability>Unknown</design:nullability>
+        </design:attributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name></design:name>
+            <design:position>2</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+          <design:precision>0</design:precision>
+          <design:scale>0</design:scale>
+          <design:nullability>Unknown</design:nullability>
+        </design:attributes>
+      </design:ParameterDefinition>
+    </parameter>
+  </DataSetParameters>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>message_key</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>1024</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>message_key</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>message_key</design:label>
+            <design:formattingHints>
+              <design:displaySize>1024</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>translation</design:name>
+              <design:position>2</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>1024</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>translation</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>translation</design:label>
+            <design:formattingHints>
+              <design:displaySize>1024</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
     </data-sets>
     <styles>
         <style name="declarationHead" id="52">
             <property name="fontSize">8pt</property>
             <property name="textAlign">center</property>
         </style>
+        <style name="NewStyle" id="4206">
+            <property name="whiteSpace">pre</property>
+        </style>
+        <style name="NewStyle1" id="4207">
+            <property name="letterSpacing">-1.5pt</property>
+            <property name="wordSpacing">1pt</property>
+        </style>
     </styles>
     <page-setup>
         <simple-master-page name="First" id="2">
+            <property name="bottomMargin">0in</property>
             <property name="showHeaderOnFirst">true</property>
             <property name="showFooterOnLast">false</property>
             <property name="headerHeight">1.1in</property>
@@ -4435,6 +4748,7 @@ LIMIT 1;
                                                     <property name="borderBottomWidth">thin</property>
                                                     <label id="3038">
                                                         <property name="style">declarationHead</property>
+                                                        <property name="fontFamily">"Noto Serif"</property>
                                                         <property name="fontSize">8pt</property>
                                                         <property name="paddingBottom">5pt</property>
                                                         <property name="textAlign">center</property>
@@ -4801,6 +5115,7 @@ LIMIT 1;
         </simple-master-page>
         <simple-master-page name="Second" id="2623">
             <property name="orientation">auto</property>
+            <property name="bottomMargin">0in</property>
             <property name="display">inline</property>
             <property name="pageBreakAfter">always</property>
             <property name="pageBreakBefore">always</property>
@@ -5146,6 +5461,7 @@ LIMIT 1;
             <row id="2619">
                 <property name="height">2.8541666666666665in</property>
                 <cell id="2620">
+                    <property name="fontFamily">"Abyssinica SIL"</property>
                     <property name="borderBottomStyle">solid</property>
                     <property name="borderBottomWidth">thin</property>
                     <property name="borderLeftStyle">solid</property>
@@ -5169,7 +5485,7 @@ LIMIT 1;
                                 <property name="borderBottomStyle">solid</property>
                                 <property name="borderBottomWidth">thin</property>
                                 <grid id="3146">
-                                    <property name="height">0.1875in</property>
+                                    <property name="height">0.15625in</property>
                                     <property name="width">2.0833333333333335in</property>
                                     <column id="3147">
                                         <property name="width">1.5520833333333333in</property>
@@ -5178,13 +5494,38 @@ LIMIT 1;
                                         <property name="width">0.53125in</property>
                                     </column>
                                     <row id="3149">
-                                        <property name="height">0.1875in</property>
+                                        <property name="height">0.15625in</property>
                                         <cell id="3150">
-                                            <label id="3152">
+                                            <text id="4202">
+                                                <property name="style">NewStyle</property>
+                                                <property name="fontFamily">"Noto Sans"</property>
                                                 <property name="fontSize">5pt</property>
-                                                <property name="masterPage">First</property>
-                                                <text-property name="text">8 Получатель</text-property>
-                                            </label>
+                                                <property name="dataSet">TranslateDB</property>
+                                                <list-property name="paramBindings">
+                                                    <structure>
+                                                        <property name="paramName">param_1</property>
+                                                        <simple-property-list name="expression">
+                                                            <value type="javascript">"Получатель"</value>
+                                                        </simple-property-list>
+                                                    </structure>
+                                                </list-property>
+                                                <list-property name="boundDataColumns">
+                                                    <structure>
+                                                        <property name="name">message_key</property>
+                                                        <text-property name="displayName">message_key</text-property>
+                                                        <expression name="expression" type="javascript">dataSetRow["message_key"]</expression>
+                                                        <property name="dataType">string</property>
+                                                    </structure>
+                                                    <structure>
+                                                        <property name="name">translation</property>
+                                                        <text-property name="displayName">translation</text-property>
+                                                        <expression name="expression" type="javascript">dataSetRow["translation"]</expression>
+                                                        <property name="dataType">string</property>
+                                                    </structure>
+                                                </list-property>
+                                                <property name="contentType">html</property>
+                                                <text-property name="content"><![CDATA[8. <VALUE-OF>row["translation"]</VALUE-OF>]]></text-property>
+                                            </text>
                                         </cell>
                                         <cell id="3151">
                                             <label id="3153">
@@ -5195,6 +5536,7 @@ LIMIT 1;
                                     </row>
                                 </grid>
                                 <data id="3361">
+                                    <property name="fontFamily">"Roboto"</property>
                                     <property name="fontSize">5pt</property>
                                     <property name="dataSet">Получатель</property>
                                     <list-property name="boundDataColumns">
@@ -5311,6 +5653,7 @@ LIMIT 1;
                                         <cell id="3407">
                                             <label id="3409">
                                                 <property name="fontSize">5pt</property>
+                                                <structure name="toc"/>
                                                 <text-property name="text">25 вид транспорта</text-property>
                                             </label>
                                             <grid id="3410">
@@ -5391,9 +5734,8 @@ LIMIT 1;
                                                 </row>
                                                 <row id="3175">
                                                     <cell id="3176">
-                                                        <data id="3193">
+                                                        <data id="3971">
                                                             <property name="fontSize">5pt</property>
-                                                            <property name="fontWeight">bold</property>
                                                             <property name="dataSet">Страна отправления</property>
                                                             <list-property name="boundDataColumns">
                                                                 <structure>
@@ -5431,15 +5773,14 @@ LIMIT 1;
                                                     <cell id="3181">
                                                         <label id="3184">
                                                             <property name="fontSize">5pt</property>
-                                                            <text-property name="text">15 Старана отправления</text-property>
+                                                            <text-property name="text">17 Старана назначения </text-property>
                                                         </label>
                                                     </cell>
                                                 </row>
                                                 <row id="3182">
                                                     <cell id="3183">
-                                                        <data id="3192">
+                                                        <data id="3972">
                                                             <property name="fontSize">5pt</property>
-                                                            <property name="fontWeight">bold</property>
                                                             <property name="dataSet">Страна назначения</property>
                                                             <list-property name="boundDataColumns">
                                                                 <structure>
@@ -5609,9 +5950,12 @@ LIMIT 1;
                                     <row id="3523">
                                         <property name="height">1.1041666666666667in</property>
                                         <cell id="3524">
+                                            <property name="fontFamily">"Times New Roman"</property>
                                             <property name="borderBottomStyle">solid</property>
                                             <property name="borderBottomWidth">thin</property>
                                             <label id="3527">
+                                                <property name="style">NewStyle1</property>
+                                                <property name="fontFamily">"Roboto"</property>
                                                 <property name="fontSize">5pt</property>
                                                 <text-property name="text">31  Грузовые места и описание товаров</text-property>
                                             </label>
@@ -5621,6 +5965,7 @@ LIMIT 1;
                                         <property name="height">0.6770833333333334in</property>
                                         <cell id="3526">
                                             <label id="3528">
+                                                <property name="fontFamily">"Times New Roman"</property>
                                                 <property name="fontSize">5pt</property>
                                                 <text-property name="text">44 Дополнит информация</text-property>
                                             </label>
@@ -5666,6 +6011,32 @@ LIMIT 1;
                                                                         <property name="masterPage">First</property>
                                                                         <text-property name="text">Маркировка и количество - Номер контейнера - Количество и отличительные особенности</text-property>
                                                                     </label>
+                                                                    <data id="3973">
+                                                                        <property name="fontSize">5pt</property>
+                                                                        <property name="dataSet">First Product</property>
+                                                                        <list-property name="boundDataColumns">
+                                                                            <structure>
+                                                                                <property name="name">name</property>
+                                                                                <text-property name="displayName">name</text-property>
+                                                                                <expression name="expression" type="javascript">dataSetRow["name"]</expression>
+                                                                                <property name="dataType">string</property>
+                                                                            </structure>
+                                                                        </list-property>
+                                                                        <property name="resultSetColumn">name</property>
+                                                                    </data>
+                                                                    <data id="3974">
+                                                                        <property name="fontSize">5pt</property>
+                                                                        <property name="dataSet">First Product</property>
+                                                                        <list-property name="boundDataColumns">
+                                                                            <structure>
+                                                                                <property name="name">cargo_quantity</property>
+                                                                                <text-property name="displayName">cargo_quantity</text-property>
+                                                                                <expression name="expression" type="javascript">dataSetRow["cargo_quantity"]</expression>
+                                                                                <property name="dataType">integer</property>
+                                                                            </structure>
+                                                                        </list-property>
+                                                                        <property name="resultSetColumn">cargo_quantity</property>
+                                                                    </data>
                                                                 </cell>
                                                             </row>
                                                         </grid>
@@ -5751,7 +6122,7 @@ LIMIT 1;
                                         </cell>
                                         <cell id="3601">
                                             <grid id="3622">
-                                                <property name="height">1.8020833333333333in</property>
+                                                <property name="height">1.8229166666666667in</property>
                                                 <property name="width">3.59375in</property>
                                                 <column id="3623">
                                                     <property name="width">3.59375in</property>
@@ -5790,6 +6161,19 @@ LIMIT 1;
                                                                         <property name="fontSize">5pt</property>
                                                                         <text-property name="text">33 код товара</text-property>
                                                                     </label>
+                                                                    <data id="3993">
+                                                                        <property name="fontSize">5pt</property>
+                                                                        <property name="dataSet">First Product</property>
+                                                                        <list-property name="boundDataColumns">
+                                                                            <structure>
+                                                                                <property name="name">code</property>
+                                                                                <text-property name="displayName">code</text-property>
+                                                                                <expression name="expression" type="javascript">dataSetRow["code"]</expression>
+                                                                                <property name="dataType">string</property>
+                                                                            </structure>
+                                                                        </list-property>
+                                                                        <property name="resultSetColumn">code</property>
+                                                                    </data>
                                                                 </cell>
                                                                 <cell id="3654">
                                                                     <property name="borderRightStyle">solid</property>
@@ -5809,7 +6193,7 @@ LIMIT 1;
                                                     </cell>
                                                 </row>
                                                 <row id="3626">
-                                                    <property name="height">0.4270833333333333in</property>
+                                                    <property name="height">0.46875in</property>
                                                     <cell id="3627">
                                                         <property name="borderBottomStyle">solid</property>
                                                         <property name="borderBottomWidth">thin</property>
@@ -5824,10 +6208,10 @@ LIMIT 1;
                                                                 <property name="height">0.4791666666666667in</property>
                                                                 <cell id="3664">
                                                                     <grid id="3693">
-                                                                        <property name="height">0.34375in</property>
+                                                                        <property name="height">0.4375in</property>
                                                                         <column id="3694"/>
                                                                         <row id="3695">
-                                                                            <property name="height">0.13541666666666666in</property>
+                                                                            <property name="height">0.22916666666666666in</property>
                                                                             <cell id="3696">
                                                                                 <property name="borderBottomStyle">solid</property>
                                                                                 <property name="borderBottomWidth">thin</property>
@@ -5845,10 +6229,10 @@ LIMIT 1;
                                                                     <property name="borderRightStyle">solid</property>
                                                                     <property name="borderRightWidth">thin</property>
                                                                     <grid id="3699">
-                                                                        <property name="height">0.3645833333333333in</property>
+                                                                        <property name="height">0.4479166666666667in</property>
                                                                         <column id="3700"/>
                                                                         <row id="3701">
-                                                                            <property name="height">0.13541666666666666in</property>
+                                                                            <property name="height">0.21875in</property>
                                                                             <cell id="3702">
                                                                                 <property name="borderBottomStyle">solid</property>
                                                                                 <property name="borderBottomWidth">thin</property>
@@ -5856,6 +6240,19 @@ LIMIT 1;
                                                                                     <property name="fontSize">5pt</property>
                                                                                     <text-property name="text">35 вес брутто</text-property>
                                                                                 </label>
+                                                                                <data id="3994">
+                                                                                    <property name="fontSize">5pt</property>
+                                                                                    <property name="dataSet">First Product</property>
+                                                                                    <list-property name="boundDataColumns">
+                                                                                        <structure>
+                                                                                            <property name="name">gross_weight</property>
+                                                                                            <text-property name="displayName">gross_weight</text-property>
+                                                                                            <expression name="expression" type="javascript">dataSetRow["gross_weight"]</expression>
+                                                                                            <property name="dataType">decimal</property>
+                                                                                        </structure>
+                                                                                    </list-property>
+                                                                                    <property name="resultSetColumn">gross_weight</property>
+                                                                                </data>
                                                                             </cell>
                                                                         </row>
                                                                         <row id="3703">
@@ -5864,12 +6261,7 @@ LIMIT 1;
                                                                         </row>
                                                                     </grid>
                                                                 </cell>
-                                                                <cell id="3666">
-                                                                    <label id="3706">
-                                                                        <property name="fontSize">5pt</property>
-                                                                        <text-property name="text">40 Общая декларация</text-property>
-                                                                    </label>
-                                                                </cell>
+                                                                <cell id="3666"/>
                                                             </row>
                                                         </grid>
                                                     </cell>
@@ -5881,17 +6273,21 @@ LIMIT 1;
                                                         <property name="borderBottomWidth">thin</property>
                                                         <property name="borderLeftStyle">solid</property>
                                                         <property name="borderLeftWidth">thin</property>
+                                                        <label id="3997">
+                                                            <property name="fontSize">5pt</property>
+                                                            <text-property name="text">40  Обшая декларация</text-property>
+                                                        </label>
                                                     </cell>
                                                 </row>
                                                 <row id="3630">
-                                                    <property name="height">0.3333333333333333in</property>
+                                                    <property name="height">0.3125in</property>
                                                     <cell id="3631">
                                                         <property name="borderBottomStyle">solid</property>
                                                         <property name="borderBottomWidth">thin</property>
                                                         <property name="borderLeftStyle">solid</property>
                                                         <property name="borderLeftWidth">thin</property>
                                                         <grid id="3708">
-                                                            <property name="height">0.2916666666666667in</property>
+                                                            <property name="height">0.375in</property>
                                                             <property name="width">3.5208333333333335in</property>
                                                             <column id="3709">
                                                                 <property name="width">1.46875in</property>
@@ -5900,12 +6296,64 @@ LIMIT 1;
                                                                 <property name="width">2.0520833333333335in</property>
                                                             </column>
                                                             <row id="3711">
-                                                                <property name="height">0.2916666666666667in</property>
+                                                                <property name="height">0.375in</property>
                                                                 <cell id="3712">
                                                                     <property name="borderRightStyle">solid</property>
                                                                     <property name="borderRightWidth">thin</property>
+                                                                    <label id="3998">
+                                                                        <property name="fontSize">5pt</property>
+                                                                        <text-property name="text">41 Дополнит ед</text-property>
+                                                                    </label>
                                                                 </cell>
-                                                                <cell id="3713"/>
+                                                                <cell id="3713">
+                                                                    <label id="3999">
+                                                                        <property name="fontSize">5pt</property>
+                                                                        <text-property name="text">42 валюта и стоимость товара</text-property>
+                                                                    </label>
+                                                                    <grid id="4000">
+                                                                        <property name="width">1.9895833333333333in</property>
+                                                                        <column id="4001">
+                                                                            <property name="width">0.6875in</property>
+                                                                        </column>
+                                                                        <column id="4002">
+                                                                            <property name="width">1.3020833333333333in</property>
+                                                                        </column>
+                                                                        <row id="4003">
+                                                                            <cell id="4004">
+                                                                                <property name="borderRightStyle">solid</property>
+                                                                                <property name="borderRightWidth">thin</property>
+                                                                                <data id="4006">
+                                                                                    <property name="fontSize">5pt</property>
+                                                                                    <property name="dataSet">First Product</property>
+                                                                                    <list-property name="boundDataColumns">
+                                                                                        <structure>
+                                                                                            <property name="name">currency</property>
+                                                                                            <text-property name="displayName">currency</text-property>
+                                                                                            <expression name="expression" type="javascript">dataSetRow["currency"]</expression>
+                                                                                            <property name="dataType">string</property>
+                                                                                        </structure>
+                                                                                    </list-property>
+                                                                                    <property name="resultSetColumn">currency</property>
+                                                                                </data>
+                                                                            </cell>
+                                                                            <cell id="4005">
+                                                                                <data id="4007">
+                                                                                    <property name="fontSize">5pt</property>
+                                                                                    <property name="dataSet">First Product</property>
+                                                                                    <list-property name="boundDataColumns">
+                                                                                        <structure>
+                                                                                            <property name="name">price</property>
+                                                                                            <text-property name="displayName">price</text-property>
+                                                                                            <expression name="expression" type="javascript">dataSetRow["price"]</expression>
+                                                                                            <property name="dataType">decimal</property>
+                                                                                        </structure>
+                                                                                    </list-property>
+                                                                                    <property name="resultSetColumn">price</property>
+                                                                                </data>
+                                                                            </cell>
+                                                                        </row>
+                                                                    </grid>
+                                                                </cell>
                                                             </row>
                                                         </grid>
                                                     </cell>
@@ -5935,6 +6383,10 @@ LIMIT 1;
                                                                     <property name="borderLeftWidth">thin</property>
                                                                     <property name="borderRightStyle">solid</property>
                                                                     <property name="borderRightWidth">thin</property>
+                                                                    <label id="4008">
+                                                                        <property name="fontSize">5pt</property>
+                                                                        <text-property name="text">/код ДИ</text-property>
+                                                                    </label>
                                                                 </cell>
                                                                 <cell id="3721"/>
                                                             </row>
@@ -5965,10 +6417,10 @@ LIMIT 1;
             </row>
         </grid>
         <grid id="3246">
-            <property name="height">1.1458333333333333in</property>
+            <property name="height">1.1041666666666667in</property>
             <column id="3247"/>
             <row id="3248">
-                <property name="height">1.1458333333333333in</property>
+                <property name="height">1.1041666666666667in</property>
                 <cell id="3249">
                     <property name="borderBottomStyle">solid</property>
                     <property name="borderBottomWidth">thin</property>
@@ -5995,7 +6447,60 @@ LIMIT 1;
                                     <text-property name="text">55  Перегрузки</text-property>
                                 </label>
                             </cell>
-                            <cell id="3267"/>
+                            <cell id="3267">
+                                <grid id="4084">
+                                    <property name="height">1.0208333333333333in</property>
+                                    <column id="4085"/>
+                                    <column id="4086"/>
+                                    <row id="4087">
+                                        <property name="height">0.23958333333333334in</property>
+                                        <cell id="4088">
+                                            <property name="borderBottomStyle">solid</property>
+                                            <property name="borderBottomWidth">thin</property>
+                                            <property name="borderRightStyle">solid</property>
+                                            <property name="borderRightWidth">thin</property>
+                                        </cell>
+                                        <cell id="4089">
+                                            <property name="borderBottomStyle">solid</property>
+                                            <property name="borderBottomWidth">thin</property>
+                                        </cell>
+                                    </row>
+                                    <row id="4090">
+                                        <property name="height">0.2708333333333333in</property>
+                                        <cell id="4091">
+                                            <property name="borderBottomStyle">solid</property>
+                                            <property name="borderBottomWidth">thin</property>
+                                            <property name="borderRightStyle">solid</property>
+                                            <property name="borderRightWidth">thin</property>
+                                        </cell>
+                                        <cell id="4092">
+                                            <property name="borderBottomStyle">solid</property>
+                                            <property name="borderBottomWidth">thin</property>
+                                        </cell>
+                                    </row>
+                                    <row id="4093">
+                                        <property name="height">0.28125in</property>
+                                        <cell id="4094">
+                                            <property name="borderBottomStyle">solid</property>
+                                            <property name="borderBottomWidth">thin</property>
+                                            <property name="borderRightStyle">solid</property>
+                                            <property name="borderRightWidth">thin</property>
+                                        </cell>
+                                        <cell id="4095">
+                                            <property name="borderBottomStyle">solid</property>
+                                            <property name="borderBottomWidth">thin</property>
+                                        </cell>
+                                    </row>
+                                    <row id="4096">
+                                        <property name="height">0.22916666666666666in</property>
+                                        <cell id="4097">
+                                            <property name="borderRightStyle">solid</property>
+                                            <property name="borderRightWidth">thin</property>
+                                        </cell>
+                                        <cell id="4098"/>
+                                    </row>
+                                </grid>
+                            </cell>
                         </row>
                     </grid>
                 </cell>
@@ -6032,7 +6537,102 @@ LIMIT 1;
                                     <text-property name="text">F  ПОДТВЕРЖДЕНИЕ КОМПЕТЕНТНЫХ ОРГАНОВ</text-property>
                                 </label>
                             </cell>
-                            <cell id="3273"/>
+                            <cell id="3273">
+                                <grid id="4039">
+                                    <property name="height">0.8958333333333334in</property>
+                                    <column id="4040"/>
+                                    <column id="4041"/>
+                                    <row id="4042">
+                                        <property name="height">0.8958333333333334in</property>
+                                        <cell id="4043">
+                                            <grid id="4045">
+                                                <property name="height">0.8229166666666666in</property>
+                                                <column id="4046"/>
+                                                <column id="4047"/>
+                                                <column id="4048"/>
+                                                <column id="4049"/>
+                                                <row id="4050">
+                                                    <property name="height">0.5520833333333334in</property>
+                                                    <cell id="4051">
+                                                        <label id="4060">
+                                                            <property name="fontSize">5pt</property>
+                                                            <text-property name="text">Новые пломбы: Номер:</text-property>
+                                                        </label>
+                                                    </cell>
+                                                    <cell id="4052"/>
+                                                    <cell id="4053">
+                                                        <label id="4078">
+                                                            <property name="fontSize">5pt</property>
+                                                            <text-property name="text">Тип:</text-property>
+                                                        </label>
+                                                    </cell>
+                                                    <cell id="4054"/>
+                                                </row>
+                                                <row id="4055">
+                                                    <property name="height">0.2708333333333333in</property>
+                                                    <cell id="4056">
+                                                        <label id="4080">
+                                                            <property name="fontSize">5pt</property>
+                                                            <text-property name="text">Подпись:</text-property>
+                                                        </label>
+                                                    </cell>
+                                                    <cell id="4057"/>
+                                                    <cell id="4058">
+                                                        <label id="4082">
+                                                            <property name="fontSize">5pt</property>
+                                                            <text-property name="text">Печать</text-property>
+                                                        </label>
+                                                    </cell>
+                                                    <cell id="4059"/>
+                                                </row>
+                                            </grid>
+                                        </cell>
+                                        <cell id="4044">
+                                            <grid id="4061">
+                                                <property name="height">0.8125in</property>
+                                                <column id="4062"/>
+                                                <column id="4063"/>
+                                                <column id="4064"/>
+                                                <column id="4065"/>
+                                                <row id="4066">
+                                                    <property name="height">0.5520833333333334in</property>
+                                                    <cell id="4067">
+                                                        <label id="4077">
+                                                            <property name="fontSize">5pt</property>
+                                                            <text-property name="text">Новые пломбы: Номер:</text-property>
+                                                        </label>
+                                                    </cell>
+                                                    <cell id="4068"/>
+                                                    <cell id="4069">
+                                                        <label id="4079">
+                                                            <property name="fontSize">5pt</property>
+                                                            <text-property name="text">Тип:</text-property>
+                                                        </label>
+                                                    </cell>
+                                                    <cell id="4070"/>
+                                                </row>
+                                                <row id="4071">
+                                                    <property name="height">0.2604166666666667in</property>
+                                                    <cell id="4072">
+                                                        <label id="4081">
+                                                            <property name="fontSize">5pt</property>
+                                                            <text-property name="text">Подпись:</text-property>
+                                                        </label>
+                                                    </cell>
+                                                    <cell id="4073"/>
+                                                    <cell id="4074">
+                                                        <label id="4083">
+                                                            <property name="fontSize">5pt</property>
+                                                            <text-property name="text">Печать</text-property>
+                                                        </label>
+                                                    </cell>
+                                                    <cell id="4075"/>
+                                                </row>
+                                            </grid>
+                                        </cell>
+                                    </row>
+                                </grid>
+                            </cell>
                         </row>
                     </grid>
                 </cell>
@@ -6065,7 +6665,75 @@ LIMIT 1;
                                 <property name="borderRightStyle">solid</property>
                                 <property name="borderRightWidth">thin</property>
                             </cell>
-                            <cell id="3279"/>
+                            <cell id="3279">
+                                <grid id="4022">
+                                    <property name="height">0.53125in</property>
+                                    <property name="width">7.041666666666667in</property>
+                                    <column id="4023">
+                                        <property name="width">4.645833333333333in</property>
+                                    </column>
+                                    <column id="4024">
+                                        <property name="width">2.3958333333333335in</property>
+                                    </column>
+                                    <row id="4025">
+                                        <property name="height">0.53125in</property>
+                                        <cell id="4026">
+                                            <grid id="4028">
+                                                <column id="4029"/>
+                                                <column id="4030"/>
+                                                <row id="4031">
+                                                    <cell id="4032">
+                                                        <label id="4021">
+                                                            <property name="fontSize">5pt</property>
+                                                            <text-property name="text">52 Принципиал</text-property>
+                                                        </label>
+                                                    </cell>
+                                                    <cell id="4033">
+                                                        <label id="4034">
+                                                            <property name="fontSize">5pt</property>
+                                                            <text-property name="text">№</text-property>
+                                                        </label>
+                                                    </cell>
+                                                </row>
+                                            </grid>
+                                            <data id="4035">
+                                                <property name="fontSize">5pt</property>
+                                                <property name="dataSet">Получатель</property>
+                                                <list-property name="boundDataColumns">
+                                                    <structure>
+                                                        <property name="name">CountryStreet</property>
+                                                        <text-property name="displayName">CountryStreet</text-property>
+                                                        <expression name="expression" type="javascript">dataSetRow["CountryStreet"]</expression>
+                                                        <property name="dataType">string</property>
+                                                    </structure>
+                                                </list-property>
+                                                <property name="resultSetColumn">CountryStreet</property>
+                                            </data>
+                                            <data id="4036">
+                                                <property name="fontSize">5pt</property>
+                                                <property name="dataSet">Получатель</property>
+                                                <list-property name="boundDataColumns">
+                                                    <structure>
+                                                        <property name="name">CountryStreet</property>
+                                                        <text-property name="displayName">CountryStreet</text-property>
+                                                        <expression name="expression" type="javascript">dataSetRow["CountryStreet"]</expression>
+                                                        <property name="dataType">string</property>
+                                                    </structure>
+                                                </list-property>
+                                                <property name="resultSetColumn">CountryStreet</property>
+                                            </data>
+                                        </cell>
+                                        <cell id="4027">
+                                            <property name="borderLeftStyle">solid</property>
+                                            <property name="borderLeftWidth">thin</property>
+                                            <label id="4038">
+                                                <property name="fontSize">5pt</property>
+                                                <text-property name="text">С ОРГАН ОТПРАВЛЕНИЯ</text-property>
+                                            </label>
+                                        </cell>
+                                    </row>
+                                </grid>
+                            </cell>
                         </row>
                     </grid>
                 </cell>
@@ -6102,7 +6770,56 @@ LIMIT 1;
                                     <text-property name="text">52 Гарантия</text-property>
                                 </label>
                             </cell>
-                            <cell id="3285"/>
+                            <cell id="3285">
+                                <grid id="4151">
+                                    <property name="height">0.2604166666666667in</property>
+                                    <property name="width">7.041666666666667in</property>
+                                    <column id="4152">
+                                        <property name="width">4.635416666666667in</property>
+                                    </column>
+                                    <column id="4153">
+                                        <property name="width">2.40625in</property>
+                                    </column>
+                                    <row id="4154">
+                                        <property name="height">0.2604166666666667in</property>
+                                        <cell id="4155">
+                                            <grid id="4158">
+                                                <property name="height">0.20833333333333334in</property>
+                                                <property name="width">4.5625in</property>
+                                                <column id="4159">
+                                                    <property name="width">3.8854166666666665in</property>
+                                                </column>
+                                                <column id="4160">
+                                                    <property name="width">0.6770833333333334in</property>
+                                                </column>
+                                                <row id="4161">
+                                                    <property name="height">0.20833333333333334in</property>
+                                                    <cell id="4162">
+                                                        <label id="4165">
+                                                            <property name="fontSize">5pt</property>
+                                                            <text-property name="text">СОПРОВОЖДЕНИЕ</text-property>
+                                                        </label>
+                                                    </cell>
+                                                    <cell id="4163">
+                                                        <label id="4164">
+                                                            <property name="fontSize">5pt</property>
+                                                            <text-property name="text">Код</text-property>
+                                                        </label>
+                                                    </cell>
+                                                </row>
+                                            </grid>
+                                        </cell>
+                                        <cell id="4156">
+                                            <property name="borderLeftStyle">solid</property>
+                                            <property name="borderLeftWidth">thin</property>
+                                            <label id="4157">
+                                                <property name="fontSize">5pt</property>
+                                                <text-property name="text">Орган назначения(и страна)</text-property>
+                                            </label>
+                                        </cell>
+                                    </row>
+                                </grid>
+                            </cell>
                         </row>
                     </grid>
                 </cell>
@@ -6127,9 +6844,191 @@ LIMIT 1;
                         <column id="3322"/>
                         <row id="3323">
                             <property name="height">1.28125in</property>
-                            <cell id="3324"/>
-                            <cell id="3325"/>
-                            <cell id="3326"/>
+                            <cell id="3324">
+                                <grid id="4166">
+                                    <property name="width">2.5520833333333335in</property>
+                                    <column id="4167">
+                                        <property name="width">1.5208333333333333in</property>
+                                    </column>
+                                    <column id="4168">
+                                        <property name="width">1.03125in</property>
+                                    </column>
+                                    <row id="4169">
+                                        <cell id="4170">
+                                            <label id="4172">
+                                                <property name="fontSize">5pt</property>
+                                                <text-property name="text">ОТМЕТКИ ОРГАНА ОТПРАВЛЕНИЯ</text-property>
+                                            </label>
+                                        </cell>
+                                        <cell id="4171">
+                                            <label id="4173">
+                                                <property name="fontSize">5pt</property>
+                                                <text-property name="text">Печать:</text-property>
+                                            </label>
+                                        </cell>
+                                    </row>
+                                </grid>
+                                <grid id="4174">
+                                    <column id="4175"/>
+                                    <column id="4176"/>
+                                    <row id="4177">
+                                        <cell id="4178">
+                                            <label id="4180">
+                                                <property name="fontSize">5pt</property>
+                                                <text-property name="text">Результат</text-property>
+                                            </label>
+                                        </cell>
+                                        <cell id="4179"/>
+                                    </row>
+                                </grid>
+                                <grid id="4181">
+                                    <column id="4182"/>
+                                    <column id="4183"/>
+                                    <row id="4184">
+                                        <cell id="4185">
+                                            <label id="4187">
+                                                <property name="fontSize">5pt</property>
+                                                <text-property name="text">Наложенные пломбы</text-property>
+                                            </label>
+                                        </cell>
+                                        <cell id="4186"/>
+                                    </row>
+                                </grid>
+                                <grid id="4188">
+                                    <column id="4189"/>
+                                    <column id="4190"/>
+                                    <row id="4191">
+                                        <cell id="4192">
+                                            <label id="4194">
+                                                <property name="fontSize">5pt</property>
+                                                <text-property name="text">Тип:</text-property>
+                                            </label>
+                                        </cell>
+                                        <cell id="4193"/>
+                                    </row>
+                                </grid>
+                                <grid id="4195">
+                                    <column id="4196"/>
+                                    <column id="4197"/>
+                                    <row id="4198">
+                                        <cell id="4199">
+                                            <label id="4201">
+                                                <property name="fontSize">5pt</property>
+                                                <text-property name="text">Срок транзита(дата)</text-property>
+                                            </label>
+                                        </cell>
+                                        <cell id="4200"/>
+                                    </row>
+                                </grid>
+                            </cell>
+                            <cell id="3325">
+                                <label id="4099">
+                                    <property name="fontSize">6pt</property>
+                                    <text-property name="text">КОНТРОЛЬ ОРГАН НАЗНАЧЕНИЯ</text-property>
+                                </label>
+                                <grid id="4100">
+                                    <column id="4101"/>
+                                    <column id="4102"/>
+                                    <row id="4103">
+                                        <cell id="4104">
+                                            <label id="4106">
+                                                <property name="fontSize">5pt</property>
+                                                <text-property name="text">Дата прибытия:</text-property>
+                                            </label>
+                                        </cell>
+                                        <cell id="4105"/>
+                                    </row>
+                                </grid>
+                                <grid id="4107">
+                                    <column id="4108"/>
+                                    <column id="4109"/>
+                                    <row id="4110">
+                                        <cell id="4111">
+                                            <label id="4113">
+                                                <property name="fontSize">5pt</property>
+                                                <text-property name="text">Проверка плоб:</text-property>
+                                            </label>
+                                        </cell>
+                                        <cell id="4112"/>
+                                    </row>
+                                </grid>
+                                <grid id="4114">
+                                    <column id="4115"/>
+                                    <column id="4116"/>
+                                    <row id="4117">
+                                        <cell id="4118">
+                                            <label id="4120">
+                                                <property name="fontSize">5pt</property>
+                                                <text-property name="text">Комментарии:</text-property>
+                                            </label>
+                                        </cell>
+                                        <cell id="4119"/>
+                                    </row>
+                                </grid>
+                            </cell>
+                            <cell id="3326">
+                                <grid id="4121">
+                                    <column id="4122"/>
+                                    <column id="4123"/>
+                                    <row id="4124">
+                                        <cell id="4125">
+                                            <label id="4127">
+                                                <property name="fontSize">5pt</property>
+                                                <text-property name="text">Экземпляр возвращен:</text-property>
+                                            </label>
+                                        </cell>
+                                        <cell id="4126"/>
+                                    </row>
+                                </grid>
+                                <grid id="4128">
+                                    <column id="4129"/>
+                                    <column id="4130"/>
+                                    <row id="4131">
+                                        <cell id="4132">
+                                            <label id="4134">
+                                                <property name="fontSize">5pt</property>
+                                                <text-property name="text">Дата:</text-property>
+                                            </label>
+                                        </cell>
+                                        <cell id="4133"/>
+                                    </row>
+                                </grid>
+                                <grid id="4135">
+                                    <column id="4136"/>
+                                    <column id="4137"/>
+                                    <row id="4138">
+                                        <cell id="4139">
+                                            <label id="4141">
+                                                <property name="fontSize">5pt</property>
+                                                <text-property name="text">После регистрации под</text-property>
+                                            </label>
+                                        </cell>
+                                        <cell id="4140"/>
+                                    </row>
+                                </grid>
+                                <label id="4142">
+                                    <property name="fontSize">5pt</property>
+                                    <text-property name="text">№</text-property>
+                                </label>
+                                <grid id="4143">
+                                    <column id="4144"/>
+                                    <column id="4145"/>
+                                    <row id="4146">
+                                        <cell id="4147">
+                                            <label id="4149">
+                                                <property name="fontSize">5pt</property>
+                                                <text-property name="text">Подпись:</text-property>
+                                            </label>
+                                        </cell>
+                                        <cell id="4148">
+                                            <label id="4150">
+                                                <property name="fontSize">5pt</property>
+                                                <text-property name="text">Печать</text-property>
+                                            </label>
+                                        </cell>
+                                    </row>
+                                </grid>
+                            </cell>
                         </row>
                     </grid>
                 </cell>
@@ -6146,6 +7045,8 @@ LIMIT 1;
                 <cell id="3289">
                     <property name="borderTopStyle">solid</property>
                     <property name="borderTopWidth">thin</property>
+                    <property name="paddingBottom">1pt</property>
+                    <property name="whiteSpace">pre</property>
                     <list id="3296">
                         <property name="borderLeftStyle">solid</property>
                         <property name="borderLeftWidth">thin</property>
@@ -6159,6 +7060,42 @@ LIMIT 1;
                                 <text-property name="displayName">id</text-property>
                                 <expression name="expression" type="javascript">dataSetRow["id"]</expression>
                                 <property name="dataType">decimal</property>
+                            </structure>
+                            <structure>
+                                <property name="name">name</property>
+                                <text-property name="displayName">name</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["name"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">cargo_quantity</property>
+                                <text-property name="displayName">cargo_quantity</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["cargo_quantity"]</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                            <structure>
+                                <property name="name">code</property>
+                                <text-property name="displayName">code</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["code"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">gross_weight</property>
+                                <text-property name="displayName">gross_weight</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["gross_weight"]</expression>
+                                <property name="dataType">decimal</property>
+                            </structure>
+                            <structure>
+                                <property name="name">price</property>
+                                <text-property name="displayName">price</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["price"]</expression>
+                                <property name="dataType">decimal</property>
+                            </structure>
+                            <structure>
+                                <property name="name">currency</property>
+                                <text-property name="displayName">currency</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["currency"]</expression>
+                                <property name="dataType">string</property>
                             </structure>
                         </list-property>
                         <structure name="toc"/>
@@ -6239,22 +7176,19 @@ LIMIT 1;
                                                                         <cell id="3873">
                                                                             <property name="borderBottomStyle">solid</property>
                                                                             <property name="borderBottomWidth">thin</property>
-                                                                            <grid id="3874">
-                                                                                <property name="height">1.09375in</property>
-                                                                                <property name="width">3.9166666666666665in</property>
-                                                                                <column id="3875">
-                                                                                    <property name="width">3.9166666666666665in</property>
-                                                                                </column>
-                                                                                <row id="3876">
-                                                                                    <property name="height">1.09375in</property>
-                                                                                    <cell id="3877">
-                                                                                        <label id="3878">
-                                                                                            <property name="fontSize">5pt</property>
-                                                                                            <text-property name="text">Маркировка и количество - Номер контейнера - Количество и отличительные особенности</text-property>
-                                                                                        </label>
-                                                                                    </cell>
-                                                                                </row>
-                                                                            </grid>
+                                                                            <label id="3988">
+                                                                                <property name="fontFamily">"Noto Serif"</property>
+                                                                                <property name="fontSize">5pt</property>
+                                                                                <text-property name="text">Маркировка и количество - Номер контейнера - Количество и отличительные особенности</text-property>
+                                                                            </label>
+                                                                            <data id="3989">
+                                                                                <property name="fontSize">5pt</property>
+                                                                                <property name="resultSetColumn">name</property>
+                                                                            </data>
+                                                                            <data id="3990">
+                                                                                <property name="fontSize">5pt</property>
+                                                                                <property name="resultSetColumn">cargo_quantity</property>
+                                                                            </data>
                                                                         </cell>
                                                                     </row>
                                                                     <row id="3881">
@@ -6337,7 +7271,7 @@ LIMIT 1;
                                                             </cell>
                                                             <cell id="3904">
                                                                 <grid id="3905">
-                                                                    <property name="height">1.8020833333333333in</property>
+                                                                    <property name="height">1.8229166666666667in</property>
                                                                     <property name="width">3.59375in</property>
                                                                     <column id="3906">
                                                                         <property name="width">3.59375in</property>
@@ -6376,6 +7310,10 @@ LIMIT 1;
                                                                                             <property name="fontSize">5pt</property>
                                                                                             <text-property name="text">33 код товара</text-property>
                                                                                         </label>
+                                                                                        <data id="3992">
+                                                                                            <property name="fontSize">5pt</property>
+                                                                                            <property name="resultSetColumn">code</property>
+                                                                                        </data>
                                                                                     </cell>
                                                                                     <cell id="3918">
                                                                                         <property name="borderRightStyle">solid</property>
@@ -6395,7 +7333,7 @@ LIMIT 1;
                                                                         </cell>
                                                                     </row>
                                                                     <row id="3922">
-                                                                        <property name="height">0.4270833333333333in</property>
+                                                                        <property name="height">0.46875in</property>
                                                                         <cell id="3923">
                                                                             <property name="borderBottomStyle">solid</property>
                                                                             <property name="borderBottomWidth">thin</property>
@@ -6410,10 +7348,10 @@ LIMIT 1;
                                                                                     <property name="height">0.4791666666666667in</property>
                                                                                     <cell id="3929">
                                                                                         <grid id="3930">
-                                                                                            <property name="height">0.34375in</property>
+                                                                                            <property name="height">0.4166666666666667in</property>
                                                                                             <column id="3931"/>
                                                                                             <row id="3932">
-                                                                                                <property name="height">0.13541666666666666in</property>
+                                                                                                <property name="height">0.20833333333333334in</property>
                                                                                                 <cell id="3933">
                                                                                                     <property name="borderBottomStyle">solid</property>
                                                                                                     <property name="borderBottomWidth">thin</property>
@@ -6431,10 +7369,10 @@ LIMIT 1;
                                                                                         <property name="borderRightStyle">solid</property>
                                                                                         <property name="borderRightWidth">thin</property>
                                                                                         <grid id="3937">
-                                                                                            <property name="height">0.3645833333333333in</property>
+                                                                                            <property name="height">0.4375in</property>
                                                                                             <column id="3938"/>
                                                                                             <row id="3939">
-                                                                                                <property name="height">0.13541666666666666in</property>
+                                                                                                <property name="height">0.20833333333333334in</property>
                                                                                                 <cell id="3940">
                                                                                                     <property name="borderBottomStyle">solid</property>
                                                                                                     <property name="borderBottomWidth">thin</property>
@@ -6442,6 +7380,10 @@ LIMIT 1;
                                                                                                         <property name="fontSize">5pt</property>
                                                                                                         <text-property name="text">35 вес брутто</text-property>
                                                                                                     </label>
+                                                                                                    <data id="3996">
+                                                                                                        <property name="fontSize">5pt</property>
+                                                                                                        <property name="resultSetColumn">gross_weight</property>
+                                                                                                    </data>
                                                                                                 </cell>
                                                                                             </row>
                                                                                             <row id="3942">
@@ -6467,17 +7409,21 @@ LIMIT 1;
                                                                             <property name="borderBottomWidth">thin</property>
                                                                             <property name="borderLeftStyle">solid</property>
                                                                             <property name="borderLeftWidth">thin</property>
+                                                                            <label id="4009">
+                                                                                <property name="fontSize">5pt</property>
+                                                                                <text-property name="text">40  Обшая декларация</text-property>
+                                                                            </label>
                                                                         </cell>
                                                                     </row>
                                                                     <row id="3948">
-                                                                        <property name="height">0.3333333333333333in</property>
+                                                                        <property name="height">0.3125in</property>
                                                                         <cell id="3949">
                                                                             <property name="borderBottomStyle">solid</property>
                                                                             <property name="borderBottomWidth">thin</property>
                                                                             <property name="borderLeftStyle">solid</property>
                                                                             <property name="borderLeftWidth">thin</property>
                                                                             <grid id="3950">
-                                                                                <property name="height">0.2916666666666667in</property>
+                                                                                <property name="height">0.4166666666666667in</property>
                                                                                 <property name="width">3.5208333333333335in</property>
                                                                                 <column id="3951">
                                                                                     <property name="width">1.46875in</property>
@@ -6486,12 +7432,48 @@ LIMIT 1;
                                                                                     <property name="width">2.0520833333333335in</property>
                                                                                 </column>
                                                                                 <row id="3953">
-                                                                                    <property name="height">0.2916666666666667in</property>
+                                                                                    <property name="height">0.4166666666666667in</property>
                                                                                     <cell id="3954">
                                                                                         <property name="borderRightStyle">solid</property>
                                                                                         <property name="borderRightWidth">thin</property>
+                                                                                        <label id="4010">
+                                                                                            <property name="fontSize">5pt</property>
+                                                                                            <text-property name="text">41 Дополнит ед</text-property>
+                                                                                        </label>
                                                                                     </cell>
-                                                                                    <cell id="3955"/>
+                                                                                    <cell id="3955">
+                                                                                        <label id="4011">
+                                                                                            <property name="fontSize">5pt</property>
+                                                                                            <text-property name="text">42 валюта и стоимость товара</text-property>
+                                                                                        </label>
+                                                                                        <grid id="4012">
+                                                                                            <property name="height">0.22916666666666666in</property>
+                                                                                            <property name="width">1.9895833333333333in</property>
+                                                                                            <column id="4013">
+                                                                                                <property name="width">0.59375in</property>
+                                                                                            </column>
+                                                                                            <column id="4014">
+                                                                                                <property name="width">1.3958333333333333in</property>
+                                                                                            </column>
+                                                                                            <row id="4015">
+                                                                                                <property name="height">0.22916666666666666in</property>
+                                                                                                <cell id="4016">
+                                                                                                    <property name="borderRightStyle">solid</property>
+                                                                                                    <property name="borderRightWidth">thin</property>
+                                                                                                    <data id="4019">
+                                                                                                        <property name="fontSize">5pt</property>
+                                                                                                        <property name="resultSetColumn">currency</property>
+                                                                                                    </data>
+                                                                                                </cell>
+                                                                                                <cell id="4017">
+                                                                                                    <data id="4018">
+                                                                                                        <property name="fontSize">5pt</property>
+                                                                                                        <property name="resultSetColumn">price</property>
+                                                                                                    </data>
+                                                                                                </cell>
+                                                                                            </row>
+                                                                                        </grid>
+                                                                                    </cell>
                                                                                 </row>
                                                                             </grid>
                                                                         </cell>
@@ -6521,6 +7503,10 @@ LIMIT 1;
                                                                                         <property name="borderLeftWidth">thin</property>
                                                                                         <property name="borderRightStyle">solid</property>
                                                                                         <property name="borderRightWidth">thin</property>
+                                                                                        <label id="4020">
+                                                                                            <property name="fontSize">5pt</property>
+                                                                                            <text-property name="text">/код ДИ</text-property>
+                                                                                        </label>
                                                                                     </cell>
                                                                                     <cell id="3965"/>
                                                                                 </row>
@@ -6552,421 +7538,6 @@ LIMIT 1;
                             </grid>
                         </detail>
                     </list>
-                </cell>
-            </row>
-        </grid>
-        <grid id="3726">
-            <property name="height">1.8854166666666667in</property>
-            <property name="width">8in</property>
-            <column id="3727">
-                <property name="width">8in</property>
-            </column>
-            <row id="3728">
-                <property name="height">1.8854166666666667in</property>
-                <cell id="3729">
-                    <property name="borderBottomStyle">solid</property>
-                    <property name="borderBottomWidth">thin</property>
-                    <property name="borderLeftStyle">solid</property>
-                    <property name="borderLeftWidth">thin</property>
-                    <property name="borderRightStyle">solid</property>
-                    <property name="borderRightWidth">thin</property>
-                    <grid id="3730">
-                        <property name="height">2.0416666666666665in</property>
-                        <property name="width">7.979166666666667in</property>
-                        <column id="3731">
-                            <property name="width">0.78125in</property>
-                        </column>
-                        <column id="3732">
-                            <property name="width">7.197916666666667in</property>
-                        </column>
-                        <row id="3733">
-                            <property name="height">2.0416666666666665in</property>
-                            <cell id="3734">
-                                <property name="borderRightStyle">solid</property>
-                                <property name="borderRightWidth">thin</property>
-                                <grid id="3735">
-                                    <property name="height">1.78125in</property>
-                                    <column id="3736"/>
-                                    <row id="3737">
-                                        <property name="height">1.1041666666666667in</property>
-                                        <cell id="3738">
-                                            <property name="borderBottomStyle">solid</property>
-                                            <property name="borderBottomWidth">thin</property>
-                                            <label id="3739">
-                                                <property name="fontSize">5pt</property>
-                                                <text-property name="text">31  Грузовые места и описание товаров</text-property>
-                                            </label>
-                                        </cell>
-                                    </row>
-                                    <row id="3740">
-                                        <property name="height">0.6770833333333334in</property>
-                                        <cell id="3741">
-                                            <label id="3742">
-                                                <property name="fontSize">5pt</property>
-                                                <text-property name="text">44 Дополнит информация</text-property>
-                                            </label>
-                                        </cell>
-                                    </row>
-                                </grid>
-                            </cell>
-                            <cell id="3743">
-                                <grid id="3744">
-                                    <property name="height">2.0208333333333335in</property>
-                                    <property name="width">7.239583333333333in</property>
-                                    <column id="3745">
-                                        <property name="width">2.875in</property>
-                                    </column>
-                                    <column id="3746">
-                                        <property name="width">0.59375in</property>
-                                    </column>
-                                    <column id="3747">
-                                        <property name="width">3.7708333333333335in</property>
-                                    </column>
-                                    <row id="3748">
-                                        <property name="height">2.0208333333333335in</property>
-                                        <cell id="3749">
-                                            <grid id="3750">
-                                                <property name="height">2.2395833333333335in</property>
-                                                <column id="3751"/>
-                                                <row id="3752">
-                                                    <property name="height">1.0833333333333333in</property>
-                                                    <cell id="3753">
-                                                        <property name="borderBottomStyle">solid</property>
-                                                        <property name="borderBottomWidth">thin</property>
-                                                        <grid id="3754">
-                                                            <property name="height">1.09375in</property>
-                                                            <property name="width">3.9166666666666665in</property>
-                                                            <column id="3755">
-                                                                <property name="width">3.9166666666666665in</property>
-                                                            </column>
-                                                            <row id="3756">
-                                                                <property name="height">1.09375in</property>
-                                                                <cell id="3757">
-                                                                    <label id="3758">
-                                                                        <property name="fontSize">5pt</property>
-                                                                        <text-property name="text">Маркировка и количество - Номер контейнера - Количество и отличительные особенности</text-property>
-                                                                    </label>
-                                                                    <data id="3759">
-                                                                        <property name="fontSize">5pt</property>
-                                                                        <property name="dataSet">First Product</property>
-                                                                        <list-property name="boundDataColumns">
-                                                                            <structure>
-                                                                                <property name="name">name</property>
-                                                                                <text-property name="displayName">name</text-property>
-                                                                                <expression name="expression" type="javascript">dataSetRow["name"]</expression>
-                                                                                <property name="dataType">string</property>
-                                                                            </structure>
-                                                                        </list-property>
-                                                                        <property name="resultSetColumn">name</property>
-                                                                    </data>
-                                                                    <data id="3760">
-                                                                        <property name="fontSize">5pt</property>
-                                                                        <property name="dataSet">First Product</property>
-                                                                        <list-property name="boundDataColumns">
-                                                                            <structure>
-                                                                                <property name="name">cargo_quantity</property>
-                                                                                <text-property name="displayName">cargo_quantity</text-property>
-                                                                                <expression name="expression" type="javascript">dataSetRow["cargo_quantity"]</expression>
-                                                                                <property name="dataType">integer</property>
-                                                                            </structure>
-                                                                        </list-property>
-                                                                        <property name="resultSetColumn">cargo_quantity</property>
-                                                                    </data>
-                                                                </cell>
-                                                            </row>
-                                                        </grid>
-                                                    </cell>
-                                                </row>
-                                                <row id="3761">
-                                                    <property name="height">1.15625in</property>
-                                                    <cell id="3762"/>
-                                                </row>
-                                            </grid>
-                                        </cell>
-                                        <cell id="3763">
-                                            <grid id="3764">
-                                                <property name="height">0.21875in</property>
-                                                <property name="width">0.6041666666666666in</property>
-                                                <column id="3765">
-                                                    <property name="width">0.6041666666666666in</property>
-                                                </column>
-                                                <row id="3766">
-                                                    <property name="height">0.21875in</property>
-                                                    <cell id="3767">
-                                                        <property name="borderBottomStyle">solid</property>
-                                                        <property name="borderBottomWidth">thin</property>
-                                                        <property name="borderLeftStyle">solid</property>
-                                                        <property name="borderLeftWidth">thin</property>
-                                                        <property name="borderRightStyle">solid</property>
-                                                        <property name="borderRightWidth">thin</property>
-                                                        <label id="3768">
-                                                            <property name="fontSize">5pt</property>
-                                                            <text-property name="text">32 товар</text-property>
-                                                        </label>
-                                                        <grid id="3769">
-                                                            <property name="height">0.125in</property>
-                                                            <column id="3770"/>
-                                                            <column id="3771"/>
-                                                            <row id="3772">
-                                                                <property name="height">0.125in</property>
-                                                                <cell id="3773">
-                                                                    <property name="borderRightStyle">solid</property>
-                                                                    <property name="borderRightWidth">thin</property>
-                                                                </cell>
-                                                                <cell id="3774">
-                                                                    <label id="3775">
-                                                                        <property name="fontSize">5pt</property>
-                                                                        <text-property name="text"> №</text-property>
-                                                                    </label>
-                                                                </cell>
-                                                            </row>
-                                                        </grid>
-                                                    </cell>
-                                                </row>
-                                            </grid>
-                                            <grid id="3776">
-                                                <property name="height">0.8541666666666666in</property>
-                                                <property name="width">0.6041666666666666in</property>
-                                                <column id="3777">
-                                                    <property name="width">0.6041666666666666in</property>
-                                                </column>
-                                                <row id="3778">
-                                                    <property name="height">0.8541666666666666in</property>
-                                                    <cell id="3779">
-                                                        <property name="borderBottomStyle">solid</property>
-                                                        <property name="borderBottomWidth">thin</property>
-                                                        <property name="borderRightStyle">solid</property>
-                                                        <property name="borderRightWidth">thin</property>
-                                                    </cell>
-                                                </row>
-                                            </grid>
-                                            <grid id="3780">
-                                                <property name="height">0.7291666666666666in</property>
-                                                <property name="width">0.6041666666666666in</property>
-                                                <column id="3781">
-                                                    <property name="width">0.6041666666666666in</property>
-                                                </column>
-                                                <row id="3782">
-                                                    <property name="height">0.7291666666666666in</property>
-                                                    <cell id="3783">
-                                                        <property name="borderRightStyle">solid</property>
-                                                        <property name="borderRightWidth">thin</property>
-                                                    </cell>
-                                                </row>
-                                            </grid>
-                                        </cell>
-                                        <cell id="3784">
-                                            <grid id="3785">
-                                                <property name="height">1.8020833333333333in</property>
-                                                <property name="width">3.59375in</property>
-                                                <column id="3786">
-                                                    <property name="width">3.59375in</property>
-                                                </column>
-                                                <row id="3787">
-                                                    <property name="height">0.21875in</property>
-                                                    <cell id="3788">
-                                                        <property name="borderBottomStyle">solid</property>
-                                                        <property name="borderBottomWidth">thin</property>
-                                                        <property name="borderLeftStyle">solid</property>
-                                                        <property name="borderLeftWidth">thin</property>
-                                                        <grid id="3789">
-                                                            <property name="height">0.25in</property>
-                                                            <property name="width">3.5208333333333335in</property>
-                                                            <column id="3790">
-                                                                <property name="width">1.1770833333333333in</property>
-                                                            </column>
-                                                            <column id="3791">
-                                                                <property name="width">0.3854166666666667in</property>
-                                                            </column>
-                                                            <column id="3792">
-                                                                <property name="width">0.4791666666666667in</property>
-                                                            </column>
-                                                            <column id="3793">
-                                                                <property name="width">0.3958333333333333in</property>
-                                                            </column>
-                                                            <column id="3794">
-                                                                <property name="width">1.0833333333333333in</property>
-                                                            </column>
-                                                            <row id="3795">
-                                                                <property name="height">0.25in</property>
-                                                                <cell id="3796">
-                                                                    <property name="borderRightStyle">solid</property>
-                                                                    <property name="borderRightWidth">thin</property>
-                                                                    <label id="3797">
-                                                                        <property name="fontSize">5pt</property>
-                                                                        <text-property name="text">33 код товара</text-property>
-                                                                    </label>
-                                                                </cell>
-                                                                <cell id="3798">
-                                                                    <property name="borderRightStyle">solid</property>
-                                                                    <property name="borderRightWidth">thin</property>
-                                                                </cell>
-                                                                <cell id="3799">
-                                                                    <property name="borderRightStyle">solid</property>
-                                                                    <property name="borderRightWidth">thin</property>
-                                                                </cell>
-                                                                <cell id="3800">
-                                                                    <property name="borderRightStyle">solid</property>
-                                                                    <property name="borderRightWidth">thin</property>
-                                                                </cell>
-                                                                <cell id="3801"/>
-                                                            </row>
-                                                        </grid>
-                                                    </cell>
-                                                </row>
-                                                <row id="3802">
-                                                    <property name="height">0.4270833333333333in</property>
-                                                    <cell id="3803">
-                                                        <property name="borderBottomStyle">solid</property>
-                                                        <property name="borderBottomWidth">thin</property>
-                                                        <property name="borderLeftStyle">solid</property>
-                                                        <property name="borderLeftWidth">thin</property>
-                                                        <grid id="3804">
-                                                            <property name="height">0.4791666666666667in</property>
-                                                            <column id="3805"/>
-                                                            <column id="3806"/>
-                                                            <column id="3807"/>
-                                                            <row id="3808">
-                                                                <property name="height">0.4791666666666667in</property>
-                                                                <cell id="3809">
-                                                                    <grid id="3810">
-                                                                        <property name="height">0.34375in</property>
-                                                                        <column id="3811"/>
-                                                                        <row id="3812">
-                                                                            <property name="height">0.13541666666666666in</property>
-                                                                            <cell id="3813">
-                                                                                <property name="borderBottomStyle">solid</property>
-                                                                                <property name="borderBottomWidth">thin</property>
-                                                                            </cell>
-                                                                        </row>
-                                                                        <row id="3814">
-                                                                            <property name="height">0.20833333333333334in</property>
-                                                                            <cell id="3815"/>
-                                                                        </row>
-                                                                    </grid>
-                                                                </cell>
-                                                                <cell id="3816">
-                                                                    <property name="borderLeftStyle">solid</property>
-                                                                    <property name="borderLeftWidth">thin</property>
-                                                                    <property name="borderRightStyle">solid</property>
-                                                                    <property name="borderRightWidth">thin</property>
-                                                                    <grid id="3817">
-                                                                        <property name="height">0.3645833333333333in</property>
-                                                                        <column id="3818"/>
-                                                                        <row id="3819">
-                                                                            <property name="height">0.13541666666666666in</property>
-                                                                            <cell id="3820">
-                                                                                <property name="borderBottomStyle">solid</property>
-                                                                                <property name="borderBottomWidth">thin</property>
-                                                                                <label id="3821">
-                                                                                    <property name="fontSize">5pt</property>
-                                                                                    <text-property name="text">35 вес брутто</text-property>
-                                                                                </label>
-                                                                            </cell>
-                                                                        </row>
-                                                                        <row id="3822">
-                                                                            <property name="height">0.22916666666666666in</property>
-                                                                            <cell id="3823"/>
-                                                                        </row>
-                                                                    </grid>
-                                                                </cell>
-                                                                <cell id="3824">
-                                                                    <label id="3825">
-                                                                        <property name="fontSize">5pt</property>
-                                                                        <text-property name="text">40 Общая декларация</text-property>
-                                                                    </label>
-                                                                </cell>
-                                                            </row>
-                                                        </grid>
-                                                    </cell>
-                                                </row>
-                                                <row id="3826">
-                                                    <property name="height">0.28125in</property>
-                                                    <cell id="3827">
-                                                        <property name="borderBottomStyle">solid</property>
-                                                        <property name="borderBottomWidth">thin</property>
-                                                        <property name="borderLeftStyle">solid</property>
-                                                        <property name="borderLeftWidth">thin</property>
-                                                    </cell>
-                                                </row>
-                                                <row id="3828">
-                                                    <property name="height">0.3333333333333333in</property>
-                                                    <cell id="3829">
-                                                        <property name="borderBottomStyle">solid</property>
-                                                        <property name="borderBottomWidth">thin</property>
-                                                        <property name="borderLeftStyle">solid</property>
-                                                        <property name="borderLeftWidth">thin</property>
-                                                        <grid id="3830">
-                                                            <property name="height">0.2916666666666667in</property>
-                                                            <property name="width">3.5208333333333335in</property>
-                                                            <column id="3831">
-                                                                <property name="width">1.46875in</property>
-                                                            </column>
-                                                            <column id="3832">
-                                                                <property name="width">2.0520833333333335in</property>
-                                                            </column>
-                                                            <row id="3833">
-                                                                <property name="height">0.2916666666666667in</property>
-                                                                <cell id="3834">
-                                                                    <property name="borderRightStyle">solid</property>
-                                                                    <property name="borderRightWidth">thin</property>
-                                                                </cell>
-                                                                <cell id="3835"/>
-                                                            </row>
-                                                        </grid>
-                                                    </cell>
-                                                </row>
-                                                <row id="3836">
-                                                    <property name="height">0.5416666666666666in</property>
-                                                    <cell id="3837">
-                                                        <grid id="3838">
-                                                            <property name="height">0.5729166666666666in</property>
-                                                            <property name="width">3.5208333333333335in</property>
-                                                            <column id="3839">
-                                                                <property name="width">1.4791666666666667in</property>
-                                                            </column>
-                                                            <column id="3840">
-                                                                <property name="width">0.53125in</property>
-                                                            </column>
-                                                            <column id="3841">
-                                                                <property name="width">1.5104166666666667in</property>
-                                                            </column>
-                                                            <row id="3842">
-                                                                <property name="height">0.23958333333333334in</property>
-                                                                <cell id="3843"/>
-                                                                <cell id="3844">
-                                                                    <property name="borderBottomStyle">solid</property>
-                                                                    <property name="borderBottomWidth">thin</property>
-                                                                    <property name="borderLeftStyle">solid</property>
-                                                                    <property name="borderLeftWidth">thin</property>
-                                                                    <property name="borderRightStyle">solid</property>
-                                                                    <property name="borderRightWidth">thin</property>
-                                                                </cell>
-                                                                <cell id="3845"/>
-                                                            </row>
-                                                            <row id="3846">
-                                                                <property name="height">0.3333333333333333in</property>
-                                                                <cell id="3847">
-                                                                    <property name="borderLeftStyle">dashed</property>
-                                                                    <property name="borderLeftWidth">thin</property>
-                                                                    <property name="borderRightStyle">solid</property>
-                                                                    <property name="borderRightWidth">thin</property>
-                                                                    <property name="borderTopStyle">dashed</property>
-                                                                    <property name="borderTopWidth">thin</property>
-                                                                </cell>
-                                                                <cell id="3848"/>
-                                                                <cell id="3849"/>
-                                                            </row>
-                                                        </grid>
-                                                    </cell>
-                                                </row>
-                                            </grid>
-                                        </cell>
-                                    </row>
-                                </grid>
-                            </cell>
-                        </row>
-                    </grid>
                 </cell>
             </row>
         </grid>
