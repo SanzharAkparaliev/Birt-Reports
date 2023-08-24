@@ -60,7 +60,7 @@
                 </ex-property>
             </list-property>
             <property name="odaDriverClass">org.postgresql.Driver</property>
-            <property name="odaURL">jdbc:postgresql://localhost:5432/smartNew</property>
+            <property name="odaURL">jdbc:postgresql://localhost:5432/smart</property>
             <property name="odaUser">admin</property>
             <encrypted-property name="odaPassword" encryptionID="base64">YWRtaW4=</encrypted-property>
         </oda-data-source>
@@ -4698,8 +4698,12 @@ where LangTranslate.message_key = ? and LangTranslate.language = ?]]></xml-prope
             <property name="whiteSpace">pre</property>
         </style>
         <style name="NewStyle1" id="4207">
-            <property name="letterSpacing">-1.5pt</property>
-            <property name="wordSpacing">1pt</property>
+            <property name="textIndent">0em</property>
+            <property name="letterSpacing">-1.3pt</property>
+            <property name="orphans">inherit</property>
+            <property name="widows">inherit</property>
+            <property name="wordSpacing">2cm</property>
+            <property name="display">inline</property>
         </style>
     </styles>
     <page-setup>
@@ -4727,13 +4731,13 @@ where LangTranslate.message_key = ? and LangTranslate.language = ?]]></xml-prope
                                 <property name="height">1.3541666666666667in</property>
                                 <property name="width">7.875in</property>
                                 <column id="3029">
-                                    <property name="width">3.0104166666666665in</property>
+                                    <property name="width">3.5520833333333335in</property>
                                 </column>
                                 <column id="3030">
-                                    <property name="width">1.4375in</property>
+                                    <property name="width">1.28125in</property>
                                 </column>
                                 <column id="3031">
-                                    <property name="width">3.4270833333333335in</property>
+                                    <property name="width">3.0416666666666665in</property>
                                 </column>
                                 <row id="3032">
                                     <property name="height">1.3541666666666667in</property>
@@ -4759,12 +4763,12 @@ where LangTranslate.message_key = ? and LangTranslate.language = ?]]></xml-prope
                                         </grid>
                                         <grid id="3039">
                                             <property name="height">0.9583333333333334in</property>
-                                            <property name="width">2.9375in</property>
+                                            <property name="width">3.4791666666666665in</property>
                                             <column id="3040">
                                                 <property name="width">0.7708333333333334in</property>
                                             </column>
                                             <column id="3041">
-                                                <property name="width">2.1666666666666665in</property>
+                                                <property name="width">2.7083333333333335in</property>
                                             </column>
                                             <row id="3042">
                                                 <property name="height">0.9583333333333334in</property>
@@ -4781,22 +4785,47 @@ where LangTranslate.message_key = ? and LangTranslate.language = ?]]></xml-prope
                                                             <cell id="3048">
                                                                 <grid id="3049">
                                                                     <property name="height">0.3333333333333333in</property>
-                                                                    <property name="width">2.03125in</property>
+                                                                    <property name="width">2.59375in</property>
                                                                     <column id="3050">
-                                                                        <property name="width">1.5833333333333333in</property>
+                                                                        <property name="width">2in</property>
                                                                     </column>
                                                                     <column id="3051">
-                                                                        <property name="width">0.4479166666666667in</property>
+                                                                        <property name="width">0.59375in</property>
                                                                     </column>
                                                                     <row id="3052">
                                                                         <property name="height">0.3333333333333333in</property>
                                                                         <cell id="3053">
-                                                                            <label id="3054">
+                                                                            <text id="4211">
                                                                                 <property name="fontSize">5pt</property>
-                                                                                <text-property name="text">2 Отправитель/ Экспортер </text-property>
-                                                                            </label>
-                                                                            <data id="3358">
+                                                                                <property name="dataSet">TranslateDB</property>
+                                                                                <list-property name="paramBindings">
+                                                                                    <structure>
+                                                                                        <property name="paramName">param_1</property>
+                                                                                        <simple-property-list name="expression">
+                                                                                            <value type="javascript">"Отправитель/Экспортер"</value>
+                                                                                        </simple-property-list>
+                                                                                    </structure>
+                                                                                </list-property>
+                                                                                <list-property name="boundDataColumns">
+                                                                                    <structure>
+                                                                                        <property name="name">message_key</property>
+                                                                                        <text-property name="displayName">message_key</text-property>
+                                                                                        <expression name="expression" type="javascript">dataSetRow["message_key"]</expression>
+                                                                                        <property name="dataType">string</property>
+                                                                                    </structure>
+                                                                                    <structure>
+                                                                                        <property name="name">translation</property>
+                                                                                        <text-property name="displayName">translation</text-property>
+                                                                                        <expression name="expression" type="javascript">dataSetRow["translation"]</expression>
+                                                                                        <property name="dataType">string</property>
+                                                                                    </structure>
+                                                                                </list-property>
+                                                                                <property name="contentType">html</property>
+                                                                                <text-property name="content"><![CDATA[<VALUE-OF>row["translation"]</VALUE-OF>]]></text-property>
+                                                                            </text>
+                                                                            <data id="4212">
                                                                                 <property name="fontSize">5pt</property>
+                                                                                <property name="marginTop">4pt</property>
                                                                                 <property name="dataSet">Экспортер</property>
                                                                                 <list-property name="boundDataColumns">
                                                                                     <structure>
@@ -4876,10 +4905,10 @@ where LangTranslate.message_key = ? and LangTranslate.language = ?]]></xml-prope
                                                                                     <property name="width">0.4270833333333333in</property>
                                                                                 </column>
                                                                                 <column id="3075">
-                                                                                    <property name="width">0.34375in</property>
+                                                                                    <property name="width">0.28125in</property>
                                                                                 </column>
                                                                                 <column id="3076">
-                                                                                    <property name="width">0.5in</property>
+                                                                                    <property name="width">0.5625in</property>
                                                                                 </column>
                                                                                 <row id="3077">
                                                                                     <property name="height">0.19791666666666666in</property>
@@ -4887,7 +4916,7 @@ where LangTranslate.message_key = ? and LangTranslate.language = ?]]></xml-prope
                                                                                         <property name="borderRightStyle">solid</property>
                                                                                         <property name="borderRightWidth">thin</property>
                                                                                         <data id="3364">
-                                                                                            <property name="fontSize">5pt</property>
+                                                                                            <property name="fontSize">8pt</property>
                                                                                             <property name="textAlign">center</property>
                                                                                             <property name="dataSet">Transit Declaration</property>
                                                                                             <list-property name="boundDataColumns">
@@ -4906,7 +4935,7 @@ where LangTranslate.message_key = ? and LangTranslate.language = ?]]></xml-prope
                                                                                         <property name="borderLeftStyle">solid</property>
                                                                                         <property name="borderLeftWidth">thin</property>
                                                                                         <data id="3365">
-                                                                                            <property name="fontSize">5pt</property>
+                                                                                            <property name="fontSize">8pt</property>
                                                                                             <property name="textAlign">center</property>
                                                                                             <property name="dataSet">Transit Declaration</property>
                                                                                             <list-property name="boundDataColumns">
@@ -4928,16 +4957,16 @@ where LangTranslate.message_key = ? and LangTranslate.language = ?]]></xml-prope
                                                                         <property name="height">0.84375in</property>
                                                                         <cell id="3084">
                                                                             <grid id="3085">
-                                                                                <property name="height">0.2916666666666667in</property>
+                                                                                <property name="height">0.3020833333333333in</property>
                                                                                 <property name="width">1.2708333333333333in</property>
                                                                                 <column id="3086">
-                                                                                    <property name="width">0.7708333333333334in</property>
+                                                                                    <property name="width">0.7083333333333334in</property>
                                                                                 </column>
                                                                                 <column id="3087">
-                                                                                    <property name="width">0.5in</property>
+                                                                                    <property name="width">0.5625in</property>
                                                                                 </column>
                                                                                 <row id="3089">
-                                                                                    <property name="height">0.2916666666666667in</property>
+                                                                                    <property name="height">0.3020833333333333in</property>
                                                                                     <cell id="3090">
                                                                                         <property name="borderBottomStyle">solid</property>
                                                                                         <property name="borderBottomWidth">thin</property>
@@ -4947,10 +4976,34 @@ where LangTranslate.message_key = ? and LangTranslate.language = ?]]></xml-prope
                                                                                             <row id="3093">
                                                                                                 <property name="height">0.13541666666666666in</property>
                                                                                                 <cell id="3094">
-                                                                                                    <label id="3095">
+                                                                                                    <text id="4213">
                                                                                                         <property name="fontSize">5pt</property>
-                                                                                                        <text-property name="text"> 3 ФОРМЫ</text-property>
-                                                                                                    </label>
+                                                                                                        <property name="dataSet">TranslateDB</property>
+                                                                                                        <list-property name="paramBindings">
+                                                                                                            <structure>
+                                                                                                                <property name="paramName">param_1</property>
+                                                                                                                <simple-property-list name="expression">
+                                                                                                                    <value type="javascript">"Формы"</value>
+                                                                                                                </simple-property-list>
+                                                                                                            </structure>
+                                                                                                        </list-property>
+                                                                                                        <list-property name="boundDataColumns">
+                                                                                                            <structure>
+                                                                                                                <property name="name">message_key</property>
+                                                                                                                <text-property name="displayName">message_key</text-property>
+                                                                                                                <expression name="expression" type="javascript">dataSetRow["message_key"]</expression>
+                                                                                                                <property name="dataType">string</property>
+                                                                                                            </structure>
+                                                                                                            <structure>
+                                                                                                                <property name="name">translation</property>
+                                                                                                                <text-property name="displayName">translation</text-property>
+                                                                                                                <expression name="expression" type="javascript">dataSetRow["translation"]</expression>
+                                                                                                                <property name="dataType">string</property>
+                                                                                                            </structure>
+                                                                                                        </list-property>
+                                                                                                        <property name="contentType">html</property>
+                                                                                                        <text-property name="content"><![CDATA[3.<VALUE-OF>row["translation"]</VALUE-OF>]]></text-property>
+                                                                                                    </text>
                                                                                                 </cell>
                                                                                             </row>
                                                                                             <row id="3096">
@@ -4963,7 +5016,7 @@ where LangTranslate.message_key = ? and LangTranslate.language = ?]]></xml-prope
                                                                                                             <property name="height">0.3333333333333333in</property>
                                                                                                             <cell id="3102">
                                                                                                                 <auto-text id="3103">
-                                                                                                                    <property name="fontSize">5pt</property>
+                                                                                                                    <property name="fontSize">6pt</property>
                                                                                                                     <property name="fontWeight">bold</property>
                                                                                                                     <property name="textAlign">center</property>
                                                                                                                     <property name="type">page-number</property>
@@ -4973,7 +5026,7 @@ where LangTranslate.message_key = ? and LangTranslate.language = ?]]></xml-prope
                                                                                                                 <property name="borderLeftStyle">solid</property>
                                                                                                                 <property name="borderLeftWidth">thin</property>
                                                                                                                 <auto-text id="3105">
-                                                                                                                    <property name="fontSize">5pt</property>
+                                                                                                                    <property name="fontSize">6pt</property>
                                                                                                                     <property name="fontWeight">bold</property>
                                                                                                                     <property name="textAlign">center</property>
                                                                                                                     <property name="type">total-page</property>
@@ -4997,10 +5050,10 @@ where LangTranslate.message_key = ? and LangTranslate.language = ?]]></xml-prope
                                                                                 <property name="height">0.4270833333333333in</property>
                                                                                 <property name="width">1.2708333333333333in</property>
                                                                                 <column id="3109">
-                                                                                    <property name="width">0.7708333333333334in</property>
+                                                                                    <property name="width">0.7083333333333334in</property>
                                                                                 </column>
                                                                                 <column id="3110">
-                                                                                    <property name="width">0.5in</property>
+                                                                                    <property name="width">0.5625in</property>
                                                                                 </column>
                                                                                 <row id="3111">
                                                                                     <property name="height">0.4270833333333333in</property>
@@ -5013,10 +5066,34 @@ where LangTranslate.message_key = ? and LangTranslate.language = ?]]></xml-prope
                                                                                             <row id="3115">
                                                                                                 <property name="height">0.14583333333333334in</property>
                                                                                                 <cell id="3116">
-                                                                                                    <label id="3117">
-                                                                                                        <property name="fontSize">4pt</property>
-                                                                                                        <text-property name="text">5 всего т-ов</text-property>
-                                                                                                    </label>
+                                                                                                    <text id="4215">
+                                                                                                        <property name="fontSize">5pt</property>
+                                                                                                        <property name="dataSet">TranslateDB</property>
+                                                                                                        <list-property name="paramBindings">
+                                                                                                            <structure>
+                                                                                                                <property name="paramName">param_1</property>
+                                                                                                                <simple-property-list name="expression">
+                                                                                                                    <value type="javascript">"Всего т-ов"</value>
+                                                                                                                </simple-property-list>
+                                                                                                            </structure>
+                                                                                                        </list-property>
+                                                                                                        <list-property name="boundDataColumns">
+                                                                                                            <structure>
+                                                                                                                <property name="name">message_key</property>
+                                                                                                                <text-property name="displayName">message_key</text-property>
+                                                                                                                <expression name="expression" type="javascript">dataSetRow["message_key"]</expression>
+                                                                                                                <property name="dataType">string</property>
+                                                                                                            </structure>
+                                                                                                            <structure>
+                                                                                                                <property name="name">translation</property>
+                                                                                                                <text-property name="displayName">translation</text-property>
+                                                                                                                <expression name="expression" type="javascript">dataSetRow["translation"]</expression>
+                                                                                                                <property name="dataType">string</property>
+                                                                                                            </structure>
+                                                                                                        </list-property>
+                                                                                                        <property name="contentType">html</property>
+                                                                                                        <text-property name="content"><![CDATA[5.<VALUE-OF>row["translation"]</VALUE-OF>]]></text-property>
+                                                                                                    </text>
                                                                                                 </cell>
                                                                                             </row>
                                                                                             <row id="3118">
@@ -5048,10 +5125,34 @@ where LangTranslate.message_key = ? and LangTranslate.language = ?]]></xml-prope
                                                                                             <row id="3131">
                                                                                                 <property name="height">0.14583333333333334in</property>
                                                                                                 <cell id="3132">
-                                                                                                    <label id="3135">
-                                                                                                        <property name="fontSize">4pt</property>
-                                                                                                        <text-property name="text">6 Всего мест</text-property>
-                                                                                                    </label>
+                                                                                                    <text id="4216">
+                                                                                                        <property name="fontSize">5pt</property>
+                                                                                                        <property name="dataSet">TranslateDB</property>
+                                                                                                        <list-property name="paramBindings">
+                                                                                                            <structure>
+                                                                                                                <property name="paramName">param_1</property>
+                                                                                                                <simple-property-list name="expression">
+                                                                                                                    <value type="javascript">"Всего мест"</value>
+                                                                                                                </simple-property-list>
+                                                                                                            </structure>
+                                                                                                        </list-property>
+                                                                                                        <list-property name="boundDataColumns">
+                                                                                                            <structure>
+                                                                                                                <property name="name">message_key</property>
+                                                                                                                <text-property name="displayName">message_key</text-property>
+                                                                                                                <expression name="expression" type="javascript">dataSetRow["message_key"]</expression>
+                                                                                                                <property name="dataType">string</property>
+                                                                                                            </structure>
+                                                                                                            <structure>
+                                                                                                                <property name="name">translation</property>
+                                                                                                                <text-property name="displayName">translation</text-property>
+                                                                                                                <expression name="expression" type="javascript">dataSetRow["translation"]</expression>
+                                                                                                                <property name="dataType">string</property>
+                                                                                                            </structure>
+                                                                                                        </list-property>
+                                                                                                        <property name="contentType">html</property>
+                                                                                                        <text-property name="content"><![CDATA[6.<VALUE-OF>row["translation"]</VALUE-OF>]]></text-property>
+                                                                                                    </text>
                                                                                                 </cell>
                                                                                             </row>
                                                                                             <row id="3133">
@@ -5453,10 +5554,10 @@ where LangTranslate.message_key = ? and LangTranslate.language = ?]]></xml-prope
                 <property name="width">0.8229166666666666in</property>
             </column>
             <column id="2617">
-                <property name="width">2.21875in</property>
+                <property name="width">2.7604166666666665in</property>
             </column>
             <column id="2618">
-                <property name="width">4.958333333333333in</property>
+                <property name="width">4.416666666666667in</property>
             </column>
             <row id="2619">
                 <property name="height">2.8541666666666665in</property>
@@ -5497,8 +5598,7 @@ where LangTranslate.message_key = ? and LangTranslate.language = ?]]></xml-prope
                                         <property name="height">0.15625in</property>
                                         <cell id="3150">
                                             <text id="4202">
-                                                <property name="style">NewStyle</property>
-                                                <property name="fontFamily">"Noto Sans"</property>
+                                                <property name="fontFamily">"Times New Roman"</property>
                                                 <property name="fontSize">5pt</property>
                                                 <property name="dataSet">TranslateDB</property>
                                                 <list-property name="paramBindings">
@@ -5523,8 +5623,11 @@ where LangTranslate.message_key = ? and LangTranslate.language = ?]]></xml-prope
                                                         <property name="dataType">string</property>
                                                     </structure>
                                                 </list-property>
+                                                <structure name="toc"/>
                                                 <property name="contentType">html</property>
-                                                <text-property name="content"><![CDATA[8. <VALUE-OF>row["translation"]</VALUE-OF>]]></text-property>
+                                                <text-property name="content"><![CDATA[<VALUE-OF>row["translation"]</VALUE-OF>
+
+]]></text-property>
                                             </text>
                                         </cell>
                                         <cell id="3151">
@@ -5538,6 +5641,7 @@ where LangTranslate.message_key = ? and LangTranslate.language = ?]]></xml-prope
                                 <data id="3361">
                                     <property name="fontFamily">"Roboto"</property>
                                     <property name="fontSize">5pt</property>
+                                    <property name="marginTop">4pt</property>
                                     <property name="dataSet">Получатель</property>
                                     <list-property name="boundDataColumns">
                                         <structure>
@@ -5573,15 +5677,15 @@ where LangTranslate.message_key = ? and LangTranslate.language = ?]]></xml-prope
                                 <property name="borderBottomWidth">thin</property>
                                 <grid id="3327">
                                     <property name="height">0.21875in</property>
-                                    <property name="width">2.0833333333333335in</property>
+                                    <property name="width">2.6458333333333335in</property>
                                     <column id="3328">
-                                        <property name="width">1.4895833333333333in</property>
+                                        <property name="width">2.0833333333333335in</property>
                                     </column>
                                     <column id="3329">
-                                        <property name="width">0.3229166666666667in</property>
+                                        <property name="width">0.3125in</property>
                                     </column>
                                     <column id="3330">
-                                        <property name="width">0.2708333333333333in</property>
+                                        <property name="width">0.25in</property>
                                     </column>
                                     <row id="3331">
                                         <property name="height">0.21875in</property>
@@ -5592,10 +5696,34 @@ where LangTranslate.message_key = ? and LangTranslate.language = ?]]></xml-prope
                                                 <row id="3349">
                                                     <property name="height">0.14583333333333334in</property>
                                                     <cell id="3350">
-                                                        <label id="3353">
+                                                        <text id="4219">
                                                             <property name="fontSize">5pt</property>
-                                                            <text-property name="text">18 Идентификвция</text-property>
-                                                        </label>
+                                                            <property name="dataSet">TranslateDB</property>
+                                                            <list-property name="paramBindings">
+                                                                <structure>
+                                                                    <property name="paramName">param_1</property>
+                                                                    <simple-property-list name="expression">
+                                                                        <value type="javascript">"Идентификация и стпарана регистрации ТС при отправлении/прибытии"</value>
+                                                                    </simple-property-list>
+                                                                </structure>
+                                                            </list-property>
+                                                            <list-property name="boundDataColumns">
+                                                                <structure>
+                                                                    <property name="name">message_key</property>
+                                                                    <text-property name="displayName">message_key</text-property>
+                                                                    <expression name="expression" type="javascript">dataSetRow["message_key"]</expression>
+                                                                    <property name="dataType">string</property>
+                                                                </structure>
+                                                                <structure>
+                                                                    <property name="name">translation</property>
+                                                                    <text-property name="displayName">translation</text-property>
+                                                                    <expression name="expression" type="javascript">dataSetRow["translation"]</expression>
+                                                                    <property name="dataType">string</property>
+                                                                </structure>
+                                                            </list-property>
+                                                            <property name="contentType">html</property>
+                                                            <text-property name="content"><![CDATA[17. <VALUE-OF>row["translation"]</VALUE-OF>]]></text-property>
+                                                        </text>
                                                     </cell>
                                                 </row>
                                                 <row id="3351">
@@ -5618,10 +5746,10 @@ where LangTranslate.message_key = ? and LangTranslate.language = ?]]></xml-prope
                         </row>
                     </grid>
                     <grid id="3198">
-                        <property name="height">0.23958333333333334in</property>
+                        <property name="height">0.3541666666666667in</property>
                         <column id="3199"/>
                         <row id="3200">
-                            <property name="height">0.23958333333333334in</property>
+                            <property name="height">0.3541666666666667in</property>
                             <cell id="3201">
                                 <property name="borderBottomStyle">solid</property>
                                 <property name="borderBottomWidth">thin</property>
@@ -5630,9 +5758,9 @@ where LangTranslate.message_key = ? and LangTranslate.language = ?]]></xml-prope
                     </grid>
                     <grid id="3202">
                         <property name="height">0.2916666666666667in</property>
-                        <property name="width">2.1979166666666665in</property>
+                        <property name="width">2.71875in</property>
                         <column id="3203">
-                            <property name="width">2.1979166666666665in</property>
+                            <property name="width">2.71875in</property>
                         </column>
                         <row id="3204">
                             <property name="height">0.2916666666666667in</property>
@@ -5641,39 +5769,44 @@ where LangTranslate.message_key = ? and LangTranslate.language = ?]]></xml-prope
                                 <property name="borderBottomWidth">thin</property>
                                 <grid id="3403">
                                     <property name="height">0.4479166666666667in</property>
-                                    <property name="width">2.125in</property>
+                                    <property name="width">2.7083333333333335in</property>
                                     <column id="3404">
-                                        <property name="width">1.8125in</property>
+                                        <property name="width">2.40625in</property>
                                     </column>
                                     <column id="3405">
-                                        <property name="width">0.3125in</property>
+                                        <property name="width">0.3020833333333333in</property>
                                     </column>
                                     <row id="3406">
                                         <property name="height">0.4479166666666667in</property>
                                         <cell id="3407">
-                                            <label id="3409">
+                                            <text id="4220">
                                                 <property name="fontSize">5pt</property>
-                                                <structure name="toc"/>
-                                                <text-property name="text">25 вид транспорта</text-property>
-                                            </label>
-                                            <grid id="3410">
-                                                <property name="height">0.25in</property>
-                                                <property name="width">1.7395833333333333in</property>
-                                                <column id="3411">
-                                                    <property name="width">0.3541666666666667in</property>
-                                                </column>
-                                                <column id="3412">
-                                                    <property name="width">1.3854166666666667in</property>
-                                                </column>
-                                                <row id="3413">
-                                                    <property name="height">0.25in</property>
-                                                    <cell id="3414">
-                                                        <property name="borderRightStyle">solid</property>
-                                                        <property name="borderRightWidth">thin</property>
-                                                    </cell>
-                                                    <cell id="3415"/>
-                                                </row>
-                                            </grid>
+                                                <property name="dataSet">TranslateDB</property>
+                                                <list-property name="paramBindings">
+                                                    <structure>
+                                                        <property name="paramName">param_1</property>
+                                                        <simple-property-list name="expression">
+                                                            <value type="javascript">"Вид транспорта"</value>
+                                                        </simple-property-list>
+                                                    </structure>
+                                                </list-property>
+                                                <list-property name="boundDataColumns">
+                                                    <structure>
+                                                        <property name="name">message_key</property>
+                                                        <text-property name="displayName">message_key</text-property>
+                                                        <expression name="expression" type="javascript">dataSetRow["message_key"]</expression>
+                                                        <property name="dataType">string</property>
+                                                    </structure>
+                                                    <structure>
+                                                        <property name="name">translation</property>
+                                                        <text-property name="displayName">translation</text-property>
+                                                        <expression name="expression" type="javascript">dataSetRow["translation"]</expression>
+                                                        <property name="dataType">string</property>
+                                                    </structure>
+                                                </list-property>
+                                                <property name="contentType">html</property>
+                                                <text-property name="content"><![CDATA[25. <VALUE-OF>row["translation"]</VALUE-OF>]]></text-property>
+                                            </text>
                                         </cell>
                                         <cell id="3408">
                                             <property name="borderLeftStyle">solid</property>
@@ -5726,10 +5859,34 @@ where LangTranslate.message_key = ? and LangTranslate.language = ?]]></xml-prope
                                                 <row id="3173">
                                                     <property name="height">0.14583333333333334in</property>
                                                     <cell id="3174">
-                                                        <label id="3177">
+                                                        <text id="4217">
                                                             <property name="fontSize">5pt</property>
-                                                            <text-property name="text">15 Старана отправления</text-property>
-                                                        </label>
+                                                            <property name="dataSet">TranslateDB</property>
+                                                            <list-property name="paramBindings">
+                                                                <structure>
+                                                                    <property name="paramName">param_1</property>
+                                                                    <simple-property-list name="expression">
+                                                                        <value type="javascript">"Страна отправления"</value>
+                                                                    </simple-property-list>
+                                                                </structure>
+                                                            </list-property>
+                                                            <list-property name="boundDataColumns">
+                                                                <structure>
+                                                                    <property name="name">message_key</property>
+                                                                    <text-property name="displayName">message_key</text-property>
+                                                                    <expression name="expression" type="javascript">dataSetRow["message_key"]</expression>
+                                                                    <property name="dataType">string</property>
+                                                                </structure>
+                                                                <structure>
+                                                                    <property name="name">translation</property>
+                                                                    <text-property name="displayName">translation</text-property>
+                                                                    <expression name="expression" type="javascript">dataSetRow["translation"]</expression>
+                                                                    <property name="dataType">string</property>
+                                                                </structure>
+                                                            </list-property>
+                                                            <property name="contentType">html</property>
+                                                            <text-property name="content"><![CDATA[15. <VALUE-OF>row["translation"]</VALUE-OF>]]></text-property>
+                                                        </text>
                                                     </cell>
                                                 </row>
                                                 <row id="3175">
@@ -5771,10 +5928,34 @@ where LangTranslate.message_key = ? and LangTranslate.language = ?]]></xml-prope
                                                 <row id="3180">
                                                     <property name="height">0.16666666666666666in</property>
                                                     <cell id="3181">
-                                                        <label id="3184">
+                                                        <text id="4218">
                                                             <property name="fontSize">5pt</property>
-                                                            <text-property name="text">17 Старана назначения </text-property>
-                                                        </label>
+                                                            <property name="dataSet">TranslateDB</property>
+                                                            <list-property name="paramBindings">
+                                                                <structure>
+                                                                    <property name="paramName">param_1</property>
+                                                                    <simple-property-list name="expression">
+                                                                        <value type="javascript">"Страна назначения"</value>
+                                                                    </simple-property-list>
+                                                                </structure>
+                                                            </list-property>
+                                                            <list-property name="boundDataColumns">
+                                                                <structure>
+                                                                    <property name="name">message_key</property>
+                                                                    <text-property name="displayName">message_key</text-property>
+                                                                    <expression name="expression" type="javascript">dataSetRow["message_key"]</expression>
+                                                                    <property name="dataType">string</property>
+                                                                </structure>
+                                                                <structure>
+                                                                    <property name="name">translation</property>
+                                                                    <text-property name="displayName">translation</text-property>
+                                                                    <expression name="expression" type="javascript">dataSetRow["translation"]</expression>
+                                                                    <property name="dataType">string</property>
+                                                                </structure>
+                                                            </list-property>
+                                                            <property name="contentType">html</property>
+                                                            <text-property name="content"><![CDATA[17. <VALUE-OF>row["translation"]</VALUE-OF>]]></text-property>
+                                                        </text>
                                                     </cell>
                                                 </row>
                                                 <row id="3182">
@@ -5813,10 +5994,10 @@ where LangTranslate.message_key = ? and LangTranslate.language = ?]]></xml-prope
                         </row>
                     </grid>
                     <grid id="3214">
-                        <property name="height">0.25in</property>
+                        <property name="height">0.3541666666666667in</property>
                         <column id="3215"/>
                         <row id="3216">
-                            <property name="height">0.25in</property>
+                            <property name="height">0.3541666666666667in</property>
                             <cell id="3217">
                                 <property name="borderBottomStyle">solid</property>
                                 <property name="borderBottomWidth">thin</property>
@@ -5837,16 +6018,41 @@ where LangTranslate.message_key = ? and LangTranslate.language = ?]]></xml-prope
                                         <cell id="3372">
                                             <property name="borderRightStyle">solid</property>
                                             <property name="borderRightWidth">thin</property>
-                                            <label id="3375">
+                                            <text id="4221">
                                                 <property name="fontSize">5pt</property>
-                                                <text-property name="text">22  валюта и общая сумма по счету</text-property>
-                                            </label>
+                                                <property name="marginBottom">2pt</property>
+                                                <property name="dataSet">TranslateDB</property>
+                                                <list-property name="paramBindings">
+                                                    <structure>
+                                                        <property name="paramName">param_1</property>
+                                                        <simple-property-list name="expression">
+                                                            <value type="javascript">"Валюта и общая сумма по счету"</value>
+                                                        </simple-property-list>
+                                                    </structure>
+                                                </list-property>
+                                                <list-property name="boundDataColumns">
+                                                    <structure>
+                                                        <property name="name">message_key</property>
+                                                        <text-property name="displayName">message_key</text-property>
+                                                        <expression name="expression" type="javascript">dataSetRow["message_key"]</expression>
+                                                        <property name="dataType">string</property>
+                                                    </structure>
+                                                    <structure>
+                                                        <property name="name">translation</property>
+                                                        <text-property name="displayName">translation</text-property>
+                                                        <expression name="expression" type="javascript">dataSetRow["translation"]</expression>
+                                                        <property name="dataType">string</property>
+                                                    </structure>
+                                                </list-property>
+                                                <property name="contentType">html</property>
+                                                <text-property name="content"><![CDATA[22. <VALUE-OF>row["translation"]</VALUE-OF>]]></text-property>
+                                            </text>
                                             <grid id="3376">
-                                                <property name="height">0.1875in</property>
+                                                <property name="height">0.23958333333333334in</property>
                                                 <column id="3377"/>
                                                 <column id="3378"/>
                                                 <row id="3379">
-                                                    <property name="height">0.1875in</property>
+                                                    <property name="height">0.23958333333333334in</property>
                                                     <cell id="3380">
                                                         <data id="3383">
                                                             <property name="fontSize">5pt</property>
@@ -5888,11 +6094,11 @@ where LangTranslate.message_key = ? and LangTranslate.language = ?]]></xml-prope
                                         </cell>
                                         <cell id="3374">
                                             <grid id="3384">
-                                                <property name="height">0.22916666666666666in</property>
+                                                <property name="height">0.3541666666666667in</property>
                                                 <column id="3385"/>
                                                 <column id="3386"/>
                                                 <row id="3387">
-                                                    <property name="height">0.22916666666666666in</property>
+                                                    <property name="height">0.3541666666666667in</property>
                                                     <cell id="3388">
                                                         <property name="borderRightStyle">solid</property>
                                                         <property name="borderRightWidth">thin</property>
@@ -5953,22 +6159,67 @@ where LangTranslate.message_key = ? and LangTranslate.language = ?]]></xml-prope
                                             <property name="fontFamily">"Times New Roman"</property>
                                             <property name="borderBottomStyle">solid</property>
                                             <property name="borderBottomWidth">thin</property>
-                                            <label id="3527">
-                                                <property name="style">NewStyle1</property>
-                                                <property name="fontFamily">"Roboto"</property>
+                                            <text id="4222">
                                                 <property name="fontSize">5pt</property>
-                                                <text-property name="text">31  Грузовые места и описание товаров</text-property>
-                                            </label>
+                                                <property name="dataSet">TranslateDB</property>
+                                                <list-property name="paramBindings">
+                                                    <structure>
+                                                        <property name="paramName">param_1</property>
+                                                        <simple-property-list name="expression">
+                                                            <value type="javascript">"Грузовые места и описание товаров"</value>
+                                                        </simple-property-list>
+                                                    </structure>
+                                                </list-property>
+                                                <list-property name="boundDataColumns">
+                                                    <structure>
+                                                        <property name="name">message_key</property>
+                                                        <text-property name="displayName">message_key</text-property>
+                                                        <expression name="expression" type="javascript">dataSetRow["message_key"]</expression>
+                                                        <property name="dataType">string</property>
+                                                    </structure>
+                                                    <structure>
+                                                        <property name="name">translation</property>
+                                                        <text-property name="displayName">translation</text-property>
+                                                        <expression name="expression" type="javascript">dataSetRow["translation"]</expression>
+                                                        <property name="dataType">string</property>
+                                                    </structure>
+                                                </list-property>
+                                                <property name="contentType">html</property>
+                                                <text-property name="content"><![CDATA[31. <VALUE-OF>row["translation"]</VALUE-OF>]]></text-property>
+                                            </text>
                                         </cell>
                                     </row>
                                     <row id="3525">
                                         <property name="height">0.6770833333333334in</property>
                                         <cell id="3526">
-                                            <label id="3528">
-                                                <property name="fontFamily">"Times New Roman"</property>
+                                            <text id="4223">
                                                 <property name="fontSize">5pt</property>
-                                                <text-property name="text">44 Дополнит информация</text-property>
-                                            </label>
+                                                <property name="dataSet">TranslateDB</property>
+                                                <list-property name="paramBindings">
+                                                    <structure>
+                                                        <property name="paramName">param_1</property>
+                                                        <simple-property-list name="expression">
+                                                            <value type="javascript">"Дополнит информация/Представл.документы"</value>
+                                                        </simple-property-list>
+                                                    </structure>
+                                                </list-property>
+                                                <list-property name="boundDataColumns">
+                                                    <structure>
+                                                        <property name="name">message_key</property>
+                                                        <text-property name="displayName">message_key</text-property>
+                                                        <expression name="expression" type="javascript">dataSetRow["message_key"]</expression>
+                                                        <property name="dataType">string</property>
+                                                    </structure>
+                                                    <structure>
+                                                        <property name="name">translation</property>
+                                                        <text-property name="displayName">translation</text-property>
+                                                        <expression name="expression" type="javascript">dataSetRow["translation"]</expression>
+                                                        <property name="dataType">string</property>
+                                                    </structure>
+                                                </list-property>
+                                                <property name="contentType">html</property>
+                                                <text-property name="content"><![CDATA[31. <VALUE-OF>row["translation"]</VALUE-OF>]]></text-property>
+                                            </text>
                                         </cell>
                                     </row>
                                 </grid>
@@ -6006,12 +6257,35 @@ where LangTranslate.message_key = ? and LangTranslate.language = ?]]></xml-prope
                                                             <row id="3548">
                                                                 <property name="height">1.09375in</property>
                                                                 <cell id="3549">
-                                                                    <label id="3615">
+                                                                    <text id="4233">
                                                                         <property name="fontSize">5pt</property>
-                                                                        <property name="masterPage">First</property>
-                                                                        <text-property name="text">Маркировка и количество - Номер контейнера - Количество и отличительные особенности</text-property>
-                                                                    </label>
-                                                                    <data id="3973">
+                                                                        <property name="dataSet">TranslateDB</property>
+                                                                        <list-property name="paramBindings">
+                                                                            <structure>
+                                                                                <property name="paramName">param_1</property>
+                                                                                <simple-property-list name="expression">
+                                                                                    <value type="javascript">"Маркировка и количество - Номера контейнеров-Количество и отличательные особенности"</value>
+                                                                                </simple-property-list>
+                                                                            </structure>
+                                                                        </list-property>
+                                                                        <list-property name="boundDataColumns">
+                                                                            <structure>
+                                                                                <property name="name">message_key</property>
+                                                                                <text-property name="displayName">message_key</text-property>
+                                                                                <expression name="expression" type="javascript">dataSetRow["message_key"]</expression>
+                                                                                <property name="dataType">string</property>
+                                                                            </structure>
+                                                                            <structure>
+                                                                                <property name="name">translation</property>
+                                                                                <text-property name="displayName">translation</text-property>
+                                                                                <expression name="expression" type="javascript">dataSetRow["translation"]</expression>
+                                                                                <property name="dataType">string</property>
+                                                                            </structure>
+                                                                        </list-property>
+                                                                        <property name="contentType">html</property>
+                                                                        <text-property name="content"><![CDATA[<VALUE-OF>row["translation"]</VALUE-OF>]]></text-property>
+                                                                    </text>
+                                                                    <data id="4234">
                                                                         <property name="fontSize">5pt</property>
                                                                         <property name="dataSet">First Product</property>
                                                                         <list-property name="boundDataColumns">
@@ -6024,7 +6298,7 @@ where LangTranslate.message_key = ? and LangTranslate.language = ?]]></xml-prope
                                                                         </list-property>
                                                                         <property name="resultSetColumn">name</property>
                                                                     </data>
-                                                                    <data id="3974">
+                                                                    <data id="4235">
                                                                         <property name="fontSize">5pt</property>
                                                                         <property name="dataSet">First Product</property>
                                                                         <list-property name="boundDataColumns">
@@ -6064,10 +6338,34 @@ where LangTranslate.message_key = ? and LangTranslate.language = ?]]></xml-prope
                                                         <property name="borderLeftWidth">thin</property>
                                                         <property name="borderRightStyle">solid</property>
                                                         <property name="borderRightWidth">thin</property>
-                                                        <label id="3607">
+                                                        <text id="4237">
                                                             <property name="fontSize">5pt</property>
-                                                            <text-property name="text">32 товар</text-property>
-                                                        </label>
+                                                            <property name="dataSet">TranslateDB</property>
+                                                            <list-property name="paramBindings">
+                                                                <structure>
+                                                                    <property name="paramName">param_1</property>
+                                                                    <simple-property-list name="expression">
+                                                                        <value type="javascript">"Товар"</value>
+                                                                    </simple-property-list>
+                                                                </structure>
+                                                            </list-property>
+                                                            <list-property name="boundDataColumns">
+                                                                <structure>
+                                                                    <property name="name">message_key</property>
+                                                                    <text-property name="displayName">message_key</text-property>
+                                                                    <expression name="expression" type="javascript">dataSetRow["message_key"]</expression>
+                                                                    <property name="dataType">string</property>
+                                                                </structure>
+                                                                <structure>
+                                                                    <property name="name">translation</property>
+                                                                    <text-property name="displayName">translation</text-property>
+                                                                    <expression name="expression" type="javascript">dataSetRow["translation"]</expression>
+                                                                    <property name="dataType">string</property>
+                                                                </structure>
+                                                            </list-property>
+                                                            <property name="contentType">html</property>
+                                                            <text-property name="content"><![CDATA[32.<VALUE-OF>row["translation"]</VALUE-OF>]]></text-property>
+                                                        </text>
                                                         <grid id="3608">
                                                             <property name="height">0.125in</property>
                                                             <column id="3609"/>
@@ -6122,13 +6420,13 @@ where LangTranslate.message_key = ? and LangTranslate.language = ?]]></xml-prope
                                         </cell>
                                         <cell id="3601">
                                             <grid id="3622">
-                                                <property name="height">1.8229166666666667in</property>
+                                                <property name="height">1.8125in</property>
                                                 <property name="width">3.59375in</property>
                                                 <column id="3623">
                                                     <property name="width">3.59375in</property>
                                                 </column>
                                                 <row id="3624">
-                                                    <property name="height">0.21875in</property>
+                                                    <property name="height">0.20833333333333334in</property>
                                                     <cell id="3625">
                                                         <property name="borderBottomStyle">solid</property>
                                                         <property name="borderBottomWidth">thin</property>
@@ -6157,11 +6455,35 @@ where LangTranslate.message_key = ? and LangTranslate.language = ?]]></xml-prope
                                                                 <cell id="3653">
                                                                     <property name="borderRightStyle">solid</property>
                                                                     <property name="borderRightWidth">thin</property>
-                                                                    <label id="3658">
+                                                                    <text id="4238">
                                                                         <property name="fontSize">5pt</property>
-                                                                        <text-property name="text">33 код товара</text-property>
-                                                                    </label>
-                                                                    <data id="3993">
+                                                                        <property name="dataSet">TranslateDB</property>
+                                                                        <list-property name="paramBindings">
+                                                                            <structure>
+                                                                                <property name="paramName">param_1</property>
+                                                                                <simple-property-list name="expression">
+                                                                                    <value type="javascript">"Код товара"</value>
+                                                                                </simple-property-list>
+                                                                            </structure>
+                                                                        </list-property>
+                                                                        <list-property name="boundDataColumns">
+                                                                            <structure>
+                                                                                <property name="name">message_key</property>
+                                                                                <text-property name="displayName">message_key</text-property>
+                                                                                <expression name="expression" type="javascript">dataSetRow["message_key"]</expression>
+                                                                                <property name="dataType">string</property>
+                                                                            </structure>
+                                                                            <structure>
+                                                                                <property name="name">translation</property>
+                                                                                <text-property name="displayName">translation</text-property>
+                                                                                <expression name="expression" type="javascript">dataSetRow["translation"]</expression>
+                                                                                <property name="dataType">string</property>
+                                                                            </structure>
+                                                                        </list-property>
+                                                                        <property name="contentType">html</property>
+                                                                        <text-property name="content"><![CDATA[33.<VALUE-OF>row["translation"]</VALUE-OF>]]></text-property>
+                                                                    </text>
+                                                                    <data id="4239">
                                                                         <property name="fontSize">5pt</property>
                                                                         <property name="dataSet">First Product</property>
                                                                         <list-property name="boundDataColumns">
@@ -6236,11 +6558,35 @@ where LangTranslate.message_key = ? and LangTranslate.language = ?]]></xml-prope
                                                                             <cell id="3702">
                                                                                 <property name="borderBottomStyle">solid</property>
                                                                                 <property name="borderBottomWidth">thin</property>
-                                                                                <label id="3705">
+                                                                                <text id="4240">
                                                                                     <property name="fontSize">5pt</property>
-                                                                                    <text-property name="text">35 вес брутто</text-property>
-                                                                                </label>
-                                                                                <data id="3994">
+                                                                                    <property name="dataSet">TranslateDB</property>
+                                                                                    <list-property name="paramBindings">
+                                                                                        <structure>
+                                                                                            <property name="paramName">param_1</property>
+                                                                                            <simple-property-list name="expression">
+                                                                                                <value type="javascript">"Вес брутто (кг)"</value>
+                                                                                            </simple-property-list>
+                                                                                        </structure>
+                                                                                    </list-property>
+                                                                                    <list-property name="boundDataColumns">
+                                                                                        <structure>
+                                                                                            <property name="name">message_key</property>
+                                                                                            <text-property name="displayName">message_key</text-property>
+                                                                                            <expression name="expression" type="javascript">dataSetRow["message_key"]</expression>
+                                                                                            <property name="dataType">string</property>
+                                                                                        </structure>
+                                                                                        <structure>
+                                                                                            <property name="name">translation</property>
+                                                                                            <text-property name="displayName">translation</text-property>
+                                                                                            <expression name="expression" type="javascript">dataSetRow["translation"]</expression>
+                                                                                            <property name="dataType">string</property>
+                                                                                        </structure>
+                                                                                    </list-property>
+                                                                                    <property name="contentType">html</property>
+                                                                                    <text-property name="content"><![CDATA[35.<VALUE-OF>row["translation"]</VALUE-OF>]]></text-property>
+                                                                                </text>
+                                                                                <data id="4241">
                                                                                     <property name="fontSize">5pt</property>
                                                                                     <property name="dataSet">First Product</property>
                                                                                     <list-property name="boundDataColumns">
@@ -6273,10 +6619,34 @@ where LangTranslate.message_key = ? and LangTranslate.language = ?]]></xml-prope
                                                         <property name="borderBottomWidth">thin</property>
                                                         <property name="borderLeftStyle">solid</property>
                                                         <property name="borderLeftWidth">thin</property>
-                                                        <label id="3997">
+                                                        <text id="4242">
                                                             <property name="fontSize">5pt</property>
-                                                            <text-property name="text">40  Обшая декларация</text-property>
-                                                        </label>
+                                                            <property name="dataSet">TranslateDB</property>
+                                                            <list-property name="paramBindings">
+                                                                <structure>
+                                                                    <property name="paramName">param_1</property>
+                                                                    <simple-property-list name="expression">
+                                                                        <value type="javascript">"Общая декларация/Предшествующий документ"</value>
+                                                                    </simple-property-list>
+                                                                </structure>
+                                                            </list-property>
+                                                            <list-property name="boundDataColumns">
+                                                                <structure>
+                                                                    <property name="name">message_key</property>
+                                                                    <text-property name="displayName">message_key</text-property>
+                                                                    <expression name="expression" type="javascript">dataSetRow["message_key"]</expression>
+                                                                    <property name="dataType">string</property>
+                                                                </structure>
+                                                                <structure>
+                                                                    <property name="name">translation</property>
+                                                                    <text-property name="displayName">translation</text-property>
+                                                                    <expression name="expression" type="javascript">dataSetRow["translation"]</expression>
+                                                                    <property name="dataType">string</property>
+                                                                </structure>
+                                                            </list-property>
+                                                            <property name="contentType">html</property>
+                                                            <text-property name="content"><![CDATA[40.<VALUE-OF>row["translation"]</VALUE-OF>]]></text-property>
+                                                        </text>
                                                     </cell>
                                                 </row>
                                                 <row id="3630">
@@ -6300,16 +6670,64 @@ where LangTranslate.message_key = ? and LangTranslate.language = ?]]></xml-prope
                                                                 <cell id="3712">
                                                                     <property name="borderRightStyle">solid</property>
                                                                     <property name="borderRightWidth">thin</property>
-                                                                    <label id="3998">
+                                                                    <text id="4243">
                                                                         <property name="fontSize">5pt</property>
-                                                                        <text-property name="text">41 Дополнит ед</text-property>
-                                                                    </label>
+                                                                        <property name="dataSet">TranslateDB</property>
+                                                                        <list-property name="paramBindings">
+                                                                            <structure>
+                                                                                <property name="paramName">param_1</property>
+                                                                                <simple-property-list name="expression">
+                                                                                    <value type="javascript">"Дополнит.единицы"</value>
+                                                                                </simple-property-list>
+                                                                            </structure>
+                                                                        </list-property>
+                                                                        <list-property name="boundDataColumns">
+                                                                            <structure>
+                                                                                <property name="name">message_key</property>
+                                                                                <text-property name="displayName">message_key</text-property>
+                                                                                <expression name="expression" type="javascript">dataSetRow["message_key"]</expression>
+                                                                                <property name="dataType">string</property>
+                                                                            </structure>
+                                                                            <structure>
+                                                                                <property name="name">translation</property>
+                                                                                <text-property name="displayName">translation</text-property>
+                                                                                <expression name="expression" type="javascript">dataSetRow["translation"]</expression>
+                                                                                <property name="dataType">string</property>
+                                                                            </structure>
+                                                                        </list-property>
+                                                                        <property name="contentType">html</property>
+                                                                        <text-property name="content"><![CDATA[41.<VALUE-OF>row["translation"]</VALUE-OF>]]></text-property>
+                                                                    </text>
                                                                 </cell>
                                                                 <cell id="3713">
-                                                                    <label id="3999">
+                                                                    <text id="4244">
                                                                         <property name="fontSize">5pt</property>
-                                                                        <text-property name="text">42 валюта и стоимость товара</text-property>
-                                                                    </label>
+                                                                        <property name="dataSet">TranslateDB</property>
+                                                                        <list-property name="paramBindings">
+                                                                            <structure>
+                                                                                <property name="paramName">param_1</property>
+                                                                                <simple-property-list name="expression">
+                                                                                    <value type="javascript">"Валюта и стоимость товара"</value>
+                                                                                </simple-property-list>
+                                                                            </structure>
+                                                                        </list-property>
+                                                                        <list-property name="boundDataColumns">
+                                                                            <structure>
+                                                                                <property name="name">message_key</property>
+                                                                                <text-property name="displayName">message_key</text-property>
+                                                                                <expression name="expression" type="javascript">dataSetRow["message_key"]</expression>
+                                                                                <property name="dataType">string</property>
+                                                                            </structure>
+                                                                            <structure>
+                                                                                <property name="name">translation</property>
+                                                                                <text-property name="displayName">translation</text-property>
+                                                                                <expression name="expression" type="javascript">dataSetRow["translation"]</expression>
+                                                                                <property name="dataType">string</property>
+                                                                            </structure>
+                                                                        </list-property>
+                                                                        <property name="contentType">html</property>
+                                                                        <text-property name="content"><![CDATA[42.<VALUE-OF>row["translation"]</VALUE-OF>]]></text-property>
+                                                                    </text>
                                                                     <grid id="4000">
                                                                         <property name="width">1.9895833333333333in</property>
                                                                         <column id="4001">
@@ -6383,10 +6801,34 @@ where LangTranslate.message_key = ? and LangTranslate.language = ?]]></xml-prope
                                                                     <property name="borderLeftWidth">thin</property>
                                                                     <property name="borderRightStyle">solid</property>
                                                                     <property name="borderRightWidth">thin</property>
-                                                                    <label id="4008">
+                                                                    <text id="4245">
                                                                         <property name="fontSize">5pt</property>
-                                                                        <text-property name="text">/код ДИ</text-property>
-                                                                    </label>
+                                                                        <property name="dataSet">TranslateDB</property>
+                                                                        <list-property name="paramBindings">
+                                                                            <structure>
+                                                                                <property name="paramName">param_1</property>
+                                                                                <simple-property-list name="expression">
+                                                                                    <value type="javascript">"Код ДИ"</value>
+                                                                                </simple-property-list>
+                                                                            </structure>
+                                                                        </list-property>
+                                                                        <list-property name="boundDataColumns">
+                                                                            <structure>
+                                                                                <property name="name">message_key</property>
+                                                                                <text-property name="displayName">message_key</text-property>
+                                                                                <expression name="expression" type="javascript">dataSetRow["message_key"]</expression>
+                                                                                <property name="dataType">string</property>
+                                                                            </structure>
+                                                                            <structure>
+                                                                                <property name="name">translation</property>
+                                                                                <text-property name="displayName">translation</text-property>
+                                                                                <expression name="expression" type="javascript">dataSetRow["translation"]</expression>
+                                                                                <property name="dataType">string</property>
+                                                                            </structure>
+                                                                        </list-property>
+                                                                        <property name="contentType">html</property>
+                                                                        <text-property name="content"><![CDATA[<VALUE-OF>row["translation"]</VALUE-OF>]]></text-property>
+                                                                    </text>
                                                                 </cell>
                                                                 <cell id="3721"/>
                                                             </row>
@@ -6442,10 +6884,34 @@ where LangTranslate.message_key = ? and LangTranslate.language = ?]]></xml-prope
                             <cell id="3266">
                                 <property name="borderRightStyle">solid</property>
                                 <property name="borderRightWidth">thin</property>
-                                <label id="3316">
+                                <text id="4224">
                                     <property name="fontSize">5pt</property>
-                                    <text-property name="text">55  Перегрузки</text-property>
-                                </label>
+                                    <property name="dataSet">TranslateDB</property>
+                                    <list-property name="paramBindings">
+                                        <structure>
+                                            <property name="paramName">param_1</property>
+                                            <simple-property-list name="expression">
+                                                <value type="javascript">"Перегрузки"</value>
+                                            </simple-property-list>
+                                        </structure>
+                                    </list-property>
+                                    <list-property name="boundDataColumns">
+                                        <structure>
+                                            <property name="name">message_key</property>
+                                            <text-property name="displayName">message_key</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["message_key"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">translation</property>
+                                            <text-property name="displayName">translation</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["translation"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                    </list-property>
+                                    <property name="contentType">html</property>
+                                    <text-property name="content"><![CDATA[55. <VALUE-OF>row["translation"]</VALUE-OF>]]></text-property>
+                                </text>
                             </cell>
                             <cell id="3267">
                                 <grid id="4084">
@@ -6532,10 +6998,34 @@ where LangTranslate.message_key = ? and LangTranslate.language = ?]]></xml-prope
                             <cell id="3272">
                                 <property name="borderRightStyle">solid</property>
                                 <property name="borderRightWidth">thin</property>
-                                <label id="3317">
+                                <text id="4225">
                                     <property name="fontSize">5pt</property>
-                                    <text-property name="text">F  ПОДТВЕРЖДЕНИЕ КОМПЕТЕНТНЫХ ОРГАНОВ</text-property>
-                                </label>
+                                    <property name="dataSet">TranslateDB</property>
+                                    <list-property name="paramBindings">
+                                        <structure>
+                                            <property name="paramName">param_1</property>
+                                            <simple-property-list name="expression">
+                                                <value type="javascript">"F  ПОДТВЕРЖДЕНИЕ КОМПЕТЕНТНЫХ ОРГАНОВ"</value>
+                                            </simple-property-list>
+                                        </structure>
+                                    </list-property>
+                                    <list-property name="boundDataColumns">
+                                        <structure>
+                                            <property name="name">message_key</property>
+                                            <text-property name="displayName">message_key</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["message_key"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">translation</property>
+                                            <text-property name="displayName">translation</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["translation"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                    </list-property>
+                                    <property name="contentType">html</property>
+                                    <text-property name="content"><![CDATA[<VALUE-OF>row["translation"]</VALUE-OF>]]></text-property>
+                                </text>
                             </cell>
                             <cell id="3273">
                                 <grid id="4039">
@@ -6765,10 +7255,34 @@ where LangTranslate.message_key = ? and LangTranslate.language = ?]]></xml-prope
                             <cell id="3284">
                                 <property name="borderRightStyle">solid</property>
                                 <property name="borderRightWidth">thin</property>
-                                <label id="3318">
+                                <text id="4226">
                                     <property name="fontSize">5pt</property>
-                                    <text-property name="text">52 Гарантия</text-property>
-                                </label>
+                                    <property name="dataSet">TranslateDB</property>
+                                    <list-property name="paramBindings">
+                                        <structure>
+                                            <property name="paramName">param_1</property>
+                                            <simple-property-list name="expression">
+                                                <value type="javascript">"Гарантия"</value>
+                                            </simple-property-list>
+                                        </structure>
+                                    </list-property>
+                                    <list-property name="boundDataColumns">
+                                        <structure>
+                                            <property name="name">message_key</property>
+                                            <text-property name="displayName">message_key</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["message_key"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">translation</property>
+                                            <text-property name="displayName">translation</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["translation"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                    </list-property>
+                                    <property name="contentType">html</property>
+                                    <text-property name="content"><![CDATA[52. <VALUE-OF>row["translation"]</VALUE-OF>]]></text-property>
+                                </text>
                             </cell>
                             <cell id="3285">
                                 <grid id="4151">
@@ -7135,6 +7649,7 @@ where LangTranslate.message_key = ? and LangTranslate.language = ?]]></xml-prope
                                                                 <property name="borderBottomStyle">solid</property>
                                                                 <property name="borderBottomWidth">thin</property>
                                                                 <label id="3859">
+                                                                    <property name="fontFamily">"Times New Roman"</property>
                                                                     <property name="fontSize">5pt</property>
                                                                     <property name="masterPage">Second</property>
                                                                     <text-property name="text">31  Грузовые места и описание товаров</text-property>
@@ -7177,7 +7692,7 @@ where LangTranslate.message_key = ? and LangTranslate.language = ?]]></xml-prope
                                                                             <property name="borderBottomStyle">solid</property>
                                                                             <property name="borderBottomWidth">thin</property>
                                                                             <label id="3988">
-                                                                                <property name="fontFamily">"Noto Serif"</property>
+                                                                                <property name="fontFamily">"Times New Roman"</property>
                                                                                 <property name="fontSize">5pt</property>
                                                                                 <text-property name="text">Маркировка и количество - Номер контейнера - Количество и отличительные особенности</text-property>
                                                                             </label>
