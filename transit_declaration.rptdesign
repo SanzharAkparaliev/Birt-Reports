@@ -6156,10 +6156,11 @@ where LangTranslate.message_key = ? and LangTranslate.language = ?]]></xml-prope
                                     <row id="3523">
                                         <property name="height">1.1041666666666667in</property>
                                         <cell id="3524">
-                                            <property name="fontFamily">"Times New Roman"</property>
+                                            <property name="fontFamily">serif</property>
                                             <property name="borderBottomStyle">solid</property>
                                             <property name="borderBottomWidth">thin</property>
                                             <text id="4222">
+                                                <property name="fontFamily">"Times New Roman"</property>
                                                 <property name="fontSize">5pt</property>
                                                 <property name="dataSet">TranslateDB</property>
                                                 <list-property name="paramBindings">
@@ -6185,7 +6186,9 @@ where LangTranslate.message_key = ? and LangTranslate.language = ?]]></xml-prope
                                                     </structure>
                                                 </list-property>
                                                 <property name="contentType">html</property>
-                                                <text-property name="content"><![CDATA[31. <VALUE-OF>row["translation"]</VALUE-OF>]]></text-property>
+                                                <text-property name="content"><![CDATA[31. <span style="font-family: 'Roboto Bold';">
+		<VALUE-OF>row["translation"]</VALUE-OF>
+	</span>]]></text-property>
                                             </text>
                                         </cell>
                                     </row>
