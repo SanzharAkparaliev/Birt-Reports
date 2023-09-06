@@ -69,6 +69,18 @@
         <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Product Transit Declaration" id="2021">
             <list-property name="columnHints">
                 <structure>
+                    <property name="columnName">additional_code</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">additional_code</text-property>
+                    <text-property name="heading">additional_code</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">quantity_goods_accordance_unit</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">quantity_goods_accordance_unit</text-property>
+                    <text-property name="heading">quantity_goods_accordance_unit</text-property>
+                </structure>
+                <structure>
                     <property name="columnName">name</property>
                     <property name="analysis">dimension</property>
                     <text-property name="displayName">name</text-property>
@@ -133,41 +145,51 @@
                 <list-property name="resultSet">
                     <structure>
                         <property name="position">1</property>
-                        <property name="name">name</property>
+                        <property name="name">additional_code</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">2</property>
+                        <property name="name">quantity_goods_accordance_unit</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
                         <property name="name">id</property>
                         <property name="dataType">decimal</property>
                     </structure>
                     <structure>
-                        <property name="position">3</property>
+                        <property name="position">5</property>
                         <property name="name">quantity</property>
                         <property name="dataType">integer</property>
                     </structure>
                     <structure>
-                        <property name="position">4</property>
+                        <property name="position">6</property>
                         <property name="name">cargo_quantity</property>
                         <property name="dataType">integer</property>
                     </structure>
                     <structure>
-                        <property name="position">5</property>
+                        <property name="position">7</property>
                         <property name="name">code</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">6</property>
+                        <property name="position">8</property>
                         <property name="name">gross_weight</property>
                         <property name="dataType">decimal</property>
                     </structure>
                     <structure>
-                        <property name="position">7</property>
+                        <property name="position">9</property>
                         <property name="name">price</property>
                         <property name="dataType">decimal</property>
                     </structure>
                     <structure>
-                        <property name="position">8</property>
+                        <property name="position">10</property>
                         <property name="name">currency</property>
                         <property name="dataType">string</property>
                     </structure>
@@ -177,67 +199,83 @@
             <list-property name="resultSet">
                 <structure>
                     <property name="position">1</property>
+                    <property name="name">additional_code</property>
+                    <property name="nativeName">additional_code</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">quantity_goods_accordance_unit</property>
+                    <property name="nativeName">quantity_goods_accordance_unit</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
                     <property name="name">name</property>
                     <property name="nativeName">name</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">12</property>
                 </structure>
                 <structure>
-                    <property name="position">2</property>
+                    <property name="position">4</property>
                     <property name="name">id</property>
                     <property name="nativeName">id</property>
                     <property name="dataType">decimal</property>
                     <property name="nativeDataType">-5</property>
                 </structure>
                 <structure>
-                    <property name="position">3</property>
+                    <property name="position">5</property>
                     <property name="name">quantity</property>
                     <property name="nativeName">quantity</property>
                     <property name="dataType">integer</property>
                     <property name="nativeDataType">4</property>
                 </structure>
                 <structure>
-                    <property name="position">4</property>
+                    <property name="position">6</property>
                     <property name="name">cargo_quantity</property>
                     <property name="nativeName">cargo_quantity</property>
                     <property name="dataType">integer</property>
                     <property name="nativeDataType">4</property>
                 </structure>
                 <structure>
-                    <property name="position">5</property>
+                    <property name="position">7</property>
                     <property name="name">code</property>
                     <property name="nativeName">code</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">12</property>
                 </structure>
                 <structure>
-                    <property name="position">6</property>
+                    <property name="position">8</property>
                     <property name="name">gross_weight</property>
                     <property name="nativeName">gross_weight</property>
                     <property name="dataType">decimal</property>
                     <property name="nativeDataType">2</property>
                 </structure>
                 <structure>
-                    <property name="position">7</property>
+                    <property name="position">9</property>
                     <property name="name">price</property>
                     <property name="nativeName">price</property>
                     <property name="dataType">decimal</property>
                     <property name="nativeDataType">2</property>
                 </structure>
                 <structure>
-                    <property name="position">8</property>
+                    <property name="position">10</property>
                     <property name="name">currency</property>
                     <property name="nativeName">currency</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">12</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[SELECT Goods.name, Goods.id, Goods.quantity, Goods.cargo_quantity, Code.code,Goods.gross_weight,Goods.price,	Currency.name as Currency
+            <xml-property name="queryText"><![CDATA[SELECT additionalinit.code as additional_code ,Goods.quantity_goods_accordance_unit, Goods.name, Goods.id, Goods.quantity, Goods.cargo_quantity, Code.code,Goods.gross_weight,Goods.price,	
+	Currency.name as Currency
 FROM public.transitcontrolsystem_transit_declaration AS TransitDec
 JOIN preliminaryinformation_commodity_consignment AS Commodity ON (Commodity.id = TransitDec.consignment)
 JOIN preliminaryinformation_goods AS Goods ON (Commodity.id = Goods.commodity_consignment)
 JOIN base_currency AS Currency ON (Currency.id = Commodity.currency)
 JOIN dictionary_tnved_position_code AS Code ON (Code.id = Goods.tnved)
+JOIN dictionary_additional_unit AS additionalinit ON (additionalinit.id = Goods.additional_unit)
 WHERE TransitDec.id = ?
 AND Goods.id NOT IN (
     SELECT MIN(id) FROM preliminaryinformation_goods
@@ -4289,6 +4327,18 @@ WHERE TransitDec.id = ?;
                     <text-property name="heading">gross_weight</text-property>
                 </structure>
                 <structure>
+                    <property name="columnName">additional_code</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">additional_code</text-property>
+                    <text-property name="heading">additional_code</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">quantity_goods_accordance_unit</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">quantity_goods_accordance_unit</text-property>
+                    <text-property name="heading">quantity_goods_accordance_unit</text-property>
+                </structure>
+                <structure>
                     <property name="columnName">currency</property>
                     <property name="analysis">dimension</property>
                     <text-property name="displayName">currency</text-property>
@@ -4351,6 +4401,16 @@ WHERE TransitDec.id = ?;
                     </structure>
                     <structure>
                         <property name="position">9</property>
+                        <property name="name">additional_code</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">quantity_goods_accordance_unit</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
                         <property name="name">currency</property>
                         <property name="dataType">string</property>
                     </structure>
@@ -4416,6 +4476,20 @@ WHERE TransitDec.id = ?;
                 </structure>
                 <structure>
                     <property name="position">9</property>
+                    <property name="name">additional_code</property>
+                    <property name="nativeName">additional_code</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">10</property>
+                    <property name="name">quantity_goods_accordance_unit</property>
+                    <property name="nativeName">quantity_goods_accordance_unit</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">11</property>
                     <property name="name">currency</property>
                     <property name="nativeName">currency</property>
                     <property name="dataType">string</property>
@@ -4427,12 +4501,14 @@ WHERE TransitDec.id = ?;
 		Goods.price,
 		Commodity.total_price,
 		Goods.gross_weight,
+		additionalinit.code as additional_code ,Goods.quantity_goods_accordance_unit,
 		Currency.name as Currency
 FROM public.transitcontrolsystem_transit_declaration AS TransitDec
 JOIN preliminaryinformation_commodity_consignment AS Commodity ON (Commodity.id = TransitDec.consignment)
 JOIN preliminaryinformation_goods AS Goods ON (Commodity.id = Goods.commodity_consignment)
 JOIN dictionary_tnved_position_code AS Code ON (Code.id = Goods.tnved)
 JOIN base_currency AS Currency ON (Currency.id = Commodity.currency)
+JOIN dictionary_additional_unit AS additionalinit ON (additionalinit.id = Goods.additional_unit)
 WHERE TransitDec.id = ?
 ORDER BY Goods.id
 LIMIT 1;
@@ -6232,10 +6308,10 @@ where LangTranslate.message_key = ? and LangTranslate.language = ?]]></xml-prope
                                     <property name="height">2.0208333333333335in</property>
                                     <property name="width">7.239583333333333in</property>
                                     <column id="3530">
-                                        <property name="width">2.875in</property>
+                                        <property name="width">2.9583333333333335in</property>
                                     </column>
                                     <column id="3531">
-                                        <property name="width">0.59375in</property>
+                                        <property name="width">0.5104166666666666in</property>
                                     </column>
                                     <column id="3602">
                                         <property name="width">3.7708333333333335in</property>
@@ -6245,7 +6321,10 @@ where LangTranslate.message_key = ? and LangTranslate.language = ?]]></xml-prope
                                         <cell id="3533">
                                             <grid id="3535">
                                                 <property name="height">2.2395833333333335in</property>
-                                                <column id="3536"/>
+                                                <property name="width">2.9791666666666665in</property>
+                                                <column id="3536">
+                                                    <property name="width">2.9791666666666665in</property>
+                                                </column>
                                                 <row id="3537">
                                                     <property name="height">1.0833333333333333in</property>
                                                     <cell id="3538">
@@ -6327,13 +6406,13 @@ where LangTranslate.message_key = ? and LangTranslate.language = ?]]></xml-prope
                                         </cell>
                                         <cell id="3534">
                                             <grid id="3603">
-                                                <property name="height">0.21875in</property>
+                                                <property name="height">0.20833333333333334in</property>
                                                 <property name="width">0.6041666666666666in</property>
                                                 <column id="3604">
                                                     <property name="width">0.6041666666666666in</property>
                                                 </column>
                                                 <row id="3605">
-                                                    <property name="height">0.21875in</property>
+                                                    <property name="height">0.20833333333333334in</property>
                                                     <cell id="3606">
                                                         <property name="borderBottomStyle">solid</property>
                                                         <property name="borderBottomWidth">thin</property>
@@ -6378,6 +6457,11 @@ where LangTranslate.message_key = ? and LangTranslate.language = ?]]></xml-prope
                                                                 <cell id="3612">
                                                                     <property name="borderRightStyle">solid</property>
                                                                     <property name="borderRightWidth">thin</property>
+                                                                    <label id="4305">
+                                                                        <property name="fontSize">5pt</property>
+                                                                        <property name="textAlign">center</property>
+                                                                        <text-property name="text">1</text-property>
+                                                                    </label>
                                                                 </cell>
                                                                 <cell id="3613">
                                                                     <label id="3614">
@@ -6391,13 +6475,13 @@ where LangTranslate.message_key = ? and LangTranslate.language = ?]]></xml-prope
                                                 </row>
                                             </grid>
                                             <grid id="3618">
-                                                <property name="height">0.8541666666666666in</property>
+                                                <property name="height">0.8645833333333334in</property>
                                                 <property name="width">0.6041666666666666in</property>
                                                 <column id="3619">
                                                     <property name="width">0.6041666666666666in</property>
                                                 </column>
                                                 <row id="3620">
-                                                    <property name="height">0.8541666666666666in</property>
+                                                    <property name="height">0.8645833333333334in</property>
                                                     <cell id="3621">
                                                         <property name="borderBottomStyle">solid</property>
                                                         <property name="borderBottomWidth">thin</property>
@@ -6423,7 +6507,7 @@ where LangTranslate.message_key = ? and LangTranslate.language = ?]]></xml-prope
                                         </cell>
                                         <cell id="3601">
                                             <grid id="3622">
-                                                <property name="height">1.8125in</property>
+                                                <property name="height">1.75in</property>
                                                 <property name="width">3.59375in</property>
                                                 <column id="3623">
                                                     <property name="width">3.59375in</property>
@@ -6653,7 +6737,7 @@ where LangTranslate.message_key = ? and LangTranslate.language = ?]]></xml-prope
                                                     </cell>
                                                 </row>
                                                 <row id="3630">
-                                                    <property name="height">0.3125in</property>
+                                                    <property name="height">0.25in</property>
                                                     <cell id="3631">
                                                         <property name="borderBottomStyle">solid</property>
                                                         <property name="borderBottomWidth">thin</property>
@@ -6701,6 +6785,42 @@ where LangTranslate.message_key = ? and LangTranslate.language = ?]]></xml-prope
                                                                         <property name="contentType">html</property>
                                                                         <text-property name="content"><![CDATA[41.<VALUE-OF>row["translation"]</VALUE-OF>]]></text-property>
                                                                     </text>
+                                                                    <grid id="4307">
+                                                                        <column id="4308"/>
+                                                                        <column id="4309"/>
+                                                                        <row id="4310">
+                                                                            <cell id="4311">
+                                                                                <data id="4323">
+                                                                                    <property name="fontSize">5pt</property>
+                                                                                    <property name="dataSet">First Product</property>
+                                                                                    <list-property name="boundDataColumns">
+                                                                                        <structure>
+                                                                                            <property name="name">quantity_goods_accordance_unit</property>
+                                                                                            <text-property name="displayName">quantity_goods_accordance_unit</text-property>
+                                                                                            <expression name="expression" type="javascript">dataSetRow["quantity_goods_accordance_unit"]</expression>
+                                                                                            <property name="dataType">integer</property>
+                                                                                        </structure>
+                                                                                    </list-property>
+                                                                                    <property name="resultSetColumn">quantity_goods_accordance_unit</property>
+                                                                                </data>
+                                                                            </cell>
+                                                                            <cell id="4312">
+                                                                                <data id="4324">
+                                                                                    <property name="fontSize">5pt</property>
+                                                                                    <property name="dataSet">First Product</property>
+                                                                                    <list-property name="boundDataColumns">
+                                                                                        <structure>
+                                                                                            <property name="name">additional_code</property>
+                                                                                            <text-property name="displayName">additional_code</text-property>
+                                                                                            <expression name="expression" type="javascript">dataSetRow["additional_code"]</expression>
+                                                                                            <property name="dataType">string</property>
+                                                                                        </structure>
+                                                                                    </list-property>
+                                                                                    <property name="resultSetColumn">additional_code</property>
+                                                                                </data>
+                                                                            </cell>
+                                                                        </row>
+                                                                    </grid>
                                                                 </cell>
                                                                 <cell id="3713">
                                                                     <text id="4244">
@@ -8286,6 +8406,18 @@ where LangTranslate.message_key = ? and LangTranslate.language = ?]]></xml-prope
                                 <expression name="expression" type="javascript">dataSetRow["currency"]</expression>
                                 <property name="dataType">string</property>
                             </structure>
+                            <structure>
+                                <property name="name">quantity_goods_accordance_unit</property>
+                                <text-property name="displayName">quantity_goods_accordance_unit</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["quantity_goods_accordance_unit"]</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                            <structure>
+                                <property name="name">additional_code</property>
+                                <text-property name="displayName">additional_code</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["additional_code"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
                         </list-property>
                         <structure name="toc"/>
                         <property name="pageBreakInterval">3</property>
@@ -8406,7 +8538,10 @@ where LangTranslate.message_key = ? and LangTranslate.language = ?]]></xml-prope
                                                             <cell id="3869">
                                                                 <grid id="3870">
                                                                     <property name="height">2.2395833333333335in</property>
-                                                                    <column id="3871"/>
+                                                                    <property name="width">2.8541666666666665in</property>
+                                                                    <column id="3871">
+                                                                        <property name="width">2.8541666666666665in</property>
+                                                                    </column>
                                                                     <row id="3872">
                                                                         <property name="height">1.0833333333333333in</property>
                                                                         <cell id="3873">
@@ -8509,6 +8644,10 @@ where LangTranslate.message_key = ? and LangTranslate.language = ?]]></xml-prope
                                                                                     <cell id="3893">
                                                                                         <property name="borderRightStyle">solid</property>
                                                                                         <property name="borderRightWidth">thin</property>
+                                                                                        <data id="4306">
+                                                                                            <property name="fontSize">5pt</property>
+                                                                                            <property name="resultSetColumn">id</property>
+                                                                                        </data>
                                                                                     </cell>
                                                                                     <cell id="3894">
                                                                                         <label id="3895">
@@ -8554,7 +8693,7 @@ where LangTranslate.message_key = ? and LangTranslate.language = ?]]></xml-prope
                                                             </cell>
                                                             <cell id="3904">
                                                                 <grid id="3905">
-                                                                    <property name="height">1.8229166666666667in</property>
+                                                                    <property name="height">1.8541666666666667in</property>
                                                                     <property name="width">3.59375in</property>
                                                                     <column id="3906">
                                                                         <property name="width">3.59375in</property>
@@ -8795,7 +8934,7 @@ where LangTranslate.message_key = ? and LangTranslate.language = ?]]></xml-prope
                                                                         </cell>
                                                                     </row>
                                                                     <row id="3948">
-                                                                        <property name="height">0.3125in</property>
+                                                                        <property name="height">0.34375in</property>
                                                                         <cell id="3949">
                                                                             <property name="borderBottomStyle">solid</property>
                                                                             <property name="borderBottomWidth">thin</property>
@@ -8843,6 +8982,24 @@ where LangTranslate.message_key = ? and LangTranslate.language = ?]]></xml-prope
                                                                                             <property name="contentType">html</property>
                                                                                             <text-property name="content"><![CDATA[41.<VALUE-OF>row["translation"]</VALUE-OF>]]></text-property>
                                                                                         </text>
+                                                                                        <grid id="4315">
+                                                                                            <column id="4316"/>
+                                                                                            <column id="4317"/>
+                                                                                            <row id="4318">
+                                                                                                <cell id="4319">
+                                                                                                    <data id="4321">
+                                                                                                        <property name="fontSize">5pt</property>
+                                                                                                        <property name="resultSetColumn">quantity_goods_accordance_unit</property>
+                                                                                                    </data>
+                                                                                                </cell>
+                                                                                                <cell id="4320">
+                                                                                                    <data id="4322">
+                                                                                                        <property name="fontSize">5pt</property>
+                                                                                                        <property name="resultSetColumn">additional_code</property>
+                                                                                                    </data>
+                                                                                                </cell>
+                                                                                            </row>
+                                                                                        </grid>
                                                                                     </cell>
                                                                                     <cell id="3955">
                                                                                         <text id="4304">

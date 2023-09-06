@@ -5,22 +5,18 @@
         <structure>
             <property name="name">odaDriverClass</property>
             <property name="id">4</property>
-            <expression name="value" type="javascript">params["DefaultDriver"].value</expression>
         </structure>
         <structure>
             <property name="name">odaURL</property>
             <property name="id">4</property>
-            <expression name="value" type="javascript">params["DBName"].value</expression>
         </structure>
         <structure>
             <property name="name">odaUser</property>
             <property name="id">4</property>
-            <expression name="value" type="javascript">params["UserName"].value</expression>
         </structure>
         <structure>
             <property name="name">odaPassword</property>
             <property name="id">4</property>
-            <expression name="value" type="javascript">params["Password"].value</expression>
         </structure>
         <structure>
             <property name="name">odaAutoCommit</property>
@@ -67,10 +63,10 @@
         <scalar-parameter name="SmartId" id="142">
             <property name="valueType">static</property>
             <property name="isRequired">true</property>
-            <property name="dataType">decimal</property>
+            <property name="dataType">string</property>
             <property name="distinct">true</property>
             <simple-property-list name="defaultValue">
-                <value type="constant">1</value>
+                <value type="constant">5</value>
             </simple-property-list>
             <list-property name="selectionList"/>
             <property name="paramType">simple</property>
@@ -159,7 +155,9 @@
                 </ex-property>
             </list-property>
             <property name="odaDriverClass">org.postgresql.Driver</property>
-            <property name="odaURL">jdbc:postgresql://localhost:5432/</property>
+            <property name="odaURL">jdbc:postgresql://localhost:5432/smart</property>
+            <property name="odaUser">admin</property>
+            <encrypted-property name="odaPassword" encryptionID="base64">YWRtaW4=</encrypted-property>
         </oda-data-source>
     </data-sources>
     <data-sets>
@@ -333,10 +331,52 @@ where LangTranslate.message_key = ? and LangTranslate.language = ?]]></xml-prope
                     <text-property name="heading">status</text-property>
                 </structure>
                 <structure>
+                    <property name="columnName">issue_date</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">issue_date</text-property>
+                    <text-property name="heading">issue_date</text-property>
+                </structure>
+                <structure>
                     <property name="columnName">registration_number</property>
                     <property name="analysis">dimension</property>
                     <text-property name="displayName">registration_number</text-property>
                     <text-property name="heading">registration_number</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">temporary_import_export_period</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">temporary_import_export_period</text-property>
+                    <text-property name="heading">temporary_import_export_period</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">form_customs_control</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">form_customs_control</text-property>
+                    <text-property name="heading">form_customs_control</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">customs_department_close</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">customs_department_close</text-property>
+                    <text-property name="heading">customs_department_close</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">form_customs_control_close</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">form_customs_control_close</text-property>
+                    <text-property name="heading">form_customs_control_close</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">status_doc</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">status_doc</text-property>
+                    <text-property name="heading">status_doc</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">date_completion</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">date_completion</text-property>
+                    <text-property name="heading">date_completion</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">CarrierFullName</property>
@@ -387,6 +427,18 @@ where LangTranslate.message_key = ? and LangTranslate.language = ?]]></xml-prope
                     <text-property name="heading">PurposeItems</text-property>
                 </structure>
                 <structure>
+                    <property name="columnName">code</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">code</text-property>
+                    <text-property name="heading">code</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">CustomDepartmentName</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">CustomDepartmentName</text-property>
+                    <text-property name="heading">CustomDepartmentName</text-property>
+                </structure>
+                <structure>
                     <property name="columnName">UserName</property>
                     <property name="analysis">dimension</property>
                     <text-property name="displayName">UserName</text-property>
@@ -419,51 +471,96 @@ where LangTranslate.message_key = ? and LangTranslate.language = ?]]></xml-prope
                     </structure>
                     <structure>
                         <property name="position">3</property>
+                        <property name="name">issue_date</property>
+                        <property name="dataType">date-time</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
                         <property name="name">registration_number</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">4</property>
-                        <property name="name">CarrierFullName</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
                         <property name="position">5</property>
-                        <property name="name">CrewDescription</property>
-                        <property name="dataType">string</property>
+                        <property name="name">temporary_import_export_period</property>
+                        <property name="dataType">date</property>
                     </structure>
                     <structure>
                         <property name="position">6</property>
-                        <property name="name">DriverFullName</property>
+                        <property name="name">form_customs_control</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">7</property>
-                        <property name="name">TsmpPassenger</property>
-                        <property name="dataType">integer</property>
+                        <property name="name">customs_department_close</property>
+                        <property name="dataType">decimal</property>
                     </structure>
                     <structure>
                         <property name="position">8</property>
-                        <property name="name">StoreInfo</property>
-                        <property name="dataType">integer</property>
+                        <property name="name">form_customs_control_close</property>
+                        <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">9</property>
-                        <property name="name">GoodsInfo</property>
-                        <property name="dataType">integer</property>
+                        <property name="name">status_doc</property>
+                        <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">10</property>
-                        <property name="name">GoodsSign</property>
-                        <property name="dataType">integer</property>
+                        <property name="name">date_completion</property>
+                        <property name="dataType">date</property>
                     </structure>
                     <structure>
                         <property name="position">11</property>
-                        <property name="name">PurposeItems</property>
+                        <property name="name">CarrierFullName</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">12</property>
+                        <property name="name">CrewDescription</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">13</property>
+                        <property name="name">DriverFullName</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">14</property>
+                        <property name="name">TsmpPassenger</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">15</property>
+                        <property name="name">StoreInfo</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">16</property>
+                        <property name="name">GoodsInfo</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">17</property>
+                        <property name="name">GoodsSign</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">18</property>
+                        <property name="name">PurposeItems</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">19</property>
+                        <property name="name">code</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">20</property>
+                        <property name="name">CustomDepartmentName</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">21</property>
                         <property name="name">UserName</property>
                         <property name="dataType">string</property>
                     </structure>
@@ -487,86 +584,176 @@ where LangTranslate.message_key = ? and LangTranslate.language = ?]]></xml-prope
                 </structure>
                 <structure>
                     <property name="position">3</property>
+                    <property name="name">issue_date</property>
+                    <property name="nativeName">issue_date</property>
+                    <property name="dataType">date-time</property>
+                    <property name="nativeDataType">93</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
                     <property name="name">registration_number</property>
                     <property name="nativeName">registration_number</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">12</property>
                 </structure>
                 <structure>
-                    <property name="position">4</property>
+                    <property name="position">5</property>
+                    <property name="name">temporary_import_export_period</property>
+                    <property name="nativeName">temporary_import_export_period</property>
+                    <property name="dataType">date</property>
+                    <property name="nativeDataType">91</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">form_customs_control</property>
+                    <property name="nativeName">form_customs_control</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">customs_department_close</property>
+                    <property name="nativeName">customs_department_close</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">-5</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">form_customs_control_close</property>
+                    <property name="nativeName">form_customs_control_close</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">status_doc</property>
+                    <property name="nativeName">status_doc</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">10</property>
+                    <property name="name">date_completion</property>
+                    <property name="nativeName">date_completion</property>
+                    <property name="dataType">date</property>
+                    <property name="nativeDataType">91</property>
+                </structure>
+                <structure>
+                    <property name="position">11</property>
                     <property name="name">CarrierFullName</property>
                     <property name="nativeName">CarrierFullName</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">12</property>
                 </structure>
                 <structure>
-                    <property name="position">5</property>
+                    <property name="position">12</property>
                     <property name="name">CrewDescription</property>
                     <property name="nativeName">CrewDescription</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">12</property>
                 </structure>
                 <structure>
-                    <property name="position">6</property>
+                    <property name="position">13</property>
                     <property name="name">DriverFullName</property>
                     <property name="nativeName">DriverFullName</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">12</property>
                 </structure>
                 <structure>
-                    <property name="position">7</property>
+                    <property name="position">14</property>
                     <property name="name">TsmpPassenger</property>
                     <property name="nativeName">TsmpPassenger</property>
                     <property name="dataType">integer</property>
                     <property name="nativeDataType">-7</property>
                 </structure>
                 <structure>
-                    <property name="position">8</property>
+                    <property name="position">15</property>
                     <property name="name">StoreInfo</property>
                     <property name="nativeName">StoreInfo</property>
                     <property name="dataType">integer</property>
                     <property name="nativeDataType">-7</property>
                 </structure>
                 <structure>
-                    <property name="position">9</property>
+                    <property name="position">16</property>
                     <property name="name">GoodsInfo</property>
                     <property name="nativeName">GoodsInfo</property>
                     <property name="dataType">integer</property>
                     <property name="nativeDataType">-7</property>
                 </structure>
                 <structure>
-                    <property name="position">10</property>
+                    <property name="position">17</property>
                     <property name="name">GoodsSign</property>
                     <property name="nativeName">GoodsSign</property>
                     <property name="dataType">integer</property>
                     <property name="nativeDataType">-7</property>
                 </structure>
                 <structure>
-                    <property name="position">11</property>
+                    <property name="position">18</property>
                     <property name="name">PurposeItems</property>
                     <property name="nativeName">PurposeItems</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">12</property>
                 </structure>
                 <structure>
-                    <property name="position">12</property>
+                    <property name="position">19</property>
+                    <property name="name">code</property>
+                    <property name="nativeName">code</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">20</property>
+                    <property name="name">CustomDepartmentName</property>
+                    <property name="nativeName">CustomDepartmentName</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">21</property>
                     <property name="name">UserName</property>
                     <property name="nativeName">UserName</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">12</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[select TIEC.id, TIEC.status, TIEC.registration_number, Carrier.full_name as "CarrierFullName", TIEC.crew_description as "CrewDescription",
-Driver.full_name as "DriverFullName", TIEC.tsmp_passenger as "TsmpPassenger",TIEC.store_info as "StoreInfo",
-TIEC.goods_info as "GoodsInfo", TIEC.goods_sign as "GoodsSign",SelectItems.title as "PurposeItems",Users.name as "UserName"
-from  public.temporaryimportexport_temporary_import_export_citd as TIEC
-join dictionary_registered_person as Carrier on (TIEC.carrier = Carrier.id)
-join dictionary_registered_person as Driver on (TIEC.driver = Driver.id)
-join meta_select as Selects on (Selects.name like 'temporaryimportexport.citd.purpose.select')
-join meta_select_item as SelectItems on (SelectItems.select_id = Selects.id AND SelectItems.value = TIEC.purpose)
-join auth_user as Users on (TIEC.created_by = Users.id)
-where TIEC.id = ?
-
+            <xml-property name="queryText"><![CDATA[SELECT
+    TIEC.id,
+    TIEC.status,
+    TIEC.issue_date,
+    TIEC.registration_number,
+    TIEC.temporary_import_export_period,
+    TIEC.form_customs_control,
+    TIEC.customs_department_close,
+    TIEC.form_customs_control_close,
+    TIEC.status_doc,
+    TIEC.date_completion,
+    Carrier.full_name AS "CarrierFullName",
+    TIEC.crew_description AS "CrewDescription",
+    Driver.full_name AS "DriverFullName",
+    TIEC.tsmp_passenger AS "TsmpPassenger",
+    TIEC.store_info AS "StoreInfo",
+    TIEC.goods_info AS "GoodsInfo",
+    TIEC.goods_sign AS "GoodsSign",
+    SelectItems.title AS "PurposeItems",
+    CustomDepartment.code,
+    CustomDepartment.name AS "CustomDepartmentName",
+    Users.name AS "UserName"
+FROM
+    public.temporaryimportexport_temporary_import_export_citd AS TIEC
+LEFT JOIN
+	dictionary_subdivision AS CustomDepartment 	ON(TIEC.customs_department = CustomDepartment.id) 
+LEFT JOIN
+    dictionary_registered_person AS Carrier ON (TIEC.carrier = Carrier.id)
+LEFT JOIN
+    dictionary_registered_person AS Driver ON (TIEC.driver = Driver.id)
+LEFT JOIN
+    meta_select AS Selects ON (Selects.name LIKE 'temporaryimportexport.citd.purpose.select')
+LEFT JOIN
+    meta_select_item AS SelectItems ON (SelectItems.select_id = Selects.id AND SelectItems.value = TIEC.purpose)
+RIGHT JOIN
+    auth_user AS Users ON (TIEC.created_by = Users.id)
+WHERE
+    TIEC.id = ?;
 ]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
@@ -1989,6 +2176,119 @@ where TIEC.id = ?]]></xml-property>
   </design:ResultSets>
 </model:DesignValues>]]></xml-property>
         </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="ПродлениеВременногоВвозаВывоза" id="705">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">date_operations</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">date_operations</text-property>
+                    <text-property name="heading">date_operations</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">name</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">name</text-property>
+                    <text-property name="heading">name</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">form_customs_control</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">form_customs_control</text-property>
+                    <text-property name="heading">form_customs_control</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">extension_temporary_import_export</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">extension_temporary_import_export</text-property>
+                    <text-property name="heading">extension_temporary_import_export</text-property>
+                </structure>
+            </list-property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">param_1</property>
+                    <property name="paramName">SmartId</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">-5</property>
+                    <property name="position">1</property>
+                    <property name="isOptional">false</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">date_operations</property>
+                        <property name="dataType">date</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">form_customs_control</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">extension_temporary_import_export</property>
+                        <property name="dataType">date</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Smart_customs</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">date_operations</property>
+                    <property name="nativeName">date_operations</property>
+                    <property name="dataType">date</property>
+                    <property name="nativeDataType">91</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">name</property>
+                    <property name="nativeName">name</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">form_customs_control</property>
+                    <property name="nativeName">form_customs_control</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">extension_temporary_import_export</property>
+                    <property name="nativeName">extension_temporary_import_export</property>
+                    <property name="dataType">date</property>
+                    <property name="nativeDataType">91</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[SELECT
+    date_operations,
+    custom_department.name,
+    form_customs_control,
+    extension_temporary_import_export
+FROM
+    public.temporaryimportexport_extended_temporary_import_export_citd AS EXTIEC
+LEFT JOIN
+    public.dictionary_subdivision AS custom_department
+ON
+    EXTIEC.customs_department = custom_department.id
+WHERE
+    EXTIEC.temporary_import_exportcitd = ?
+ORDER BY
+    date_operations DESC
+LIMIT 1;
+]]></xml-property>
+        </oda-data-set>
     </data-sets>
     <page-setup>
         <simple-master-page name="Simple MasterPage" id="2">
@@ -1998,13 +2298,13 @@ where TIEC.id = ?]]></xml-property>
     </page-setup>
     <body>
         <grid id="7">
-            <property name="height">9in</property>
+            <property name="height">10.854166666666666in</property>
             <property name="width">7.979166666666667in</property>
             <column id="8">
                 <property name="width">7.979166666666667in</property>
             </column>
             <row id="9">
-                <property name="height">9in</property>
+                <property name="height">10.854166666666666in</property>
                 <cell id="10">
                     <property name="fontFamily">"Times New Roman"</property>
                     <property name="borderBottomStyle">solid</property>
@@ -3846,7 +4146,7 @@ where TIEC.id = ?]]></xml-property>
                         </row>
                     </grid>
                     <grid id="582">
-                        <property name="height">1.6770833333333333in</property>
+                        <property name="height">3.75in</property>
                         <property name="width">7.979166666666667in</property>
                         <column id="583">
                             <property name="width">2.6354166666666665in</property>
@@ -3858,7 +4158,7 @@ where TIEC.id = ?]]></xml-property>
                             <property name="width">2.7083333333333335in</property>
                         </column>
                         <row id="586">
-                            <property name="height">1.1875in</property>
+                            <property name="height">2.8958333333333335in</property>
                             <cell id="587">
                                 <property name="borderBottomStyle">solid</property>
                                 <property name="borderBottomWidth">thin</property>
@@ -3866,25 +4166,138 @@ where TIEC.id = ?]]></xml-property>
                                 <property name="borderLeftWidth">thin</property>
                                 <property name="borderRightStyle">solid</property>
                                 <property name="borderRightWidth">thin</property>
-                                <grid id="596">
-                                    <property name="width">0.3333333333333333in</property>
-                                    <column id="597">
-                                        <property name="width">0.3333333333333333in</property>
+                                <grid id="615">
+                                    <property name="height">0.28125in</property>
+                                    <property name="width">2.5625in</property>
+                                    <column id="616">
+                                        <property name="width">0.5in</property>
                                     </column>
-                                    <row id="598">
-                                        <cell id="599">
-                                            <property name="borderBottomStyle">solid</property>
-                                            <property name="borderBottomWidth">thin</property>
-                                            <property name="borderLeftStyle">solid</property>
-                                            <property name="borderLeftWidth">thin</property>
-                                            <property name="borderRightStyle">solid</property>
-                                            <property name="borderRightWidth">thin</property>
-                                            <property name="borderTopStyle">solid</property>
-                                            <property name="borderTopWidth">thin</property>
-                                            <label id="581">
+                                    <column id="617">
+                                        <property name="width">1.6041666666666667in</property>
+                                    </column>
+                                    <column id="618">
+                                        <property name="width">0.4583333333333333in</property>
+                                    </column>
+                                    <row id="619">
+                                        <property name="height">0.28125in</property>
+                                        <cell id="620">
+                                            <label id="623">
+                                                <property name="borderBottomStyle">solid</property>
+                                                <property name="borderBottomWidth">thin</property>
+                                                <property name="borderLeftStyle">solid</property>
+                                                <property name="borderLeftWidth">thin</property>
+                                                <property name="borderRightStyle">solid</property>
+                                                <property name="borderRightWidth">thin</property>
+                                                <property name="borderTopStyle">solid</property>
+                                                <property name="borderTopWidth">thin</property>
                                                 <property name="textAlign">center</property>
                                                 <text-property name="text">A</text-property>
                                             </label>
+                                        </cell>
+                                        <cell id="621">
+                                            <label id="624">
+                                                <property name="fontSize">10pt</property>
+                                                <text-property name="text">Таможенный орган.</text-property>
+                                            </label>
+                                        </cell>
+                                        <cell id="622"/>
+                                    </row>
+                                </grid>
+                                <grid id="625">
+                                    <property name="height">2.1770833333333335in</property>
+                                    <column id="626"/>
+                                    <row id="627">
+                                        <cell id="628">
+                                            <label id="643">
+                                                <text-property name="text">оформивший временный ввоз(вывоз)</text-property>
+                                            </label>
+                                        </cell>
+                                    </row>
+                                    <row id="629">
+                                        <cell id="630">
+                                            <data id="644">
+                                                <property name="dataSet">Smart</property>
+                                                <list-property name="boundDataColumns">
+                                                    <structure>
+                                                        <property name="name">CustomDepartmentName</property>
+                                                        <text-property name="displayName">CustomDepartmentName</text-property>
+                                                        <expression name="expression" type="javascript">dataSetRow["CustomDepartmentName"]</expression>
+                                                        <property name="dataType">string</property>
+                                                    </structure>
+                                                </list-property>
+                                                <property name="resultSetColumn">CustomDepartmentName</property>
+                                            </data>
+                                        </cell>
+                                    </row>
+                                    <row id="631">
+                                        <cell id="632">
+                                            <label id="645">
+                                                <text-property name="text">дата регистрации ТДТС</text-property>
+                                            </label>
+                                        </cell>
+                                    </row>
+                                    <row id="633">
+                                        <cell id="634">
+                                            <data id="646">
+                                                <property name="dataSet">Smart</property>
+                                                <list-property name="boundDataColumns">
+                                                    <structure>
+                                                        <property name="name">issue_date</property>
+                                                        <text-property name="displayName">issue_date</text-property>
+                                                        <expression name="expression" type="javascript">dataSetRow["issue_date"]</expression>
+                                                        <property name="dataType">date-time</property>
+                                                    </structure>
+                                                </list-property>
+                                                <property name="resultSetColumn">issue_date</property>
+                                            </data>
+                                        </cell>
+                                    </row>
+                                    <row id="635">
+                                        <cell id="636">
+                                            <label id="647">
+                                                <text-property name="text">формы таможного контроля</text-property>
+                                            </label>
+                                        </cell>
+                                    </row>
+                                    <row id="637">
+                                        <cell id="638">
+                                            <data id="648">
+                                                <property name="dataSet">Smart</property>
+                                                <list-property name="boundDataColumns">
+                                                    <structure>
+                                                        <property name="name">form_customs_control</property>
+                                                        <text-property name="displayName">form_customs_control</text-property>
+                                                        <expression name="expression" type="javascript">dataSetRow["form_customs_control"]</expression>
+                                                        <property name="dataType">string</property>
+                                                    </structure>
+                                                </list-property>
+                                                <property name="resultSetColumn">form_customs_control</property>
+                                            </data>
+                                        </cell>
+                                    </row>
+                                    <row id="639">
+                                        <property name="height">0.3125in</property>
+                                        <cell id="640">
+                                            <label id="649">
+                                                <text-property name="text">срок временного ввоза</text-property>
+                                            </label>
+                                        </cell>
+                                    </row>
+                                    <row id="641">
+                                        <property name="height">0.2916666666666667in</property>
+                                        <cell id="642">
+                                            <data id="650">
+                                                <property name="dataSet">Smart</property>
+                                                <list-property name="boundDataColumns">
+                                                    <structure>
+                                                        <property name="name">temporary_import_export_period</property>
+                                                        <text-property name="displayName">temporary_import_export_period</text-property>
+                                                        <expression name="expression" type="javascript">dataSetRow["temporary_import_export_period"]</expression>
+                                                        <property name="dataType">date</property>
+                                                    </structure>
+                                                </list-property>
+                                                <property name="resultSetColumn">temporary_import_export_period</property>
+                                            </data>
                                         </cell>
                                     </row>
                                 </grid>
@@ -3896,25 +4309,112 @@ where TIEC.id = ?]]></xml-property>
                                 <property name="borderLeftWidth">thin</property>
                                 <property name="borderRightStyle">solid</property>
                                 <property name="borderRightWidth">thin</property>
-                                <grid id="600">
-                                    <property name="width">0.3333333333333333in</property>
-                                    <column id="601">
-                                        <property name="width">0.3333333333333333in</property>
+                                <grid id="651">
+                                    <property name="height">0.3020833333333333in</property>
+                                    <property name="width">2.5729166666666665in</property>
+                                    <column id="652">
+                                        <property name="width">0.59375in</property>
                                     </column>
-                                    <row id="602">
-                                        <cell id="603">
-                                            <property name="borderBottomStyle">solid</property>
-                                            <property name="borderBottomWidth">thin</property>
-                                            <property name="borderLeftStyle">solid</property>
-                                            <property name="borderLeftWidth">thin</property>
-                                            <property name="borderRightStyle">solid</property>
-                                            <property name="borderRightWidth">thin</property>
-                                            <property name="borderTopStyle">solid</property>
-                                            <property name="borderTopWidth">thin</property>
-                                            <label id="468">
+                                    <column id="653">
+                                        <property name="width">1.3541666666666667in</property>
+                                    </column>
+                                    <column id="654">
+                                        <property name="width">0.625in</property>
+                                    </column>
+                                    <row id="655">
+                                        <property name="height">0.3020833333333333in</property>
+                                        <cell id="656">
+                                            <label id="659">
+                                                <property name="borderBottomStyle">solid</property>
+                                                <property name="borderBottomWidth">thin</property>
+                                                <property name="borderLeftStyle">solid</property>
+                                                <property name="borderLeftWidth">thin</property>
+                                                <property name="borderRightStyle">solid</property>
+                                                <property name="borderRightWidth">thin</property>
+                                                <property name="borderTopStyle">solid</property>
+                                                <property name="borderTopWidth">thin</property>
                                                 <property name="textAlign">center</property>
                                                 <text-property name="text">B</text-property>
                                             </label>
+                                        </cell>
+                                        <cell id="657">
+                                            <label id="660">
+                                                <property name="fontSize">10pt</property>
+                                                <text-property name="text">Таможенный орган.</text-property>
+                                            </label>
+                                        </cell>
+                                        <cell id="658"/>
+                                    </row>
+                                </grid>
+                                <grid id="661">
+                                    <column id="662"/>
+                                    <row id="663">
+                                        <cell id="664">
+                                            <label id="675">
+                                                <text-property name="text">завершение временнего ввоза(вывоз)</text-property>
+                                            </label>
+                                        </cell>
+                                    </row>
+                                    <row id="665">
+                                        <cell id="666">
+                                            <data id="678">
+                                                <property name="dataSet">Smart</property>
+                                                <list-property name="boundDataColumns">
+                                                    <structure>
+                                                        <property name="name">customs_department_close</property>
+                                                        <text-property name="displayName">customs_department_close</text-property>
+                                                        <expression name="expression" type="javascript">dataSetRow["customs_department_close"]</expression>
+                                                        <property name="dataType">decimal</property>
+                                                    </structure>
+                                                </list-property>
+                                                <property name="resultSetColumn">customs_department_close</property>
+                                            </data>
+                                        </cell>
+                                    </row>
+                                    <row id="667">
+                                        <cell id="668">
+                                            <label id="676">
+                                                <text-property name="text">дата регистрации ТДТС</text-property>
+                                            </label>
+                                        </cell>
+                                    </row>
+                                    <row id="669">
+                                        <cell id="670">
+                                            <data id="703">
+                                                <property name="dataSet">Smart</property>
+                                                <list-property name="boundDataColumns">
+                                                    <structure>
+                                                        <property name="name">date_completion</property>
+                                                        <text-property name="displayName">date_completion</text-property>
+                                                        <expression name="expression" type="javascript">dataSetRow["date_completion"]</expression>
+                                                        <property name="dataType">date</property>
+                                                    </structure>
+                                                </list-property>
+                                                <property name="resultSetColumn">date_completion</property>
+                                            </data>
+                                        </cell>
+                                    </row>
+                                    <row id="671">
+                                        <cell id="672">
+                                            <label id="677">
+                                                <text-property name="text">формы таможного контроля</text-property>
+                                            </label>
+                                        </cell>
+                                    </row>
+                                    <row id="673">
+                                        <cell id="674">
+                                            <data id="680">
+                                                <property name="dataSet">Smart</property>
+                                                <list-property name="boundDataColumns">
+                                                    <structure>
+                                                        <property name="name">form_customs_control_close</property>
+                                                        <text-property name="displayName">form_customs_control_close</text-property>
+                                                        <expression name="expression" type="javascript">dataSetRow["form_customs_control_close"]</expression>
+                                                        <property name="dataType">string</property>
+                                                    </structure>
+                                                </list-property>
+                                                <property name="resultSetColumn">form_customs_control_close</property>
+                                            </data>
                                         </cell>
                                     </row>
                                 </grid>
@@ -3926,32 +4426,123 @@ where TIEC.id = ?]]></xml-property>
                                 <property name="borderLeftWidth">thin</property>
                                 <property name="borderRightStyle">solid</property>
                                 <property name="borderRightWidth">thin</property>
-                                <grid id="605">
-                                    <property name="width">0.3333333333333333in</property>
-                                    <column id="606">
-                                        <property name="width">0.3333333333333333in</property>
+                                <grid id="681">
+                                    <property name="width">2.6458333333333335in</property>
+                                    <column id="682">
+                                        <property name="width">0.5729166666666666in</property>
                                     </column>
-                                    <row id="607">
-                                        <cell id="608">
-                                            <property name="borderBottomStyle">solid</property>
-                                            <property name="borderBottomWidth">thin</property>
-                                            <property name="borderLeftStyle">solid</property>
-                                            <property name="borderLeftWidth">thin</property>
-                                            <property name="borderRightStyle">solid</property>
-                                            <property name="borderRightWidth">thin</property>
-                                            <property name="borderTopStyle">solid</property>
-                                            <property name="borderTopWidth">thin</property>
-                                            <label id="473">
+                                    <column id="683">
+                                        <property name="width">2.0729166666666665in</property>
+                                    </column>
+                                    <row id="684">
+                                        <cell id="685">
+                                            <label id="687">
+                                                <property name="borderBottomStyle">solid</property>
+                                                <property name="borderBottomWidth">thin</property>
+                                                <property name="borderLeftStyle">solid</property>
+                                                <property name="borderLeftWidth">thin</property>
+                                                <property name="borderRightStyle">solid</property>
+                                                <property name="borderRightWidth">thin</property>
+                                                <property name="borderTopStyle">solid</property>
+                                                <property name="borderTopWidth">thin</property>
                                                 <property name="textAlign">center</property>
                                                 <text-property name="text">C</text-property>
                                             </label>
                                         </cell>
+                                        <cell id="686">
+                                            <label id="688">
+                                                <text-property name="text">Промежутожный таможенный таможенный оргон-</text-property>
+                                            </label>
+                                        </cell>
                                     </row>
                                 </grid>
+                                <list id="704">
+                                    <property name="dataSet">ПродлениеВременногоВвозаВывоза</property>
+                                    <list-property name="boundDataColumns">
+                                        <structure>
+                                            <property name="name">date_operations</property>
+                                            <text-property name="displayName">date_operations</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["date_operations"]</expression>
+                                            <property name="dataType">date</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">name</property>
+                                            <text-property name="displayName">name</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["name"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">form_customs_control</property>
+                                            <text-property name="displayName">form_customs_control</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["form_customs_control"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">extension_temporary_import_export</property>
+                                            <text-property name="displayName">extension_temporary_import_export</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["extension_temporary_import_export"]</expression>
+                                            <property name="dataType">date</property>
+                                        </structure>
+                                    </list-property>
+                                    <detail>
+                                        <grid id="707">
+                                            <column id="708"/>
+                                            <row id="709">
+                                                <cell id="710">
+                                                    <data id="723">
+                                                        <property name="resultSetColumn">name</property>
+                                                    </data>
+                                                </cell>
+                                            </row>
+                                            <row id="711">
+                                                <cell id="712">
+                                                    <label id="724">
+                                                        <text-property name="text">дата совершения таможеннего контроля</text-property>
+                                                    </label>
+                                                </cell>
+                                            </row>
+                                            <row id="713">
+                                                <cell id="714">
+                                                    <data id="725">
+                                                        <property name="resultSetColumn">date_operations</property>
+                                                    </data>
+                                                </cell>
+                                            </row>
+                                            <row id="715">
+                                                <cell id="716">
+                                                    <label id="726">
+                                                        <text-property name="text">формы таможженного контроля</text-property>
+                                                    </label>
+                                                </cell>
+                                            </row>
+                                            <row id="717">
+                                                <cell id="718">
+                                                    <data id="727">
+                                                        <property name="resultSetColumn">form_customs_control</property>
+                                                    </data>
+                                                </cell>
+                                            </row>
+                                            <row id="719">
+                                                <cell id="720">
+                                                    <label id="728">
+                                                        <text-property name="text">Предление срока временного ввоза</text-property>
+                                                    </label>
+                                                </cell>
+                                            </row>
+                                            <row id="721">
+                                                <cell id="722">
+                                                    <data id="729">
+                                                        <property name="resultSetColumn">extension_temporary_import_export</property>
+                                                    </data>
+                                                </cell>
+                                            </row>
+                                        </grid>
+                                    </detail>
+                                </list>
                             </cell>
                         </row>
                         <row id="590">
-                            <property name="height">0.4895833333333333in</property>
+                            <property name="height">0.8541666666666666in</property>
                             <cell id="591">
                                 <property name="borderBottomStyle">solid</property>
                                 <property name="borderBottomWidth">thin</property>
